@@ -1,0 +1,18 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>estabelecimento-list</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding (ionScroll)="onScroll()">
+  <ion-list no-lines>
+    <ion-item *ngFor="let item of data">
+      <ion-img class="restLogo" src="{{item.image}}"></ion-img>
+      <p class="restTitle">{{item.name}}</p>
+      <p class="restDescription">{{item.description}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>
