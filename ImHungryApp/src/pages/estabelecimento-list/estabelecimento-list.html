@@ -8,11 +8,26 @@
 
 
 <ion-content padding (ionScroll)="onScroll()">
-  <ion-list no-lines>
+  <ion-list>
     <ion-item *ngFor="let item of data">
-      <ion-img class="restLogo" src="{{item.image}}"></ion-img>
-      <p class="restTitle">{{item.name}}</p>
-      <p class="restDescription">{{item.description}}</p>
+      <div class="Card_Item">
+        <img src="{{item.image}}">
+        <div class="Card_Info">
+          <div>
+            <span>{{item.name}}</span>
+            <span>
+              <ion-icon name="cart"></ion-icon>
+            </span>
+          </div>
+          <div>
+              É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível de uma página quando estiver examinando sua diagramação.
+          </div>
+          <div>
+            <div>teste</div>
+            <div>teste</div>
+          </div>
+        </div>
+      </div>
     </ion-item>
   </ion-list>
 </ion-content>
