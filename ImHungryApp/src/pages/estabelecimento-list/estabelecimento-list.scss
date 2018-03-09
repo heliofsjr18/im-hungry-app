@@ -1,5 +1,9 @@
 page-estabelecimento-list {
     
+    .List_Body{
+        background-color: #FFF;
+    }
+
     .Card_Item{
         display: flex;
         width: 100%;
@@ -9,6 +13,10 @@ page-estabelecimento-list {
         
         background-color: #FFF;
         box-shadow: 0 1px 5px rgba(0,0,0,0.16);
+    }
+
+    .Card_Item + .Card_Item{
+        margin-top: 20px;
     }
 
     .Card_Item img{
