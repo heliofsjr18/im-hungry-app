@@ -12,11 +12,11 @@ export class EstabelecimentoListPage {
   }
 
   data = [
-    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png'},
-    {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png'},
-    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png'},
-    {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png'},
-    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png'}
+    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 2.5},
+    {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png', rate: 3.5},
+    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 1.5},
+    {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png', rate: 4},
+    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 5}
   ];
 
   ionViewDidLoad() {
@@ -25,6 +25,10 @@ export class EstabelecimentoListPage {
 
   onScroll(){
     //this.detector.markForCheck();
+  }
+
+  logStars(event){
+    console.log(event);
   }
 
 }

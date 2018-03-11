@@ -5,14 +5,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+
+//Pages
 import { HomePage } from '../pages/home/home';
 import { EstabelecimentoListPage } from '../pages/estabelecimento-list/estabelecimento-list';
+
+//Components
+import { IonRatingComponent } from '../components/ion-rating/ion-rating';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    EstabelecimentoListPage
+    EstabelecimentoListPage,
+    IonRatingComponent
   ],
   imports: [
     BrowserModule,
