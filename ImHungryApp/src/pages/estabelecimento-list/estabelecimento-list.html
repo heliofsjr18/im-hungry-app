@@ -20,7 +20,7 @@
 
       <div *ngFor="let item of data" class="Card_Item">
         <img src="{{item.image}}">
-        <div class="Card_Info">
+        <div class="Card_Info" (ionClick)="chamaTelaMenu()">
           <div>
             <span>{{item.name}}</span>
             <span>

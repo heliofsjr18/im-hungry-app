@@ -1,5 +1,6 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { MenuListPage } from '../menu-list/menu-list';
 
 @IonicPage()
 @Component({
@@ -29,6 +30,10 @@ export class EstabelecimentoListPage {
 
   logStars(event){
     console.log(event);
+  }
+
+  chamaTelaMenu() {
+    this.navCtrl.push(MenuListPage);
   }
 
 }

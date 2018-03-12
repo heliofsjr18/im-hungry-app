@@ -9,6 +9,10 @@ import { MyApp } from './app.component';
 //Pages
 import { HomePage } from '../pages/home/home';
 import { EstabelecimentoListPage } from '../pages/estabelecimento-list/estabelecimento-list';
+import { MenuListPage } from '../pages/menu-list/menu-list';
+import { CarrinhoPage } from '../pages/carrinho/carrinho';
+import { PagamentoPage } from '../pages/pagamento/pagamento';
+
 
 //Components
 import { IonRatingComponent } from '../components/ion-rating/ion-rating';
@@ -18,6 +22,9 @@ import { IonRatingComponent } from '../components/ion-rating/ion-rating';
     MyApp,
     HomePage,
     EstabelecimentoListPage,
+    MenuListPage,
+    CarrinhoPage,
+    PagamentoPage,
     IonRatingComponent
   ],
   imports: [
@@ -28,7 +35,10 @@ import { IonRatingComponent } from '../components/ion-rating/ion-rating';
   entryComponents: [
     MyApp,
     HomePage,
-    EstabelecimentoListPage
+    EstabelecimentoListPage,
+    CarrinhoPage,
+    PagamentoPage,
+    MenuListPage
   ],
   providers: [
     StatusBar,
