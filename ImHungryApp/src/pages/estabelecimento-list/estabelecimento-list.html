@@ -1,13 +1,22 @@
 <ion-header>
 
-  <ion-navbar color="primary">
+  <ion-navbar class="myNavBar" color="secondary">
     <ion-title>Estabelecimentos</ion-title>
     
-    <ion-buttons end>
+    <ion-toolbar *ngIf="showSearch" [@fadeInOut] no-border-top>
+      <ion-searchbar
+        class="mySearchBar"
+        [showCancelButton]="true"
+        (ionCancel)="onCancel($event)"
+        placeholder="Buscar">
+      </ion-searchbar>
+    </ion-toolbar>
+
+    <ion-buttons end *ngIf="!showSearch">
       <button ion-button icon-only>
         <ion-icon name="md-notifications"></ion-icon>
       </button>
-      <button margin-left ion-button icon-only>
+      <button (click)="clickSearch()" margin-left ion-button icon-only>
         <ion-icon name="md-search"></ion-icon>
       </button>
     </ion-buttons>
@@ -18,9 +27,9 @@
 <ion-content class="List_Body" padding (ionScroll)="onScroll()">
   <ion-list padding-top>
 
-      <div *ngFor="let item of data" class="Card_Item">
+      <div *ngFor="let item of data" (click)="navigateToMenuPage()" class="Card_Item">
         <img src="{{item.image}}">
-        <div class="Card_Info" (ionClick)="chamaTelaMenu()">
+        <div class="Card_Info">
           <div>
             <span>{{item.name}}</span>
             <span>
