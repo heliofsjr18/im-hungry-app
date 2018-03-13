@@ -3,6 +3,7 @@ import { style, state, animate, transition, trigger } from '@angular/animations'
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MenuListPage } from '../menu-list/menu-list';
 import $ from "jquery";
+import { CarrinhoPage } from '../carrinho/carrinho';
 
 @IonicPage()
 @Component({
@@ -48,6 +49,10 @@ export class EstabelecimentoListPage {
       $(".searchbar-ios-cancel > .button-inner").text("Cancelar");
     },200);
     
+  }
+
+  openCart() : void{
+    this.navCtrl.push(CarrinhoPage);
   }
 
   onCancel(event){
