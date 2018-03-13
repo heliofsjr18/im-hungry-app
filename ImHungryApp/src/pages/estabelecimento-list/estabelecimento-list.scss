@@ -1,5 +1,21 @@
 page-estabelecimento-list {
     
+    .buttonBadge{
+        position: relative;
+        width: 55px;
+        top:1px;
+        right: 1px;
+        overflow: visible!important;
+    }
+
+    .cartBadge{
+        position: absolute;
+        top: -3px;
+        right: -3px;
+        border-radius: 100px;
+        padding: 3px 3px;
+    }
+    
     .toolbar-ios ion-title{
         //padding: 0 130px 1px 20px;
         padding: 0 20px 1px;

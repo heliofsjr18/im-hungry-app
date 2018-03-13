@@ -3,10 +3,13 @@ page-carrinho {
         margin: auto;
         width: 100%;
         bottom: 0;
-        margin-bottom: 0px;
         position: fixed;
     }
     .cards{
         padding-block-end: 50px;
+    }
+
+    .payButton{
+        margin-bottom: 0px;
     }
 }

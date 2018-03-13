@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar class="myNavBar" color="secondary">
-    <ion-title>Estabelecimentos</ion-title>
+    <ion-title *ngIf="!showSearch">Estabelecimentos</ion-title>
     
     <ion-toolbar *ngIf="showSearch" [@fadeInOut] no-border-top>
       <ion-searchbar
@@ -13,8 +13,9 @@
     </ion-toolbar>
 
     <ion-buttons end *ngIf="!showSearch">
-      <button (click)="openCart()" ion-button icon-only>
+      <button class="buttonBadge" (click)="openCart()" ion-button icon-only>
         <ion-icon name="md-cart"></ion-icon>
+        <ion-badge class="cartBadge">10</ion-badge>
       </button>
       <button class="iconHeader" ion-button icon-only>
         <ion-icon name="md-notifications"></ion-icon>
