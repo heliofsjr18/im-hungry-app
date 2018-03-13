@@ -1,5 +1,10 @@
 page-estabelecimento-list {
     
+    .textNote{
+        color: #bbbbbb;
+        font-size: 12px;
+    }
+
     .buttonBadge{
         position: relative;
         width: 55px;
@@ -78,7 +83,7 @@ page-estabelecimento-list {
 
     .Card_Info > div > span:nth-child(1){
         display: inline-block;
-        width: calc(100% - 20px);
+        width: calc(100% - 60px);
         font-size: 16px;
         color: #000;
         font-weight: 700;
@@ -110,13 +115,14 @@ page-estabelecimento-list {
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+        min-height: 46px;
     }
 
     .Card_Info > div:nth-child(3){
         display: flex;
         width: 100%;
         align-items: center;
-        margin-top: 10px;
+        margin-top: 5px;
     }
 
     .Card_Info > div:nth-child(3) > div:nth-child(1){

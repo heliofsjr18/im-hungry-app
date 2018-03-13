@@ -37,17 +37,21 @@
           <div>
             <span>{{item.name}}</span>
             <span>
-              <ion-icon name="more"></ion-icon>
+              <span>Aberto</span>
+              <ion-icon color="secondary" name="ios-radio-button-on-outline"></ion-icon>
             </span>
           </div>
           <div>
-              É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível de uma página quando estiver examinando sua diagramação.
+            <!--{{item.description}}-->É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível de uma página quando estiver examinando sua diagramação.
           </div>
           <div>
             <div>
               <ion-rating [showOnly]="true" [numStars]="5" [rateValue]="item.rate" (ionClick)="logStars($event)"></ion-rating>
             </div>
-            <div>teste</div>
+            <div class="textNote">
+              <ion-icon name="pin"></ion-icon>
+              {{item.distance}}
+            </div>
           </div>
         </div>
       </div>
