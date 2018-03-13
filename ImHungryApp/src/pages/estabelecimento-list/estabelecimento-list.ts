@@ -1,6 +1,6 @@
 import { Component, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { style, state, animate, transition, trigger } from '@angular/animations';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { MenuListPage } from '../menu-list/menu-list';
 import $ from "jquery";
 import { CarrinhoPage } from '../carrinho/carrinho';
@@ -25,15 +25,15 @@ import { CarrinhoPage } from '../carrinho/carrinho';
 export class EstabelecimentoListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private detector: ChangeDetectorRef,
-  private elRef: ElementRef) {
+  private elRef: ElementRef, private menuCtrl: MenuController) {
   }
 
   data = [
-    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 2.5, distance: '2,5 Km'},
-    {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png', rate: 3.5, distance: '3,5 Km'},
-    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 1.5, distance: '1,5 Km'},
-    {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png', rate: 4, distance: '4 Km'},
-    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 5, distance: '5 Km'}
+    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 2.5, distance: '2,5 Km' , status: 1},
+    {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png', rate: 3.5, distance: '3,5 Km', status: 0},
+    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 1.5, distance: '1,5 Km', status: 1},
+    {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png', rate: 4, distance: '4 Km', status: 0},
+    {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 5, distance: '5 Km', status: 1}
   ];
 
   showSearch: boolean = false;
@@ -61,6 +61,10 @@ export class EstabelecimentoListPage {
 
   ionViewDidLoad() {
     
+  }
+
+  openFilterMenu(){
+    this.menuCtrl.open("filtersMenu");
   }
 
   navigateToMenuPage(){

@@ -1,1 +1,14 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<!--Menu de Filtros da listagem de estabelecimentos-->
+<ion-menu id="filtersMenu" type="overlay" swipeEnabled="false" side="right" [content]="myContent">
+    <ion-header>
+        <ion-navbar class="myNavBar" color="primary">
+
+        </ion-navbar>
+    </ion-header>
+    <ion-content padding>
+        <button ion-button>
+            FILTROS
+        </button>
+    </ion-content>
+</ion-menu>
+<ion-nav [root]="rootPage" #myContent></ion-nav>

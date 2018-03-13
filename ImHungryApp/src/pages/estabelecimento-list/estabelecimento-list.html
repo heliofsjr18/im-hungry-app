@@ -1,6 +1,5 @@
 <ion-header>
-
-  <ion-navbar class="myNavBar" color="secondary">
+  <ion-navbar #myContent class="myNavBar" color="secondary">
     <ion-title *ngIf="!showSearch">Estabelecimentos</ion-title>
     
     <ion-toolbar *ngIf="showSearch" [@fadeInOut] no-border-top>
@@ -15,10 +14,13 @@
     <ion-buttons end *ngIf="!showSearch">
       <button class="buttonBadge" (click)="openCart()" ion-button icon-only>
         <ion-icon name="md-cart"></ion-icon>
-        <ion-badge class="cartBadge">10</ion-badge>
+        <ion-badge class="cartBadge" >10</ion-badge>
       </button>
       <button class="iconHeader" ion-button icon-only>
         <ion-icon name="md-notifications"></ion-icon>
+      </button>
+      <button class="iconHeader" (click)="openFilterMenu()" ion-button icon-only>
+        <ion-icon name="ios-funnel"></ion-icon>
       </button>
       <button (click)="clickSearch()" class="iconHeader" ion-button icon-only>
         <ion-icon name="md-search"></ion-icon>
@@ -37,8 +39,8 @@
           <div>
             <span>{{item.name}}</span>
             <span>
-              <span>Aberto</span>
-              <ion-icon color="secondary" name="ios-radio-button-on-outline"></ion-icon>
+              <span>{{item.status == 1 ? "Aberto" : "Fechado"}}</span>
+              <ion-icon [ngClass]="(item.status == 1)?'statusOpen' : 'statusClose'" name="ios-radio-button-on-outline"></ion-icon>
             </span>
           </div>
           <div>

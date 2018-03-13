@@ -1,5 +1,13 @@
 page-estabelecimento-list {
-    
+
+    .statusOpen{
+        color: #00B200;
+    }
+
+    .statusClose{
+        color: #f53d3d;
+    }
+
     .textNote{
         color: #bbbbbb;
         font-size: 12px;
@@ -36,12 +44,12 @@ page-estabelecimento-list {
         margin-left: 7px;
     }
 
-    .myNavBar{
-        height: 56px;
-    }
-
     .List_Body{
         background-color: #FFF;
+    }
+
+    .ion-rating-container grid{
+        padding: 5px 5px 5px 0;
     }
 
     .Card_Item{
@@ -64,7 +72,7 @@ page-estabelecimento-list {
         max-height: 120px;
         width: 120px;
         height: 120px;
-        border: 0;
+        border: 8px solid transparent;
         display: inline-block;
     }
 
@@ -83,7 +91,7 @@ page-estabelecimento-list {
 
     .Card_Info > div > span:nth-child(1){
         display: inline-block;
-        width: calc(100% - 60px);
+        width: calc(100% - 71px);
         font-size: 16px;
         color: #000;
         font-weight: 700;
@@ -93,14 +101,22 @@ page-estabelecimento-list {
         white-space: nowrap;
         text-transform: uppercase;
     }
-    .Card_Info > div > span:nth-child(2) a{ 
-        font-size: 18px;
+    .Card_Info > div > span:nth-child(2) { 
+        font-size: 13px;
         text-decoration: none;
         color: #000;
         text-align: right;
-        display: inline-block;
-        width: 20px;
+        //display: inline-block;
+        display: inline-flex;
+        width: 30px;
+        justify-content: flex-end;
+        flex: 1;
+        align-items: center;
     }
+
+    .Card_Info > div > span:nth-child(2) > span {
+        margin-right: 5px;
+    } 
 
     .Card_Info > div:nth-child(2){
         display: block;
