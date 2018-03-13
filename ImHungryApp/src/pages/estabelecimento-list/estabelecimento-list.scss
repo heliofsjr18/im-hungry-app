@@ -1,13 +1,18 @@
 page-estabelecimento-list {
     
-    ion-title {
-        position: absolute;
-        top: 0;
-        left: 0;
-        padding: 0 90px 1px;
-        width: 100%;
-        height: 100%;
-        text-align: center;
+    .toolbar-ios ion-title{
+        //padding: 0 130px 1px 20px;
+        padding: 0 20px 1px;
+    }
+    .toolbar-ios-secondary
+    .toolbar-title-ios,
+    .toolbar-ios-secondary
+    .bar-button-clear-ios,
+    .toolbar-ios-secondary
+    .bar-button-default-ios{text-align: left;}
+    
+    .iconHeader{
+        margin-left: 7px;
     }
 
     .myNavBar{

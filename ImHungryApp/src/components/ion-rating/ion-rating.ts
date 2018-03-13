@@ -15,11 +15,9 @@ export class IonRatingComponent {
   stars: string[] = [];
 
   constructor() {
-    console.log('passei');
   }
 
   ngAfterViewInit(){
-    console.log('aqui');
     this.setStars();
   }
 
@@ -34,7 +32,6 @@ export class IonRatingComponent {
       else
         this.stars.push("star-outline");
     }
-    console.log(this.stars);
   }
 
   starClicked(index){
@@ -46,7 +43,6 @@ export class IonRatingComponent {
   }
 
   logStars(event){
-    console.log(event);
   }
 
 }
