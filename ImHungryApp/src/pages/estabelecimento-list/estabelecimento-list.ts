@@ -47,7 +47,7 @@ export class EstabelecimentoListPage {
     
     setTimeout(()=>{
       $(".searchbar-ios-cancel > .button-inner").text("Cancelar");
-    },200);
+    },100);
     
   }
 
