@@ -1,4 +1,4 @@
-<ion-header> 
+<ion-header>
 
   <ion-navbar class="myNavBar" color="secondary">
     <ion-title>Menu</ion-title>
@@ -15,9 +15,20 @@
         <div>
           <span>{{item.name}}</span>
           <span>
-            <ion-icon name="more"></ion-icon>
+            <ion-icon color="primary-light" name="md-cart"></ion-icon>
           </span>
-          <div><!--Deve ser implementado aqui os menus que serão recebidos pelo web service--></div>
+        </div>
+        <div>
+          <!--{{item.description}}-->É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível de uma página quando estiver
+          examinando sua diagramação.
+        </div>
+        <div>
+          <div>
+            <ion-rating class="smallRating" [showOnly]="true" [numStars]="5" [rateValue]="item.rate" (ionClick)="logStars($event)"></ion-rating>
+          </div>
+          <div class="textListPrice smallListPrice">
+            {{item.price}}
+          </div>
         </div>
       </div>
     </div>

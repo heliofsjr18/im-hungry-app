@@ -1,11 +1,15 @@
 page-estabelecimento-list {
 
     .statusOpen{
-        color: #00B200;
+        color: color($colors, success);
     }
 
     .statusClose{
-        color: #f53d3d;
+        color: color($colors, danger);
+    }
+
+    .smallRating{
+        font-size: 11px;
     }
 
     .buttonBadge{
@@ -53,11 +57,11 @@ page-estabelecimento-list {
         background-color: #FFF;
         box-shadow: 0 1px 5px rgba(0,0,0,0.16);
     }
-
+    
     .Card_Item + .Card_Item{
         margin-top: 20px;
     }
-
+    
     .Card_Item img{
         max-width: 120px;
         max-height: 120px;
@@ -66,25 +70,25 @@ page-estabelecimento-list {
         border: 8px solid transparent;
         display: inline-block;
     }
-
+    
     .Card_Item .Card_Info{
         display: inline-block;
         width: calc(100% - 80px);
         padding: 5px 15px 10px 8px;
         height: 100%;
     }
-
+    
     .Card_Info > div:nth-child(1){
         display: flex;
         width: 100%;
         align-items: center;
     }
-
+    
     .Card_Info > div > span:nth-child(1){
         display: inline-block;
         width: calc(100% - 71px);
         font-size: 16px;
-        color: #000;
+        color: color($colors, secondary-light);
         font-weight: 700;
         position: relative;
         text-overflow: ellipsis;
@@ -104,11 +108,11 @@ page-estabelecimento-list {
         flex: 1;
         align-items: center;
     }
-
+    
     .Card_Info > div > span:nth-child(2) > span {
         margin-right: 5px;
     } 
-
+    
     .Card_Info > div:nth-child(2){
         display: block;
         display: -webkit-box;
@@ -124,21 +128,21 @@ page-estabelecimento-list {
         text-overflow: ellipsis;
         min-height: 46px;
     }
-
+    
     .Card_Info > div:nth-child(3){
         display: flex;
         width: 100%;
         align-items: center;
         margin-top: 5px;
     }
-
+    
     .Card_Info > div:nth-child(3) > div:nth-child(1){
         display: inline-block;
         width: 70%;
         padding-right: 5px;
         text-align: left;
     }
-
+    
     .Card_Info > div:nth-child(3) > div:nth-child(2){
         display: inline-block;
         width: 30%;

@@ -1,3 +1,114 @@
 page-menu-list {
+    
+    .smallRating{
+        font-size: 11px;
+    }
+    .smallListPrice{
+        font-size: 14px;
+    }
+
+    .Card_Item{
+        display: flex;
+        width: 100%;
+        height: auto;
+        max-height: 120px;
+        padding: 0;
+        
+        background-color: #FFF;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.16);
+    }
+    
+    .Card_Item + .Card_Item{
+        margin-top: 20px;
+    }
+    
+    .Card_Item img{
+        max-width: 120px;
+        max-height: 120px;
+        width: 120px;
+        height: 120px;
+        border: 8px solid transparent;
+        display: inline-block;
+    }
+    
+    .Card_Item .Card_Info{
+        display: inline-block;
+        width: calc(100% - 80px);
+        padding: 5px 15px 10px 8px;
+        height: 100%;
+    }
+    
+    .Card_Info > div:nth-child(1){
+        display: flex;
+        width: 100%;
+        align-items: center;
+    }
+    
+    .Card_Info > div > span:nth-child(1){
+        display: inline-block;
+        width: calc(100% - 71px);
+        font-size: 16px;
+        color: color($colors, secondary-light);
+        font-weight: 700;
+        position: relative;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        text-transform: uppercase;
+    }
+    .Card_Info > div > span:nth-child(2) { 
+        font-size: 13px;
+        text-decoration: none;
+        color: #000;
+        text-align: right;
+        //display: inline-block;
+        display: inline-flex;
+        width: 30px;
+        justify-content: flex-end;
+        flex: 1;
+        align-items: center;
+    }
+    
+    .Card_Info > div > span:nth-child(2) > span {
+        margin-right: 5px;
+    } 
+    
+    .Card_Info > div:nth-child(2){
+        display: block;
+        display: -webkit-box;
+        margin-top: 10px;
+        width: 100%;
+        text-align: left;
+        line-height: 1.4;
+        color: rgba(0,0,0,0.67);
+        font-size: 12px;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-height: 46px;
+    }
+    
+    .Card_Info > div:nth-child(3){
+        display: flex;
+        width: 100%;
+        align-items: center;
+        margin-top: 5px;
+    }
+    
+    .Card_Info > div:nth-child(3) > div:nth-child(1){
+        display: inline-block;
+        width: auto;
+        padding-right: 5px;
+        text-align: left;
+    }
+    
+    .Card_Info > div:nth-child(3) > div:nth-child(2){
+        display: inline-block;
+        width: auto;
+        flex: 1;
+        padding-left: 5px;
+        text-align: right;
+    }
 
 }
