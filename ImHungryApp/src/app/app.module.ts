@@ -17,6 +17,8 @@ import { PagamentoPage } from '../pages/pagamento/pagamento';
 
 //Components
 import { IonRatingComponent } from '../components/ion-rating/ion-rating';
+import { EstabelecimentoServiceProvider } from '../providers/estabelecimento-service/estabelecimento-service';
+import { RestClientProvider } from '../providers/rest-client/rest-client';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { IonRatingComponent } from '../components/ion-rating/ion-rating';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    EstabelecimentoServiceProvider,
+    RestClientProvider
   ]
 })
 export class AppModule {}
