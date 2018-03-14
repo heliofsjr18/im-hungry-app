@@ -17,7 +17,7 @@ export class EstabelecimentoServiceProvider {
   //}
   private actionUrl: string;
 
-  constructor(private http: HttpClient, private _configuration: RestClient) {
+  constructor(private http: HttpClient, private _configuration: RestClientProvider) {
     this.actionUrl = _configuration.ServerWithApiUrl + 'values/';
   }
 
