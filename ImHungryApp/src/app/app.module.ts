@@ -13,6 +13,7 @@ import { EstabelecimentoListPage } from '../pages/estabelecimento-list/estabelec
 import { MenuListPage } from '../pages/menu-list/menu-list';
 import { CarrinhoPage } from '../pages/carrinho/carrinho';
 import { PagamentoPage } from '../pages/pagamento/pagamento';
+import { MenuDetailPage } from '../pages/menu-detail/menu-detail';
 
 
 //Components
@@ -28,7 +29,8 @@ import { RestClientProvider } from '../providers/rest-client/rest-client';
     MenuListPage,
     CarrinhoPage,
     PagamentoPage,
-    IonRatingComponent
+    IonRatingComponent,
+    MenuDetailPage
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import { RestClientProvider } from '../providers/rest-client/rest-client';
     EstabelecimentoListPage,
     CarrinhoPage,
     PagamentoPage,
-    MenuListPage
+    MenuListPage,
+    MenuDetailPage
   ],
   providers: [
     StatusBar,

@@ -1,0 +1,17 @@
+page-menu-detail {
+    
+    .menuViewDiv{
+        display: flex;
+        align-items: center;
+        padding: 0 10px 0 10px;
+    }
+
+    .menuViewStar{
+        width: 60%;
+    }
+
+    .menuViewPrice{
+        width: 40%;
+        text-align: right;
+    }
+}

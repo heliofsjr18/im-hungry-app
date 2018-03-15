@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform } from 'ionic-angular';
 import $ from "jquery";
+import { MenuDetailPage } from '../menu-detail/menu-detail';
 
 @IonicPage()
 @Component({
@@ -33,5 +34,9 @@ export class MenuListPage {
 
   onScroll(){
      
+  }
+
+  navegateToDetail(): void {
+    this.navCtrl.push(MenuDetailPage);
   }
 }
