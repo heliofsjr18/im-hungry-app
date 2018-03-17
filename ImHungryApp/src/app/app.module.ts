@@ -20,6 +20,7 @@ import { MenuDetailPage } from '../pages/menu-detail/menu-detail';
 import { IonRatingComponent } from '../components/ion-rating/ion-rating';
 import { EstabelecimentoServiceProvider } from '../providers/estabelecimento-service/estabelecimento-service';
 import { RestClientProvider } from '../providers/rest-client/rest-client';
+import { CarrinhoProvider } from '../providers/carrinho/carrinho';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { RestClientProvider } from '../providers/rest-client/rest-client';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EstabelecimentoServiceProvider,
-    RestClientProvider
+    RestClientProvider,
+    CarrinhoProvider
   ]
 })
 export class AppModule {}

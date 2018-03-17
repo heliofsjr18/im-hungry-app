@@ -2,8 +2,9 @@ import { Component, ChangeDetectorRef, ElementRef } from '@angular/core';
 import { style, state, animate, transition, trigger } from '@angular/animations';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { MenuListPage } from '../menu-list/menu-list';
-import $ from "jquery";
 import { CarrinhoPage } from '../carrinho/carrinho';
+import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
+import $ from "jquery";
 
 @IonicPage()
 @Component({
@@ -25,7 +26,7 @@ import { CarrinhoPage } from '../carrinho/carrinho';
 export class EstabelecimentoListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private detector: ChangeDetectorRef,
-  private elRef: ElementRef, private menuCtrl: MenuController) {
+  private elRef: ElementRef, private menuCtrl: MenuController, private carrinho: CarrinhoProvider) {
   }
 
   data = [
@@ -37,9 +38,14 @@ export class EstabelecimentoListPage {
   ];
 
   showSearch: boolean = false;
+  totalCarrinho: string = '';
 
   toggleSearch(){
     this.showSearch = !this.showSearch;
+  }
+
+  getTotalCarrinho(){
+    return  this.carrinho.getCountCarrinho();
   }
 
   clickSearch(){

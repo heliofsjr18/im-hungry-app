@@ -2,6 +2,28 @@
 
   <ion-navbar class="myNavBar" color="secondary">
     <ion-title>Menu</ion-title>
+
+    <ion-toolbar *ngIf="showSearch" [@fadeInOut] no-border-top>
+      <ion-searchbar
+        class="mySearchBar"
+        [showCancelButton]="true"
+        (ionCancel)="onCancel($event)"
+        placeholder="Buscar">
+      </ion-searchbar>
+    </ion-toolbar>
+
+    <ion-buttons end *ngIf="!showSearch">
+      <button class="buttonBadge" (click)="openCart()" ion-button icon-only>
+        <ion-icon name="md-cart"></ion-icon>
+        <ion-badge *ngIf="getTotalCarrinho() > 0" class="cartBadge" >{{getTotalCarrinho()}}</ion-badge>
+      </button>
+      <button class="iconHeader" (click)="openFilterMenu()" ion-button icon-only>
+        <ion-icon name="ios-funnel"></ion-icon>
+      </button>
+      <button (click)="clickSearch()" class="iconHeader" ion-button icon-only>
+        <ion-icon name="md-search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>

@@ -1,14 +1,17 @@
-<!--
-  Generated template for the MenuDetailPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
   <ion-navbar class="myNavBar" color="secondary">
-    <ion-title>Detalhe</ion-title>
+    <ion-title>Produto Nome</ion-title>
+
+    <ion-buttons end>
+      <button class="buttonBadge" (click)="openCart()" ion-button icon-only>
+        <ion-icon name="md-cart"></ion-icon>
+        <ion-badge *ngIf="getTotalCarrinho() > 0" class="cartBadge" >{{getTotalCarrinho()}}</ion-badge>
+      </button>
+    </ion-buttons>
   </ion-navbar>
+
+  
 
 </ion-header>
 
@@ -20,10 +23,10 @@
     <img src="assets/imgs/test-prato.png" />
 
     <ion-card-content>
-      <ion-card-title>
+      <ion-card-title color="primary-dark">
         Sushi
       </ion-card-title>
-      <p>
+      <p class="cardTextDescription">
         É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível de uma página quando estiver
           examinando sua diagramação.
       </p>
@@ -40,14 +43,14 @@
 
     <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="danger" icon-start>
+        <button ion-button clear small color="secondary-dark" icon-start>
           <ion-icon name='star'></ion-icon>
-          Favorite
+          Favorito
         </button>
       </ion-col>
       
       <ion-col text-right>
-        <button ion-button clear small color="danger" icon-start>
+        <button (click)="addToCart()" ion-button clear small color="secondary-dark" icon-start>
           <ion-icon name='md-cart'></ion-icon>
           Adcionar ao Carrinho
         </button>

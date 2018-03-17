@@ -6,6 +6,10 @@ page-menu-detail {
         padding: 0 10px 0 10px;
     }
 
+    .cardTextDescription{
+        color: color($colors, primary-light);
+    }
+
     .menuViewStar{
         width: 60%;
     }
@@ -13,5 +17,21 @@ page-menu-detail {
     .menuViewPrice{
         width: 40%;
         text-align: right;
+    }
+
+    .buttonBadge{
+        position: relative;
+        width: 55px;
+        top:1px;
+        right: 1px;
+        overflow: visible!important;
+    }
+
+    .cartBadge{
+        position: absolute;
+        top: -3px;
+        right: 5px;
+        border-radius: 100px;
+        padding: 3px 3px;
     }
 }

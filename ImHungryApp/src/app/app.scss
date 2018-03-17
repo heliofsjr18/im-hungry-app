@@ -28,3 +28,9 @@
 .List_Body{
     background-color: #FFF;
 }
+
+.myToast{
+    .toast-wrapper{
+        background: color($colors, primary);
+    }
+}

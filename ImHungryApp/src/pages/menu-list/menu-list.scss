@@ -7,7 +7,22 @@ page-menu-list {
         font-size: 14px;
     }
 
-    
+    .buttonBadge{
+        position: relative;
+        width: 55px;
+        top:1px;
+        right: 1px;
+        overflow: visible!important;
+    }
+
+    .cartBadge{
+        position: absolute;
+        top: -3px;
+        right: 5px;
+        border-radius: 100px;
+        padding: 3px 3px;
+    } 
+
     .Card_Item{
         display: flex;
         width: 100%;
