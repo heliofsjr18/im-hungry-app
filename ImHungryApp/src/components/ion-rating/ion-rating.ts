@@ -1,8 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'ion-rating',
-  templateUrl: 'ion-rating.html'
+  templateUrl: 'ion-rating.html',
 })
 export class IonRatingComponent {
 
@@ -14,7 +14,7 @@ export class IonRatingComponent {
 
   stars: string[] = [];
 
-  constructor() {
+  constructor(private detector: ChangeDetectorRef) {
   }
 
   ngAfterViewInit(){
@@ -32,6 +32,7 @@ export class IonRatingComponent {
       else
         this.stars.push("star-outline");
     }
+    this.detector.detectChanges();
   }
 
   starClicked(index){

@@ -28,6 +28,14 @@
 
 
 <ion-content class="List_Body" padding (ionScroll)="onScroll()">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Arraste para atualizar"
+      refreshingSpinner="crescent"
+      refreshingText="Atualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list padding-top>
 
       <div *ngFor="let item of data" (click)="navigateToMenuPage()" class="Card_Item">
