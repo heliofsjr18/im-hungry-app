@@ -2,16 +2,15 @@
 
   <ion-navbar class="myNavBar" color="secondary">
     <ion-title>Produto Nome </ion-title>
-    
     <ion-buttons end>
       <button class="buttonBadge" (click)="openCart()" ion-button icon-only>
         <ion-icon name="md-cart"></ion-icon>
-        <ion-badge *ngIf="getTotalCarrinho() > 0" class="cartBadge" >{{getTotalCarrinho()}}</ion-badge>
+        <ion-badge *ngIf="getTotalCarrinho() > 0" class="cartBadge">{{getTotalCarrinho()}}</ion-badge>
       </button>
     </ion-buttons>
   </ion-navbar>
 
-  
+
 
 </ion-header>
 
@@ -20,26 +19,26 @@
 
   <ion-card>
 
-    <img src="assets/imgs/test-prato.png" />
+    <img src="{{item.image}}">
 
     <ion-card-content>
       <ion-card-title color="primary-dark">
-        Sushi
+        <span>{{item.name}}</span>
       </ion-card-title>
       <p class="cardTextDescription">
-        É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível de uma página quando estiver
-          examinando sua diagramação.
+        É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível de uma página quando estiver examinando
+        sua diagramação.
       </p>
     </ion-card-content>
 
     <div class="menuViewDiv">
       <div class="menuViewStar">
-        <ion-rating class="menuViewStar" [showOnly]="true" [numStars]="5" [rateValue]="4" ></ion-rating>
+        <ion-rating class="menuViewStar" [showOnly]="true" [numStars]="5" [rateValue]="4"></ion-rating>
       </div>
       <div class="textListPrice menuViewPrice">
-        R$ 129,69
+        {{item.price}}
       </div>
-    </div> 
+    </div>
 
     <ion-row no-padding>
       <ion-col>
@@ -48,7 +47,7 @@
           Favorito
         </button>
       </ion-col>
-      
+
       <ion-col text-right>
         <button (click)="addToCart()" ion-button clear small color="secondary-dark" icon-start>
           <ion-icon name='md-cart'></ion-icon>

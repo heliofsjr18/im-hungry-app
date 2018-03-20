@@ -11,10 +11,11 @@ import { CarrinhoPage } from '../carrinho/carrinho';
   templateUrl: 'menu-detail.html',
 })
 export class MenuDetailPage {
+  private item = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
   private carrinho: CarrinhoProvider, private detector: ChangeDetectorRef, private toastCtrl: ToastController) {
-    this.navParams.get('objSelecionado');
+    this.item = navParams.get('objSelecionado');
   }
 
   ionViewDidLoad() {

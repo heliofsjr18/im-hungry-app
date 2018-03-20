@@ -4,21 +4,15 @@
     <ion-title>Menu</ion-title>
 
     <ion-toolbar *ngIf="showSearch" [@fadeInOut] no-border-top>
-      <ion-searchbar
-        class="mySearchBar"
-        [showCancelButton]="true"
-        (ionCancel)="onCancel($event)"
-        placeholder="Buscar"
-        (search)="onSearchTermChanged()"
-        [(ngModel)]="searchTerm"
-        (ionClear)="onClearSearch()">
+      <ion-searchbar class="mySearchBar" [showCancelButton]="true" (ionCancel)="onCancel($event)" placeholder="Buscar" (search)="onSearchTermChanged()"
+        [(ngModel)]="searchTerm" (ionClear)="onClearSearch()">
       </ion-searchbar>
     </ion-toolbar>
 
     <ion-buttons end *ngIf="!showSearch">
       <button class="buttonBadge" (click)="openCart()" ion-button icon-only>
         <ion-icon name="md-cart"></ion-icon>
-        <ion-badge *ngIf="getTotalCarrinho() > 0" class="cartBadge" >{{getTotalCarrinho()}}</ion-badge>
+        <ion-badge *ngIf="getTotalCarrinho() > 0" class="cartBadge">{{getTotalCarrinho()}}</ion-badge>
       </button>
       <button class="iconHeader" (click)="openFilterMenu()" ion-button icon-only>
         <ion-icon name="ios-funnel"></ion-icon>
@@ -34,6 +28,7 @@
 <ion-content class="List_Body" padding (ionScroll)="onScroll()">
   <ion-list padding-top>
 
+    <ion-icon color="primary-light" name="md-cart"></ion-icon>
     <div *ngFor="let item of data" (click)="navegateToDetail(item)" class="Card_Item">
       <img src="{{item.image}}">
       <div class="Card_Info">
