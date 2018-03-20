@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import { style, state, animate, transition, trigger } from '@angular/animations';
-import { IonicPage, NavController, NavParams, Platform, MenuController } from 'ionic-angular';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IonicPage, NavController, NavParams, Platform, MenuController, LoadingController } from 'ionic-angular';
 import { MenuDetailPage } from '../menu-detail/menu-detail';
 import { CarrinhoPage } from '../carrinho/carrinho';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
+import { RestClientProvider } from '../../providers/rest-client/rest-client';
 import $ from "jquery";
 
 @IonicPage()
@@ -26,7 +28,8 @@ import $ from "jquery";
 export class MenuListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
-  private menuCtrl: MenuController, private carrinho: CarrinhoProvider) {
+  private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private restClient: RestClientProvider,
+  private loadingCtrl: LoadingController, private http: HttpClient) {
   }
 
   ionViewDidLoad() {
@@ -36,19 +39,15 @@ export class MenuListPage {
         $(".back-button-text").text("");
       },100);
     }
+
+    this.loadList();
   }
 
   showSearch: boolean = false;
-
+  searchTerm: string = '';
   //Deve ser implementado aqui a recepção do objeto Json que virá do web service e distribuição do objeto no Array abaixo
 
-  data = [
-    {name: 'Sushi', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-prato.png', rate: 2.5, price: 'R$ 1329,90' , status: 1},
-    {name: 'Sushi', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-prato.png', rate: 3.5, price: 'R$ 129,90', status: 0},
-    {name: 'Sushi', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-prato.png', rate: 1.5, price: 'R$ 129,90', status: 1},
-    {name: 'Sushi', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-prato.png', rate: 4, price: 'R$ 129,90', status: 0},
-    {name: 'Sushi', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-prato.png', rate: 5, price: 'R$ 129,90', status: 1}
-  ];
+  data = [];
 
   onScroll(){
      
@@ -71,6 +70,36 @@ export class MenuListPage {
     
   }
 
+  loadList(){
+    
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent'
+    });
+
+    loading.present();
+
+    this.getMenuItems().then(data => {
+      this.data = [];
+
+      var obj = JSON.parse(data.toString());
+      var items = obj.menu;
+      console.log(items);
+
+      for(let i in items){
+        this.data.push({name: items[i].item_nome,
+          description: '',
+          image: 'https://rafafreitas.com/api/uploads/itens/' + items[i].fotos[0].fot_file,
+          rate: 4.5,
+          price: 'R$ ' + parseFloat(items[i].item_valor).toFixed(2),
+          id: items[i].item_id
+        });
+      }
+      this.restClient.Token = obj.token;
+
+      loading.dismiss();
+    });
+  }
+
   onCancel(event){
     this.toggleSearch();
   }
@@ -85,5 +114,34 @@ export class MenuListPage {
 
   navegateToDetail(): void {
     this.navCtrl.push(MenuDetailPage);
+  }
+
+  onSearchTermChanged(){
+    this.loadList();
+  }
+
+  onClearSearch(){
+    this.searchTerm = '';
+    this.loadList();
+  }
+
+  getMenuItems(){
+    let token = this.restClient.Token;
+
+    let body = {
+      "search": this.searchTerm,
+      "filial_id": this.navParams.data
+    }
+
+    return new Promise(resolve => {
+      this.http.post("https:api.rafafreitas.com/app/menu/list", body, {
+        headers: new HttpHeaders().set('Authorization', token)
+      })
+      .subscribe(res => {
+        resolve(JSON.stringify(res));
+      }, (err) => {
+        console.log(err);
+      });
+    });
   }
 }

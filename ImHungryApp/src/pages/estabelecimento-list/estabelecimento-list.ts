@@ -1,9 +1,11 @@
 import { Component, ChangeDetectorRef, ElementRef, ChangeDetectionStrategy } from '@angular/core';
-import { style, state, animate, transition, trigger } from '@angular/animations';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { style, animate, transition, trigger } from '@angular/animations';
 import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 import { MenuListPage } from '../menu-list/menu-list';
 import { CarrinhoPage } from '../carrinho/carrinho';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
+import { RestClientProvider } from '../../providers/rest-client/rest-client';
 import $ from "jquery";
 
 @IonicPage()
@@ -28,11 +30,11 @@ export class EstabelecimentoListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private detector: ChangeDetectorRef,
     private elRef: ElementRef, private menuCtrl: MenuController, private carrinho: CarrinhoProvider,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController, private http: HttpClient, private restClient: RestClientProvider) {
   }
 
   data = [];
-
+  searchTerm: string = '';
   showSearch: boolean = false;
   totalCarrinho: string = '';
 
@@ -61,52 +63,92 @@ export class EstabelecimentoListPage {
     this.toggleSearch();
   }
 
-  loadList(){
+  loadList(isRefresh: boolean, refresher){
 
     let loading = this.loadingCtrl.create({
       spinner: 'crescent'
     });
 
-    loading.present();
+    if(!isRefresh){
+      loading.present();
+    }else{
 
-    setTimeout(()=>{
-      loading.dismiss();
+    }
 
-      this.data = [
-        {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 2.5, distance: '2,5 Km' , status: 1},
-        {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png', rate: 3.5, distance: '3,5 Km', status: 0},
-        {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 1.5, distance: '1,5 Km', status: 1},
-        {name: 'Pizza Hut', description: 'Pizza Hut Boa Viagem', image: '/assets/imgs/test-logo.png', rate: 4, distance: '4 Km', status: 0},
-        {name: 'Pizza Hut', description: 'Pizza Hut da Favela', image: '/assets/imgs/test-logo.png', rate: 5, distance: '5 Km', status: 1}
-      ];
+    this.getEstabelecimentos().then(data => {
+      this.data = [];
 
-    }, 1500);
+      var obj = JSON.parse(data.toString());
+      var items = obj.filiais;
+
+      for(let i in items){
+        this.data.push({name: items[i].filial_nome,
+        description: items[i].logradouro + ', ' + items[i].filial_numero_endereco + ', ' + items[i].bairro + ', ' + items[i].cidade,
+        image: "https://rafafreitas.com/api/uploads/empresa/" + items[i].empresa_foto_marca,
+        rate: parseFloat(items[i].avaliacao),
+        distance: parseFloat(items[i].distancia).toFixed(2) + ' Km',
+        status: parseInt(items[i].filial_status),
+        id: parseInt(items[i].filial_id)});
+      }
+
+      this.restClient.Token = obj.token;
+
+      if(!isRefresh){
+        loading.dismiss();
+      }else{
+        refresher.complete();
+      }
+    });
+  }
+
+  getEstabelecimentos(){
+
+    let Token = this.restClient.Token;
+  
+    let body = {
+      'latitude': '-8.0282236',
+      'longitude': '-34.8855557',
+      'search': this.searchTerm
+    }
+
+    return new Promise(resolve => {
+      
+      this.http.post("https://api.rafafreitas.com/app/filial/list", body,{
+        headers: new HttpHeaders().set('Authorization', Token)
+      })
+      .subscribe(res => {
+        resolve(JSON.stringify(res));
+      },(err) => {
+        console.log(err);
+      });
+    });
   }
 
   ionViewDidLoad() {
-    this.loadList();
+    this.loadList(false, null);
   }
 
-  ionViewDidEnter(){
-    
+  onSearchChanged(){
+    this.loadList(false, null);
   }
 
-  ngOnInit(){
-    
+  onClearSearch(){
+    if(this.searchTerm.length > 1){
+      this.searchTerm = '';
+      this.loadList(false, null);
+    }
   }
   
   openFilterMenu(){
     this.menuCtrl.open("filtersMenu");
   }
 
-  navigateToMenuPage(){
-    this.navCtrl.push(MenuListPage);
+  navigateToMenuPage(item){
+    this.navCtrl.push(MenuListPage, item.id);
   }
 
   doRefresh(refresher){
-    setTimeout(()=>{
-      refresher.complete();
-    }, 3000);
+    this.loadList(true, refresher);
   }
 
   onScroll(){

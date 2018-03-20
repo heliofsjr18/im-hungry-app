@@ -8,7 +8,10 @@
         class="mySearchBar"
         [showCancelButton]="true"
         (ionCancel)="onCancel($event)"
-        placeholder="Buscar">
+        placeholder="Buscar"
+        (search)="onSearchTermChanged()"
+        [(ngModel)]="searchTerm"
+        (ionClear)="onClearSearch()">
       </ion-searchbar>
     </ion-toolbar>
 

@@ -7,7 +7,10 @@
         class="mySearchBar"
         [showCancelButton]="true"
         (ionCancel)="onCancel($event)"
-        placeholder="Buscar">
+        placeholder="Buscar"
+        [(ngModel)]="searchTerm"
+        (search)="onSearchChanged()"
+        (ionClear)="onClearSearch()">
       </ion-searchbar>
     </ion-toolbar>
 
@@ -38,7 +41,7 @@
   </ion-refresher>
   <ion-list padding-top>
 
-      <div *ngFor="let item of data" (click)="navigateToMenuPage()" class="Card_Item">
+      <div *ngFor="let item of data" (click)="navigateToMenuPage(item)" class="Card_Item">
         <img src="{{item.image}}">
         <div class="Card_Info">
           <div>
@@ -49,7 +52,7 @@
             </span>
           </div>
           <div>
-            <!--{{item.description}}-->É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível de uma página quando estiver examinando sua diagramação.
+            {{item.description}}
           </div>
           <div>
             <div>
