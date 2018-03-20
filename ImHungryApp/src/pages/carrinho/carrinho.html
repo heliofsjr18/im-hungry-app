@@ -27,145 +27,27 @@
           <img src="/assets/imgs/logo.png">
         </ion-thumbnail>
         <ion-thumbnail item-end>
-          <button ion-button color="danger">
+          <button (click)="removeButton()" ion-button color="danger">
             <ion-icon name="remove"></ion-icon>
           </button>
-          <button ion-button color="danger">
+          <button (click)="addButton()" ion-button color="danger">
             <ion-icon name="add"></ion-icon>
           </button>
         </ion-thumbnail>
-        <h3> Pequena Descrição </h3>
-        <h3> 10,00 x 3 </h3>
+        <h3> <ion-label id="lblDescricao">Nada pra ver aqui</ion-label> </h3>
+        <h3> <ion-label id="lblPreco">00,00 R$</ion-label> <ion-label id="lblMultiplicador">x 1 </ion-label> </h3>
       </ion-item>
 
     </ion-card>
 
     <!-- Apagar apartir daqui quando consumir -->
-    <ion-card>
-
-      <ion-card-header>
-        Titulo do Produto
-      </ion-card-header>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="/assets/imgs/logo.png">
-        </ion-thumbnail>
-        <ion-thumbnail item-end>
-          <button ion-button color="danger">
-            <ion-icon name="remove"></ion-icon>
-          </button>
-          <button ion-button color="danger">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-thumbnail>
-        <h3> Pequena Descrição </h3>
-        <h3> 10,00 x 3 </h3>
-      </ion-item>
-
-    </ion-card>
-
-    <ion-card>
-
-      <ion-card-header>
-        Titulo do Produto
-      </ion-card-header>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="/assets/imgs/logo.png">
-        </ion-thumbnail>
-        <ion-thumbnail item-end>
-          <button ion-button color="danger">
-            <ion-icon name="remove"></ion-icon>
-          </button>
-          <button ion-button color="danger">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-thumbnail>
-        <h3> Pequena Descrição </h3>
-        <h3> 10,00 x 3 </h3>
-      </ion-item>
-
-    </ion-card>
-
-    <ion-card>
-
-      <ion-card-header>
-        Titulo do Produto
-      </ion-card-header>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="/assets/imgs/logo.png">
-        </ion-thumbnail>
-        <ion-thumbnail item-end>
-          <button ion-button color="danger">
-            <ion-icon name="remove"></ion-icon>
-          </button>
-          <button ion-button color="danger">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-thumbnail>
-        <h3> Pequena Descrição </h3>
-        <h3> 10,00 x 3 </h3>
-      </ion-item>
-
-    </ion-card>
-
-    <ion-card>
-
-      <ion-card-header>
-        Titulo do Produto
-      </ion-card-header>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="/assets/imgs/logo.png">
-        </ion-thumbnail>
-        <ion-thumbnail item-end>
-          <button ion-button color="danger">
-            <ion-icon name="remove"></ion-icon>
-          </button>
-          <button ion-button color="danger">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-thumbnail>
-        <h3> Pequena Descrição </h3>
-        <h3> 10,00 x 3 </h3>
-      </ion-item>
-
-    </ion-card>
-
-    <ion-card>
-
-      <ion-card-header>
-        Titulo do Produto
-      </ion-card-header>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="/assets/imgs/logo.png">
-        </ion-thumbnail>
-        <ion-thumbnail item-end>
-          <button ion-button color="danger">
-            <ion-icon name="remove"></ion-icon>
-          </button>
-          <button ion-button color="danger">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-thumbnail>
-        <h3> Pequena Descrição </h3>
-        <h3> 10,00 x 3 </h3>
-      </ion-item>
-
-    </ion-card>
+    
     <!-- Apagar até aqui quando consumir -->
   </div>
 
   <div class="pay">
     <button class="payButton" (click)="cartPay()" ion-button full color="danger">
-      Pagar 180,00
+      Pagar 00,00 R$
     </button>
   </div>
 
