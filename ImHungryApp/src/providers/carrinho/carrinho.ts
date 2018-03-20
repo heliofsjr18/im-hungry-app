@@ -9,22 +9,33 @@ export class CarrinhoProvider {
   }
 
   carrinho = [
-    
+
   ];
 
-  public adicionarCarrinho(produto): void{
+  public adicionarCarrinho(produto): void {
+    //1. Verificar se existe este produto (id) no carrinho
+
+    //se sim: qtd + 1 a partir do id;
+
+    //se não add:
     this.carrinho.push(produto);
   }
 
-  public getCart(){
+  public getCart() {
     return this.carrinho;
-  } 
-
-  public removerCarrinho(): void{
-    this.carrinho.splice(1,1);
   }
 
-  public getCountCarrinho(): number{
+  public removerCarrinho(produto): void {
+    //1. Verificar se existe este produto (id) no carrinho
+
+    //se sim e qtd == 1 Não faz nada
+    //se sim e qqtd > 1 : qtd - 1 a partir do id;
+
+    //se não add:
+    this.carrinho.splice(1, 1);
+  }
+
+  public getCountCarrinho(): number {
     return this.carrinho.length;
   }
 

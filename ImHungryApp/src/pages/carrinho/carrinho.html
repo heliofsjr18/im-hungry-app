@@ -16,28 +16,28 @@
 <ion-content>
 
   <div class="cards">
-    <div *ngFor="let item of data" (click)="navegateToDetail(item)" class="Card_Item">
+    <div *ngFor="let item of data" class="Card_Item">
       <ion-card>
         <ion-card-header>
-          <span>{{item.name}}</span>
+          <span (click)="navegateToDetail(item)">{{item.name}}</span>
         </ion-card-header>
 
         <ion-item>
           <ion-thumbnail item-start>
-            <img src="{{item.image}}">
+            <img (click)="navegateToDetail(item)" src="{{item.image}}">
           </ion-thumbnail>
           <ion-thumbnail item-end>
-            <button (click)="removeButton()" ion-button color="danger">
+            <button (click)="removeButton(item)" ion-button color="danger">
               <ion-icon name="remove"></ion-icon>
             </button>
-            <button (click)="addButton()" ion-button color="danger">
+            <button (click)="addButton(item)" ion-button color="danger">
               <ion-icon name="add"></ion-icon>
             </button>
           </ion-thumbnail>
-          <h3>
+          <h3 (click)="navegateToDetail(item)">
               É um fato conhecido
           </h3>
-          <h3>
+          <h3 (click)="navegateToDetail(item)">
             {{item.price}} x {{item.qtd}}
           </h3>
         </ion-item>

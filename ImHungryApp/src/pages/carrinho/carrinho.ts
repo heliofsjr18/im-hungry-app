@@ -58,12 +58,12 @@ export class CarrinhoPage {
     });
   }
 
-  addButton() {
-    
+  addButton(item) {
+    this.carrinho.adicionarCarrinho(item);
   }
 
-  removeButton(){
-    
+  removeButton(item){
+    this.carrinho.removerCarrinho(item);
   }
 
 
