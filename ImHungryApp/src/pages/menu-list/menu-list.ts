@@ -112,8 +112,10 @@ export class MenuListPage {
     this.navCtrl.push(CarrinhoPage);
   }
 
-  navegateToDetail(): void {
-    this.navCtrl.push(MenuDetailPage);
+  navegateToDetail(item): void {
+    this.navCtrl.push(MenuDetailPage,{
+      objSelecionado : item
+    });
   }
 
   onSearchTermChanged(){

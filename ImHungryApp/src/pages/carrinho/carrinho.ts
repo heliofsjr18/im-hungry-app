@@ -9,6 +9,7 @@ import $ from "jquery";
 })
 export class CarrinhoPage {
 
+  mylblRef: any;
   @ViewChild('lblMultiplicador') lblMultiplicadorRef: ElementRef;
   @ViewChild('lblDescricao') lblDescricaoRef: ElementRef;
   @ViewChild('lblPreco') lblPrecoRef: ElementRef;

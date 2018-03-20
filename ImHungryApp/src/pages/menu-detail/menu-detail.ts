@@ -14,6 +14,7 @@ export class MenuDetailPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
   private carrinho: CarrinhoProvider, private detector: ChangeDetectorRef, private toastCtrl: ToastController) {
+    this.navParams.get('objSelecionado');
   }
 
   ionViewDidLoad() {

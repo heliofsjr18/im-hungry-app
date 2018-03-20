@@ -34,7 +34,7 @@
 <ion-content class="List_Body" padding (ionScroll)="onScroll()">
   <ion-list padding-top>
 
-    <div *ngFor="let item of data" (click)="navegateToDetail()" class="Card_Item">
+    <div *ngFor="let item of data" (click)="navegateToDetail(item)" class="Card_Item">
       <img src="{{item.image}}">
       <div class="Card_Info">
         <div>
