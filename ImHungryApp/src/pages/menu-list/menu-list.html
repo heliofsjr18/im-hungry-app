@@ -28,7 +28,6 @@
 <ion-content class="List_Body" padding (ionScroll)="onScroll()">
   <ion-list padding-top>
 
-    <ion-icon color="primary-light" name="md-cart"></ion-icon>
     <div *ngFor="let item of data" (click)="navegateToDetail(item)" class="Card_Item">
       <img src="{{item.image}}">
       <div class="Card_Info">

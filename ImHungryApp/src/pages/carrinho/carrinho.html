@@ -16,33 +16,33 @@
 <ion-content>
 
   <div class="cards">
-    <ion-card>
+    <div *ngFor="let item of data" (click)="navegateToDetail(item)" class="Card_Item">
+      <ion-card>
+        <ion-card-header>
+          <span>{{item.name}}</span>
+        </ion-card-header>
 
-      <ion-card-header>
-        Titulo do Produto
-      </ion-card-header>
-
-      <ion-item>
-        <ion-thumbnail item-start>
-          <img src="/assets/imgs/logo.png">
-        </ion-thumbnail>
-        <ion-thumbnail item-end>
-          <button (click)="removeButton()" ion-button color="danger">
-            <ion-icon name="remove"></ion-icon>
-          </button>
-          <button (click)="addButton()" ion-button color="danger">
-            <ion-icon name="add"></ion-icon>
-          </button>
-        </ion-thumbnail>
-        <h3> <ion-label id="lblDescricao">Nada pra ver aqui</ion-label> </h3>
-        <h3> <ion-label id="lblPreco">00,00 R$</ion-label> <ion-label id="lblMultiplicador">x 1 </ion-label> </h3>
-      </ion-item>
-
-    </ion-card>
-
-    <!-- Apagar apartir daqui quando consumir -->
-    
-    <!-- Apagar até aqui quando consumir -->
+        <ion-item>
+          <ion-thumbnail item-start>
+            <img src="{{item.image}}">
+          </ion-thumbnail>
+          <ion-thumbnail item-end>
+            <button (click)="removeButton()" ion-button color="danger">
+              <ion-icon name="remove"></ion-icon>
+            </button>
+            <button (click)="addButton()" ion-button color="danger">
+              <ion-icon name="add"></ion-icon>
+            </button>
+          </ion-thumbnail>
+          <h3>
+              É um fato conhecido
+          </h3>
+          <h3>
+            {{item.price}} x {{item.qtd}}
+          </h3>
+        </ion-item>
+      </ion-card>
+    </div>
   </div>
 
   <div class="pay">

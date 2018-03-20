@@ -27,9 +27,8 @@ export class MenuDetailPage {
     }
   }
 
-  addToCart(){
-    var obj = {name: 'asdasd'};
-    this.carrinho.adicionarCarrinho(obj);
+  addToCart(item){
+    this.carrinho.adicionarCarrinho(item);
     this.detector.detectChanges();
 
     let toast = this.toastCtrl.create({

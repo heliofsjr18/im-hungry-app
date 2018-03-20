@@ -8,11 +8,17 @@ export class CarrinhoProvider {
     console.log('Hello CarrinhoProvider Provider');
   }
 
-  carrinho = [{name: 'a'}, {name: 'b'}];
+  carrinho = [
+    
+  ];
 
   public adicionarCarrinho(produto): void{
     this.carrinho.push(produto);
   }
+
+  public getCart(){
+    return this.carrinho;
+  } 
 
   public removerCarrinho(): void{
     this.carrinho.splice(1,1);

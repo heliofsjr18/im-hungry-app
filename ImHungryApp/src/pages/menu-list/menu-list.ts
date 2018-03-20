@@ -91,7 +91,8 @@ export class MenuListPage {
           image: 'https://rafafreitas.com/api/uploads/itens/' + items[i].fotos[0].fot_file,
           rate: 4.5,
           price: 'R$ ' + parseFloat(items[i].item_valor).toFixed(2),
-          id: items[i].item_id
+          id: items[i].item_id,
+          qtd: 1
         });
       }
       this.restClient.Token = obj.token;

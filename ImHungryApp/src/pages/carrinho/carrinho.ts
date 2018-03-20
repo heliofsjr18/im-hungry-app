@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { IonicPage, NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
+import { CarrinhoProvider } from '../../providers/carrinho/carrinho'
+import { MenuDetailPage } from '../menu-detail/menu-detail';
 import $ from "jquery";
 
 @IonicPage()
@@ -19,8 +21,10 @@ export class CarrinhoPage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
-   private loadCtrl: LoadingController) {
+   private loadCtrl: LoadingController, private carrinho: CarrinhoProvider) {
   }
+
+  data = [];
 
   ionViewDidLoad() {
     if(this.platform.is('ios')){
@@ -28,6 +32,11 @@ export class CarrinhoPage {
         $(".back-button-text").text("");
       },100);
     }
+    this.loadCart();
+  }
+
+  loadCart(){
+    this.data = this.carrinho.getCart();
   }
 
   cartPay(){
@@ -43,13 +52,18 @@ export class CarrinhoPage {
     },10000);
   }
 
+  navegateToDetail(item): void {
+    this.navCtrl.push(MenuDetailPage,{
+      objSelecionado : item
+    });
+  }
 
   addButton() {
-    this.lblMultiplicadorRef.nativeElement.innerText =+ 1;
+    
   }
 
   removeButton(){
-    this.lblMultiplicadorRef.nativeElement.innerText =- 1;
+    
   }
 
 
