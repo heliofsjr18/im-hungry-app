@@ -49,7 +49,7 @@ export class CarrinhoPage {
 
     setTimeout(()=> {
       loading.dismiss();
-    },10000);
+    },1500);
   }
 
   navegateToDetail(item): void {
@@ -59,11 +59,11 @@ export class CarrinhoPage {
   }
 
   addButton(item) {
-    this.carrinho.adicionarCarrinho(item);
+    //this.carrinho.adicionarCarrinho(item);
   }
 
   removeButton(item){
-    this.carrinho.removerCarrinho(item);
+    //this.carrinho.removerCarrinho(item);
   }
 
 

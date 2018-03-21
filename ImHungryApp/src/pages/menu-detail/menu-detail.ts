@@ -33,8 +33,8 @@ export class MenuDetailPage {
 
     let toast = this.toastCtrl.create({
       message: "Item adicionado com sucesso.",
-      duration: 3000,
-      position: 'top',
+      duration: 1000,
+      position: 'bottom',
       showCloseButton: true,
       closeButtonText: 'X',
       dismissOnPageChange: true,
