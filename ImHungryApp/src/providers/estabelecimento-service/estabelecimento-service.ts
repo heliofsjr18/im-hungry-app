@@ -11,50 +11,14 @@ import { RestClientProvider } from '../rest-client/rest-client';
 */
 @Injectable()
 export class EstabelecimentoServiceProvider {
-  searchTerm: string = '';
 
-
-  //constructor(public http: HttpClient) {
-  //  console.log('Hello EstabelecimentoServiceProvider Provider');
-  //}
-  private actionUrl: string;
-
-
-  constructor(private http: HttpClient, private _configuration: RestClientProvider) {
-    this.actionUrl = _configuration.ServerWithApiUrl + 'values/';
+  constructor(private http: HttpClient, private rest: RestClientProvider) {
+    
   }
 
 
   //HFSJ - Tirando as chamadas de serviço externo das telas
-  public getEstabelecimentos() {
-
-    let Token = this._configuration.Token;
-    var items;
-    var obj;
-
-    let body = {
-      'latitude': '-8.0282236',
-      'longitude': '-34.8855557',
-      'search': this.searchTerm
-    }
-
-    var dataEstabelecimentos = new Promise(resolve => {
-      //HFSJ - Esse trecho não deve conter parametros Hard Code
-      this.http.post("https://api.rafafreitas.com/app/filial/list", body, {
-        headers: new HttpHeaders().set('Authorization', Token)
-      })
-        .subscribe(res => {
-          resolve(JSON.stringify(res));
-        }, (err) => {
-          console.log(err);
-        });
-    });
-
-    dataEstabelecimentos.then(data => {
-      obj = JSON.parse(data.toString());
-      items = obj.filiais;
-    });
-
-    return items;
+  public getEstabelecimentos(url: string, bodyJson) {
+    return this.rest.getPostJson(url, bodyJson);
   }
 }

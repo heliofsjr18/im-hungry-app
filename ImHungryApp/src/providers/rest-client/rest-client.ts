@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 /*
@@ -14,8 +14,29 @@ export class RestClientProvider {
     console.log('Hello RestClientProvider Provider');
   }
 
+  public getPostJson(url: string, bodyJson){
+    return new Promise((resolve, reject) => {
+      this.http.post(this.Server + this.ApiUrl + url, bodyJson, {
+        headers: new HttpHeaders().set('Authorization', this.Token)
+      })
+      .subscribe(res => {
+        resolve(JSON.stringify(res));
+      }, (err) => {
+        reject(JSON.stringify(err));
+      });
+    });
+  }
+
+  getJson(){
+
+  }
+
+  getLoginJson(){
+
+  }
+
   public Server = 'http://api.rafafreitas.com/';
-  public ApiUrl = 'api/';
+  public ApiUrl = 'app/';
   public ServerWithApiUrl = this.Server + this.ApiUrl;
-  public Token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MjE1MTY1NzUsImp0aSI6IlBpVCtaZGt6T1lNTCt2TCttZVRxUFczQjRMeDZBdFwvVGVEbTVzdHA2d0wwPSIsImlzcyI6Imh0dHA6XC9cL3JhZmFmcmVpdGFzLmNvbVwvIiwibmJmIjoxNTIxNTE2NTg1LCJleHAiOjE1MjE2MDI5ODUsImRhdGEiOnsidXNlcl9pZCI6IjEiLCJ1c2VyX25vbWUiOiJNYXRoZXVzIiwidXNlcl9jcGYiOiIxMDEyNDk0NDQ2OSIsInVzZXJfZW1haWwiOiJ0ZXN0ZUB0ZXN0ZS5jb20iLCJ1c2VyX3RlbGVmb25lIjoiODEzMzcyNjI0OSIsInVzZXJfZGF0YSI6IjIwMTgtMDMtMDUiLCJ1c2VyX2NhZGFzdHJvIjoiMjAxOC0wMy0wNSAwMDowMDowMCIsInVzZXJfZm90b19wZXJmaWwiOm51bGwsInVzZXJfc3RhdHVzIjoiMSIsInRpcG9faWQiOiIxIiwiZGF0ZUFuaXZlcnNhcmlvIjoiMDVcLzAzXC8yMDE4IiwiZGF0ZUNhZGF0cm8iOiIwNVwvMDNcLzIwMTgifX0.yrjt7myqe8ozzA9r5BQ2twdzWm4wxrNSBe-WPou1mSo';
+  public Token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1MjE3NTc0NzEsImp0aSI6Ikp2U1hVMEc0bE9zSUxrenZrNlM1SHNJNjdFaGtnclVGRTVxaDdCaGlGREE9IiwiaXNzIjoiaHR0cDpcL1wvcmFmYWZyZWl0YXMuY29tXC8iLCJuYmYiOjE1MjE3NTc0ODEsImV4cCI6MTUyMTg0Mzg4MSwiZGF0YSI6eyJ1c2VyX2lkIjoiMSIsInVzZXJfbm9tZSI6Ik1hdGhldXMiLCJ1c2VyX2NwZiI6IjEwMTI0OTQ0NDY5IiwidXNlcl9lbWFpbCI6InRlc3RlQHRlc3RlLmNvbSIsInVzZXJfdGVsZWZvbmUiOiI4MTMzNzI2MjQ5IiwidXNlcl9kYXRhIjoiMjAxOC0wMy0wNSIsInVzZXJfY2FkYXN0cm8iOiIyMDE4LTAzLTA1IDAwOjAwOjAwIiwidXNlcl9mb3RvX3BlcmZpbCI6bnVsbCwidXNlcl9zdGF0dXMiOiIxIiwidGlwb19pZCI6IjEiLCJkYXRlQW5pdmVyc2FyaW8iOiIwNVwvMDNcLzIwMTgiLCJkYXRlQ2FkYXRybyI6IjA1XC8wM1wvMjAxOCJ9fQ.q9wsku_F20d6is3AD06zBGfqZB7V-X4RMDOqTjkQX1U';
 }

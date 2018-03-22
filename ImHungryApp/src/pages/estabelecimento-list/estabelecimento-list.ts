@@ -37,6 +37,7 @@ export class EstabelecimentoListPage {
   searchTerm: string = '';
   showSearch: boolean = false;
   totalCarrinho: string = '';
+  data = []; // PRECISA ESTAR AQUI PARA ESTAR ACESSÍVEL NO HTML
 
   toggleSearch() {
     this.showSearch = !this.showSearch;
@@ -69,33 +70,50 @@ export class EstabelecimentoListPage {
       spinner: 'crescent'
     });
 
-    if (isRefresh) {
+    if (!isRefresh) {
       loading.present();
     }
 
-    var data = this.estabelecimentoServiceProvider.getEstabelecimentos();
-    for (let i in data) {
-      data.push({
-        name: data[i].filial_nome,
-        description: data[i].logradouro + ', ' + data[i].filial_numero_endereco + ', ' + data[i].bairro + ', ' + data[i].cidade,
-        image: "https://rafafreitas.com/api/uploads/empresa/" + data[i].empresa_foto_marca,
-        rate: parseFloat(data[i].avaliacao),
-        distance: parseFloat(data[i].distancia).toFixed(2) + ' Km',
-        status: parseInt(data[i].filial_status),
-        id: parseInt(data[i].filial_id)
+    let body = {
+      'latitude': '-8.0282236',
+      'longitude' : '-34.8855557',
+      'search': this.searchTerm
+    }
+
+    this.estabelecimentoServiceProvider.getEstabelecimentos('filial/list', body)
+      .then((data)=>{
+        this.data = [];
+        let parseObj = JSON.parse(data.toString());
+        let listItem = parseObj.filiais;
+
+        for (let i in listItem) {
+          this.data.push({
+            name: listItem[i].filial_nome,
+            description: listItem[i].logradouro + ', ' + listItem[i].filial_numero_endereco + ', ' + listItem[i].bairro + ', ' + listItem[i].cidade,
+            image: "https://rafafreitas.com/api/uploads/empresa/" + listItem[i].empresa_foto_marca,
+            rate: parseFloat(listItem[i].avaliacao),
+            distance: parseFloat(listItem[i].distancia).toFixed(2) + ' Km',
+            status: parseInt(listItem[i].filial_status),
+            id: parseInt(listItem[i].filial_id)
+          });
+        }
+
+        if (isRefresh) {
+          refresher.complete();
+        } else {
+          loading.dismiss();
+        }
+
+      })
+      .catch((rej) =>{
+        console.log(rej);
+        if(!isRefresh){
+          loading.dismiss();
+        }else{
+          refresher.complete();
+        }
       });
-    }
-
-    if (isRefresh) {
-      refresher.complete();
-      loading.dismiss();
-    } else {
-      loading.dismiss();
-    }
-
   }
-
-
 
   ionViewDidLoad() {
     this.loadList(false, null);
