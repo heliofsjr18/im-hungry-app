@@ -34,7 +34,6 @@ export class EstabelecimentoListPage {
     private loadingCtrl: LoadingController, private http: HttpClient, private restClient: RestClientProvider) {
   }
 
-  data = [];
   searchTerm: string = '';
   showSearch: boolean = false;
   totalCarrinho: string = '';
@@ -66,46 +65,36 @@ export class EstabelecimentoListPage {
 
   loadList(isRefresh: boolean, refresher) {
 
-    let loading;
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent'
+    });
 
-    if (!isRefresh) {
+    if (isRefresh) {
       loading.present();
     }
-    else {
-      loading = this.loadingCtrl.create({
-        spinner: 'crescent'
+
+    var data = this.estabelecimentoServiceProvider.getEstabelecimentos();
+    for (let i in data) {
+      data.push({
+        name: data[i].filial_nome,
+        description: data[i].logradouro + ', ' + data[i].filial_numero_endereco + ', ' + data[i].bairro + ', ' + data[i].cidade,
+        image: "https://rafafreitas.com/api/uploads/empresa/" + data[i].empresa_foto_marca,
+        rate: parseFloat(data[i].avaliacao),
+        distance: parseFloat(data[i].distancia).toFixed(2) + ' Km',
+        status: parseInt(data[i].filial_status),
+        id: parseInt(data[i].filial_id)
       });
     }
 
-    this.estabelecimentoServiceProvider.getEstabelecimentos().then(data => {
-      this.data = [];
+    if (isRefresh) {
+      refresher.complete();
+    } else {
+      loading.dismiss();
+    }
 
-      var obj = JSON.parse(data.toString());
-      var items = obj.filiais;
-
-      for (let i in items) {
-        this.data.push({
-          name: items[i].filial_nome,
-          description: items[i].logradouro + ', ' + items[i].filial_numero_endereco + ', ' + items[i].bairro + ', ' + items[i].cidade,
-          image: "https://rafafreitas.com/api/uploads/empresa/" + items[i].empresa_foto_marca,
-          rate: parseFloat(items[i].avaliacao),
-          distance: parseFloat(items[i].distancia).toFixed(2) + ' Km',
-          status: parseInt(items[i].filial_status),
-          id: parseInt(items[i].filial_id)
-        });
-      }
-
-      this.restClient.Token = obj.token;
-
-      if (!isRefresh) {
-        loading.dismiss();
-      } else {
-        refresher.complete();
-      }
-    });
   }
 
-  
+
 
   ionViewDidLoad() {
     this.loadList(false, null);

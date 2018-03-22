@@ -19,6 +19,7 @@ export class EstabelecimentoServiceProvider {
   //}
   private actionUrl: string;
 
+
   constructor(private http: HttpClient, private _configuration: RestClientProvider) {
     this.actionUrl = _configuration.ServerWithApiUrl + 'values/';
   }
@@ -28,6 +29,8 @@ export class EstabelecimentoServiceProvider {
   public getEstabelecimentos() {
 
     let Token = this._configuration.Token;
+    var items;
+    var obj;
 
     let body = {
       'latitude': '-8.0282236',
@@ -35,8 +38,7 @@ export class EstabelecimentoServiceProvider {
       'search': this.searchTerm
     }
 
-    return new Promise(resolve => {
-
+    var dataEstabelecimentos = new Promise(resolve => {
       //HFSJ - Esse trecho não deve conter parametros Hard Code
       this.http.post("https://api.rafafreitas.com/app/filial/list", body, {
         headers: new HttpHeaders().set('Authorization', Token)
@@ -47,5 +49,12 @@ export class EstabelecimentoServiceProvider {
           console.log(err);
         });
     });
+
+    dataEstabelecimentos.then(data => {
+      obj = JSON.parse(data.toString());
+      items = obj.filiais;
+    });
+
+    return items;
   }
 }
