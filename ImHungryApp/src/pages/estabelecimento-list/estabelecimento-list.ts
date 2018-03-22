@@ -6,6 +6,7 @@ import { MenuListPage } from '../menu-list/menu-list';
 import { CarrinhoPage } from '../carrinho/carrinho';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
+import { EstabelecimentoServiceProvider } from '../../providers/estabelecimento-service/estabelecimento-service';
 import $ from "jquery";
 
 @IonicPage()
@@ -15,12 +16,12 @@ import $ from "jquery";
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [
-        style({transform: 'translateX(100%)', opacity: 0}),
-        animate('150ms', style({transform: 'translateX(0)', opacity: 1}))
+        style({ transform: 'translateX(100%)', opacity: 0 }),
+        animate('150ms', style({ transform: 'translateX(0)', opacity: 1 }))
       ]),
       transition(':leave', [
-        style({transform: 'translateX(0)', opacity: 1}),
-        animate('150ms', style({transform: 'translateX(100%)', opacity: 0}))
+        style({ transform: 'translateX(0)', opacity: 1 }),
+        animate('150ms', style({ transform: 'translateX(100%)', opacity: 0 }))
       ])
     ])
   ],
@@ -29,7 +30,7 @@ import $ from "jquery";
 export class EstabelecimentoListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private detector: ChangeDetectorRef,
-    private elRef: ElementRef, private menuCtrl: MenuController, private carrinho: CarrinhoProvider,
+    private elRef: ElementRef, private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private estabelecimentoServiceProvider: EstabelecimentoServiceProvider,
     private loadingCtrl: LoadingController, private http: HttpClient, private restClient: RestClientProvider) {
   }
 
@@ -38,124 +39,106 @@ export class EstabelecimentoListPage {
   showSearch: boolean = false;
   totalCarrinho: string = '';
 
-  toggleSearch(){
+  toggleSearch() {
     this.showSearch = !this.showSearch;
   }
 
-  getTotalCarrinho(){
-    return  this.carrinho.getCountCarrinho();
+  getTotalCarrinho() {
+    return this.carrinho.getCountCarrinho();
   }
 
-  clickSearch(){
+  clickSearch() {
     this.toggleSearch();
-    
-    setTimeout(()=>{
+
+    setTimeout(() => {
       $(".searchbar-ios-cancel > .button-inner").text("Cancelar");
-    },100);
-    
+    }, 100);
+
   }
 
-  openCart() : void{
+  openCart(): void {
     this.navCtrl.push(CarrinhoPage);
   }
 
-  onCancel(event){
+  onCancel(event) {
     this.toggleSearch();
   }
 
-  loadList(isRefresh: boolean, refresher){
+  loadList(isRefresh: boolean, refresher) {
 
-    let loading = this.loadingCtrl.create({
-      spinner: 'crescent'
-    });
+    let loading;
 
-    if(!isRefresh){
+    if (!isRefresh) {
       loading.present();
-    }else{
-
+    }
+    else {
+      loading = this.loadingCtrl.create({
+        spinner: 'crescent'
+      });
     }
 
-    this.getEstabelecimentos().then(data => {
+    this.estabelecimentoServiceProvider.getEstabelecimentos().then(data => {
       this.data = [];
 
       var obj = JSON.parse(data.toString());
       var items = obj.filiais;
 
-      for(let i in items){
-        this.data.push({name: items[i].filial_nome,
-        description: items[i].logradouro + ', ' + items[i].filial_numero_endereco + ', ' + items[i].bairro + ', ' + items[i].cidade,
-        image: "https://rafafreitas.com/api/uploads/empresa/" + items[i].empresa_foto_marca,
-        rate: parseFloat(items[i].avaliacao),
-        distance: parseFloat(items[i].distancia).toFixed(2) + ' Km',
-        status: parseInt(items[i].filial_status),
-        id: parseInt(items[i].filial_id)});
+      for (let i in items) {
+        this.data.push({
+          name: items[i].filial_nome,
+          description: items[i].logradouro + ', ' + items[i].filial_numero_endereco + ', ' + items[i].bairro + ', ' + items[i].cidade,
+          image: "https://rafafreitas.com/api/uploads/empresa/" + items[i].empresa_foto_marca,
+          rate: parseFloat(items[i].avaliacao),
+          distance: parseFloat(items[i].distancia).toFixed(2) + ' Km',
+          status: parseInt(items[i].filial_status),
+          id: parseInt(items[i].filial_id)
+        });
       }
 
       this.restClient.Token = obj.token;
 
-      if(!isRefresh){
+      if (!isRefresh) {
         loading.dismiss();
-      }else{
+      } else {
         refresher.complete();
       }
     });
   }
 
-  getEstabelecimentos(){
-
-    let Token = this.restClient.Token;
   
-    let body = {
-      'latitude': '-8.0282236',
-      'longitude': '-34.8855557',
-      'search': this.searchTerm
-    }
-
-    return new Promise(resolve => {
-      
-      this.http.post("https://api.rafafreitas.com/app/filial/list", body,{
-        headers: new HttpHeaders().set('Authorization', Token)
-      })
-      .subscribe(res => {
-        resolve(JSON.stringify(res));
-      },(err) => {
-        console.log(err);
-      });
-    });
-  }
 
   ionViewDidLoad() {
     this.loadList(false, null);
   }
 
-  onSearchChanged(){
+  onSearchChanged() {
     this.loadList(false, null);
   }
 
-  onClearSearch(){
-    if(this.searchTerm.length > 1){
+  onClearSearch() {
+    if (this.searchTerm.length > 1) {
       this.searchTerm = '';
       this.loadList(false, null);
     }
   }
-  
-  openFilterMenu(){
+
+  openFilterMenu() {
     this.menuCtrl.open("filtersMenu");
   }
 
-  navigateToMenuPage(item){
+  navigateToMenuPage(item) {
     this.navCtrl.push(MenuListPage, item.id);
   }
 
-  doRefresh(refresher){
+  doRefresh(refresher) {
     this.loadList(true, refresher);
   }
 
-  onScroll(){
+  onScroll() {
     //this.detector.markForCheck();
   }
 
-  logStars(event){
+  logStars(event) {
     console.log(event);
   }
 }

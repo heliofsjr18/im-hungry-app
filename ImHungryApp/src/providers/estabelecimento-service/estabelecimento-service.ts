@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { RestClientProvider } from '../rest-client/rest-client';
@@ -11,6 +11,8 @@ import { RestClientProvider } from '../rest-client/rest-client';
 */
 @Injectable()
 export class EstabelecimentoServiceProvider {
+  searchTerm: string = '';
+
 
   //constructor(public http: HttpClient) {
   //  console.log('Hello EstabelecimentoServiceProvider Provider');
@@ -22,26 +24,28 @@ export class EstabelecimentoServiceProvider {
   }
 
 
-  public getAll<T>(): Observable<T> {
-    return this.http.get<T>(this.actionUrl);
-  }
+  //HFSJ - Tirando as chamadas de serviço externo das telas
+  public getEstabelecimentos() {
 
-  public getSingle<T>(id: number): Observable<T> {
-    return this.http.get<T>(this.actionUrl + id);
-  }
+    let Token = this._configuration.Token;
 
-  public add<T>(itemName: string): Observable<T> {
-    const toAdd = JSON.stringify({ ItemName: itemName });
+    let body = {
+      'latitude': '-8.0282236',
+      'longitude': '-34.8855557',
+      'search': this.searchTerm
+    }
 
-    return this.http.post<T>(this.actionUrl, toAdd);
-  }
+    return new Promise(resolve => {
 
-  public update<T>(id: number, itemToUpdate: any): Observable<T> {
-    return this.http
-      .put<T>(this.actionUrl + id, JSON.stringify(itemToUpdate));
-  }
-
-  public delete<T>(id: number): Observable<T> {
-    return this.http.delete<T>(this.actionUrl + id);
+      //HFSJ - Esse trecho não deve conter parametros Hard Code
+      this.http.post("https://api.rafafreitas.com/app/filial/list", body, {
+        headers: new HttpHeaders().set('Authorization', Token)
+      })
+        .subscribe(res => {
+          resolve(JSON.stringify(res));
+        }, (err) => {
+          console.log(err);
+        });
+    });
   }
 }
