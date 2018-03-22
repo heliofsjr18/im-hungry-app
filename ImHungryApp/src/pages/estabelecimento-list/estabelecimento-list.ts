@@ -88,6 +88,7 @@ export class EstabelecimentoListPage {
 
     if (isRefresh) {
       refresher.complete();
+      loading.dismiss();
     } else {
       loading.dismiss();
     }
