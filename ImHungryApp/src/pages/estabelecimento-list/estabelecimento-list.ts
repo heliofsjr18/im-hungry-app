@@ -106,6 +106,7 @@ export class EstabelecimentoListPage {
 
       })
       .catch((rej) =>{
+        this.data = [];
         console.log(rej);
         if(!isRefresh){
           loading.dismiss();

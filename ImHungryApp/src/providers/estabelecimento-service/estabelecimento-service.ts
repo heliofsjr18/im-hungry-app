@@ -15,8 +15,7 @@ export class EstabelecimentoServiceProvider {
   constructor(private http: HttpClient, private rest: RestClientProvider) {
     
   }
-
-
+  
   //HFSJ - Tirando as chamadas de serviço externo das telas
   public getEstabelecimentos(url: string, bodyJson) {
     return this.rest.getPostJson(url, bodyJson);
