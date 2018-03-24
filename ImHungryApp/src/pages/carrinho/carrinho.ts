@@ -38,7 +38,7 @@ export class CarrinhoPage {
 
   loadCart(){
     this.data = this.carrinho.getCart();
-    this.sumeCart();
+    this.sumCart();
   }
 
   sumCart(){
