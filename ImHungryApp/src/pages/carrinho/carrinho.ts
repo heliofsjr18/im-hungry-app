@@ -25,6 +25,7 @@ export class CarrinhoPage {
   }
 
   data = [];
+  total = '0,00';
 
   ionViewDidLoad() {
     if(this.platform.is('ios')){
@@ -37,9 +38,15 @@ export class CarrinhoPage {
 
   loadCart(){
     this.data = this.carrinho.getCart();
+    this.sumeCart();
+  }
+
+  sumCart(){
+    
   }
 
   cartPay(){
+    
     let loading = this.loadCtrl.create({
       spinner: 'crescent',
       content: 'Efetuando pagamento. Aguarde...'
@@ -50,6 +57,7 @@ export class CarrinhoPage {
     setTimeout(()=> {
       loading.dismiss();
     },1500);
+
   }
 
   navegateToDetail(item): void {
@@ -59,11 +67,11 @@ export class CarrinhoPage {
   }
 
   addButton(item) {
-    //this.carrinho.adicionarCarrinho(item);
+    this.carrinho.adicionarCarrinho(item);
   }
 
   removeButton(item){
-    //this.carrinho.removerCarrinho(item);
+    this.carrinho.removerCarrinho(item);
   }
 
 

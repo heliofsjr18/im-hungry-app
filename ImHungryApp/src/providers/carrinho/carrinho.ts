@@ -8,17 +8,20 @@ export class CarrinhoProvider {
     console.log('Hello CarrinhoProvider Provider');
   }
 
-  carrinho = [
-
-  ];
+  carrinho = [];
+  exist = false;
 
   public adicionarCarrinho(produto): void {
-    //1. Verificar se existe este produto (id) no carrinho
-
-    //se sim: qtd + 1 a partir do id;
-
-    //se não add:
-    this.carrinho.push(produto);
+    if (this.carrinho.length > 0) {
+      let index = this.carrinho.findIndex(x => x.id === produto.id);
+      if (index < 0) {
+        this.carrinho.push(produto);
+      } else {
+        this.carrinho[index].qtd = produto.qtd + 1;
+      }
+    } else {
+      this.carrinho.push(produto);
+    }
   }
 
   public getCart() {
@@ -26,12 +29,6 @@ export class CarrinhoProvider {
   }
 
   public removerCarrinho(produto): void {
-    //1. Verificar se existe este produto (id) no carrinho
-
-    //se sim e qtd == 1 Não faz nada
-    //se sim e qqtd > 1 : qtd - 1 a partir do id;
-
-    //se não add:
     this.carrinho.splice(1, 1);
   }
 
