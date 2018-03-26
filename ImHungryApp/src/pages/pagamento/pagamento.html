@@ -1,18 +1,34 @@
-<!--
-  Generated template for the PagamentoPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>pagamento</ion-title>
+  <ion-navbar class="myNavBar" hideBackButton="true" color="secondary">
+    <ion-title>Pagamento</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+  <ion-slides pager="true">
+  
+    <ion-slide>
+      <!--MOSTRAR PARTE DE ESCOLHER FORMA DE PAGAMENTO OU BOTÃO PARA CADASTRAR NOVA-->
+      <button ion-button (click)="setNext(false)"> SELECIONAR FORMA DE PAGAMENTO </button>
+    </ion-slide>
 
+    <ion-slide>
+      <!--MOSTRAR RESUMO DA COMPRA COM BOTÃO CONFIRMAR-->
+      <button ion-button (click)="setNext(true)">CONFIRMAR PAGAMENTO</button>
+    </ion-slide>
+
+    <ion-slide>
+      <!--MOSTRAR SPINNER COM LOADING DE PAGAMENTO-->
+      <h1>Efetuando Pagamento...</h1>
+      <ion-spinner name="crescent"></ion-spinner>
+    </ion-slide>
+
+  </ion-slides>
 </ion-content>

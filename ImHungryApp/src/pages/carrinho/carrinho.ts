@@ -1,8 +1,9 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, ModalController } from 'ionic-angular';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho'
 import { MenuDetailPage } from '../menu-detail/menu-detail';
 import $ from "jquery";
+import { PagamentoPage } from '../pagamento/pagamento';
 
 @IonicPage()
 @Component({
@@ -21,7 +22,7 @@ export class CarrinhoPage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
-   private loadCtrl: LoadingController, private carrinho: CarrinhoProvider) {
+   private carrinho: CarrinhoProvider, private modalCtrl: ModalController) {
   }
 
   data = [];
@@ -46,18 +47,8 @@ export class CarrinhoPage {
   }
 
   cartPay(){
-    
-    let loading = this.loadCtrl.create({
-      spinner: 'crescent',
-      content: 'Efetuando pagamento. Aguarde...'
-    });
-
-    loading.present();
-
-    setTimeout(()=> {
-      loading.dismiss();
-    },1500);
-
+    let paymentModal = this.modalCtrl.create(PagamentoPage);
+    paymentModal.present();
   }
 
   navegateToDetail(item): void {
