@@ -8,47 +8,49 @@ export class CarrinhoProvider {
     console.log('Hello CarrinhoProvider Provider');
   }
 
-  carrinho = [];
+  carrinho = { array: [], total: 0.00};
   cartForApi = [];
-  qtdCart = 0;
+
 
   public adicionarCarrinho(produto): void {
-    if (this.carrinho.length > 0) {
-      let index = this.carrinho.findIndex(x => x.id === produto.id);
+
+    if (this.carrinho.array.length > 0) {
+
+      let index = this.carrinho.array.findIndex(x => x.id === produto.id);
+
       if (index < 0) {
-        this.carrinho.push(produto);
-        this.cartForApi.push({ id: produto.id, qtd: 1 });
+
+        this.carrinho.array.push(produto);
+        this.carrinho.total = this.carrinho.total + (produto.price * 1);
+
       } else {
-        this.carrinho[index].qtd = produto.qtd + 1;
-        let indexCAPI = this.cartForApi.findIndex(x => x.id === produto.id);
-        this.cartForApi[indexCAPI].qtd = this.carrinho[index].qtd;
+        this.carrinho.array[index].qtd = produto.qtd + 1;
+        this.carrinho.total = (produto.price * produto.qtd);
       }
     } else {
-      this.carrinho.push(produto);
-      this.cartForApi.push({ id: produto.id, qtd: 1 });
+      this.carrinho.array.push(produto);
+      this.carrinho.total = produto.price * produto.qtd;
     }
-    this.qtdCart = this.qtdCart + 1;
   }
 
   public getCart() {
     return this.carrinho;
   }
 
+  public generateCartForApi(){
+    return '';
+  }
+
   public removerCarrinho(produto): void {
     if (produto.qtd > 1) {
-      let index = this.carrinho.findIndex(x => x.id === produto.id);
-      this.carrinho[index].qtd = produto.qtd - 1;
-
-      this.qtdCart = this.qtdCart - 1;
-
-      let indexCAPI = this.cartForApi.findIndex(x => x.id === produto.id);
-      this.cartForApi[indexCAPI].qtd = this.carrinho[index].qtd;
+      let index = this.carrinho.array.findIndex(x => x.id === produto.id);
+      this.carrinho.array[index].qtd = produto.qtd - 1;
+      this.carrinho.total = this.carrinho.total - produto.price;
     }
   }
 
   public getCountCarrinho(): number {
-    //return this.carrinho.length;
-    return this.qtdCart;
+    return this.carrinho.array.length;
   }
 
 }

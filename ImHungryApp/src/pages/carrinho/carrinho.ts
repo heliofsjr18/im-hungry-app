@@ -25,7 +25,7 @@ export class CarrinhoPage {
    private carrinho: CarrinhoProvider, private modalCtrl: ModalController) {
   }
 
-  data = [];
+  data = {array: [], total: 0.00};
   total = '0,00';
 
   ionViewDidLoad() {
@@ -39,6 +39,7 @@ export class CarrinhoPage {
 
   loadCart(){
     this.data = this.carrinho.getCart();
+    console.log(this.data);
     this.sumCart();
   }
 

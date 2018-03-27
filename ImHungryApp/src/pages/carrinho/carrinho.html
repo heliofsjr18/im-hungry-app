@@ -16,7 +16,7 @@
 <ion-content>
 
   <div class="cards">
-    <div *ngFor="let item of data" class="Card_Item">
+    <div *ngFor="let item of data.array" class="Card_Item">
       <ion-card>
         <ion-card-header>
           <span (click)="navegateToDetail(item)">{{item.name}}</span>
@@ -38,7 +38,7 @@
               É um fato conhecido
           </h3>
           <h3 (click)="navegateToDetail(item)">
-            {{item.price}} x {{item.qtd}}
+            {{item.price.toFixed(2)}} x {{item.qtd}}
           </h3>
         </ion-item>
       </ion-card>
@@ -46,8 +46,8 @@
   </div>
 
   <div class="pay">
-    <button class="payButton" (click)="cartPay()" ion-button full color="danger">
-      Pagar {{total}} R$
+    <button round (click)="cartPay()" ion-button full color="danger">
+      <span>Pagar R$ {{data.total.toFixed(2)}}</span>
     </button>
   </div>
 

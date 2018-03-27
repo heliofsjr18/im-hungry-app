@@ -90,7 +90,7 @@ export class MenuListPage {
           description: '',
           image: 'https://rafafreitas.com/api/uploads/itens/' + items[i].fotos[0].fot_file,
           rate: 4.5,
-          price: 'R$ ' + parseFloat(items[i].item_valor).toFixed(2),
+          price: parseFloat(items[i].item_valor),
           id: items[i].item_id,
           qtd: 1
         });

@@ -46,7 +46,7 @@
             <ion-rating class="smallRating" [showOnly]="true" [numStars]="5" [rateValue]="item.rate" (ionClick)="logStars($event)"></ion-rating>
           </div>
           <div class="textListPrice smallListPrice">
-            {{item.price}}
+            R$ {{item.price.toFixed(2)}}
           </div>
         </div>
       </div>
