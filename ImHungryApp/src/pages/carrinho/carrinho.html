@@ -22,6 +22,7 @@
           <span (click)="navegateToDetail(item)">{{item.name}}</span>
         </ion-card-header>
 
+      <ion-item-sliding>
         <ion-item>
           <ion-thumbnail item-start>
             <img (click)="navegateToDetail(item)" src="{{item.image}}">
@@ -41,12 +42,16 @@
             {{item.price.toFixed(2)}} x {{item.qtd}}
           </h3>
         </ion-item>
+        <ion-item-options side="right">
+          <button ion-button>Remover</button>
+        </ion-item-options>
+      </ion-item-sliding>
       </ion-card>
     </div>
   </div>
 
   <div class="pay">
-    <button round (click)="cartPay()" ion-button full color="danger">
+    <button round (click)="cartPay()" ion-button full color="primary">
       <span>Pagar R$ {{data.total.toFixed(2)}}</span>
     </button>
   </div>

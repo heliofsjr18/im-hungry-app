@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header no-border>
 
-  <ion-navbar class="myNavBar" hideBackButton="true" color="secondary">
+  <ion-navbar class="myNavBar" color="secondary" hideBackButton="true" color="secondary">
     <ion-title>Pagamento</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="closeModal()">
@@ -11,24 +11,25 @@
 
 </ion-header>
 
-<ion-content padding>
-  <ion-slides pager="true">
-  
-    <ion-slide>
-      <!--MOSTRAR PARTE DE ESCOLHER FORMA DE PAGAMENTO OU BOTÃO PARA CADASTRAR NOVA-->
-      <button ion-button (click)="setNext(false)"> SELECIONAR FORMA DE PAGAMENTO </button>
+<ion-content>
+ <div class="bodyHeader">
+   <ion-slides #firstSlider pager="true">
+     <ion-slide>
+       <ion-card class="sliderCard">
+         <ion-card-content>
+           CARTÃO 1
+         </ion-card-content>
+       </ion-card>
+     </ion-slide>
+     <ion-slide>
+        <ion-card class="sliderCard">
+          <ion-card-content>
+            CARTÃO 2
+          </ion-card-content>
+        </ion-card>
     </ion-slide>
+   </ion-slides>
+ </div>
+ <div class="bodyContent"></div>
 
-    <ion-slide>
-      <!--MOSTRAR RESUMO DA COMPRA COM BOTÃO CONFIRMAR-->
-      <button ion-button (click)="setNext(true)">CONFIRMAR PAGAMENTO</button>
-    </ion-slide>
-
-    <ion-slide>
-      <!--MOSTRAR SPINNER COM LOADING DE PAGAMENTO-->
-      <h1>Efetuando Pagamento...</h1>
-      <ion-spinner name="crescent"></ion-spinner>
-    </ion-slide>
-
-  </ion-slides>
 </ion-content>
