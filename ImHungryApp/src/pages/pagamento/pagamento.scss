@@ -5,12 +5,12 @@ page-pagamento {
     }*/
 
     .swiper-pagination-bullet-active{
-        background: color($colors, primary-dark);
+        background: color($colors, secondary-light);
     }
 
     .bodyHeader{
         height: 220px;
-        background: color($colors, secondary);
+        background: color($colors, primary);
     }
 
     .bodyContent{
@@ -19,7 +19,18 @@ page-pagamento {
 
     .sliderCard{
         height: 150px;
-        margin: 5px 30px 10px 30px;
-        width: calc(100% - 60px);
+        margin: 20px 30px 30px 30px;
+        width: 300px;//calc(100% - 60px);
+        border-radius: 10px;
+        display: inline-block;
+    }
+
+    .myPaymentNavBar{
+        height: 56px;
+    }
+
+    .slide-zoom{
+        height: 100%;
+        width: 100%;
     }
 }

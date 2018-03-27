@@ -1,6 +1,6 @@
 <ion-header no-border>
 
-  <ion-navbar class="myNavBar" color="secondary" hideBackButton="true" color="secondary">
+  <ion-navbar class="myNavBar" hideBackButton="true" color="primary">
     <ion-title>Pagamento</ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="closeModal()">
@@ -12,24 +12,24 @@
 </ion-header>
 
 <ion-content>
- <div class="bodyHeader">
-   <ion-slides #firstSlider pager="true">
-     <ion-slide>
-       <ion-card class="sliderCard">
-         <ion-card-content>
-           CARTÃO 1
-         </ion-card-content>
-       </ion-card>
-     </ion-slide>
-     <ion-slide>
-        <ion-card class="sliderCard">
-          <ion-card-content>
-            CARTÃO 2
-          </ion-card-content>
-        </ion-card>
-    </ion-slide>
-   </ion-slides>
- </div>
- <div class="bodyContent"></div>
+
+ <ion-slides #firstSlides pager="false">
+
+   <ion-slide>  
+    <div class="bodyHeader">
+      <ion-slides #secondSlides pager="true">
+        <ion-slide *ngFor="let card of cards">
+          <ion-card class="sliderCard"> 
+            <ion-card-content>
+              {{card.name}}
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+    </div>
+    <div class="bodyContent"></div>
+  </ion-slide>
+
+ </ion-slides>
 
 </ion-content>
