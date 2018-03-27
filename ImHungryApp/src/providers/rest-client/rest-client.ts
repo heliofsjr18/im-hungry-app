@@ -35,8 +35,17 @@ export class RestClientProvider {
     })
   }
 
-  public getLoginJson(){
-    
+  public getLoginJson(bodyJson, url: string) {
+
+    return new Promise((resolve, reject) => {
+      this.http.post(this.Server + this.ApiUrl + url, bodyJson)
+        .subscribe(res => {
+          resolve(JSON.stringify(res));
+        }, (err) => {
+          reject(JSON.stringify(err));
+        });
+    });
+
   }
 
   public Server = 'http://api.rafafreitas.com/';
