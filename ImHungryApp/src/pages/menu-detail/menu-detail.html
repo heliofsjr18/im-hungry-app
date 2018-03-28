@@ -36,21 +36,21 @@
         <ion-rating class="menuViewStar" [showOnly]="true" [numStars]="5" [rateValue]="4"></ion-rating>
       </div>
       <div class="textListPrice menuViewPrice">
-        {{item.price.toFixed(2)}}
+        R$ {{item.price.toFixed(2)}}
       </div>
     </div>
 
     <ion-row no-padding>
       <ion-col>
-        <button ion-button clear small color="secondary-dark" icon-start>
-          <ion-icon name='star'></ion-icon>
+        <button ion-button clear small color="secondary" icon-start>
+          <i class="fas fa-star"></i>
           Favorito
         </button>
       </ion-col>
 
       <ion-col text-right>
-        <button (click)="addToCart(item)" ion-button clear small color="secondary-dark" icon-start>
-          <ion-icon name='md-cart'></ion-icon>
+        <button (click)="addToCart(item)" ion-button clear small color="secondary" icon-start>
+          <i class="fas fa-shopping-cart"></i>
           Adcionar ao Carrinho
         </button>
       </ion-col>

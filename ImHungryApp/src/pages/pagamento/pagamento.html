@@ -19,14 +19,37 @@
     <div class="bodyHeader">
       <ion-slides #secondSlides pager="true">
         <ion-slide *ngFor="let card of cards">
-          <ion-card class="sliderCard"> 
-            <ion-card-header>
-              <div class="cardDivHeader">
-                <i class="fab fa-cc-visa fa-2x"></i> 
-              </div>
-            </ion-card-header>
+          <ion-card class="sliderCard" [ngStyle]="{ 'background' : 'linear-gradient(90deg, #FFF, #ededed)' }"> 
             <ion-card-content>
-              
+              <div class="cardDivHeader">
+                <div class="cardIconHeader">
+                  <i [class]="getCardIconClass(card.brand)"></i>
+                </div>
+                <div [ngStyle]="{ 'color': '#c3ea9c' }">
+                  <i class="far fa-check-circle fa-2x"></i>
+                </div>
+              </div>
+              <div class="cardDivMid">
+                <div class="groupDigits" *ngFor="let group of groupDigits">
+                  <i *ngFor="let icon of groupIcons" class="fas fa-circle"></i>
+                </div>
+                <div class="groupDigits">
+                  <span>
+                    {{card.lastDigits}}
+                  </span>
+                </div>
+              </div>
+              <div class="cardDivFooter">
+                <div>
+                  <span>Data</span>
+                  <span>Exp.</span>
+                </div>
+                <div>
+                  <div>
+                    <span>{{card.expDate}}</span>
+                  </div>
+                </div>
+              </div>
             </ion-card-content>
           </ion-card>
         </ion-slide>

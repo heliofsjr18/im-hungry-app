@@ -14,10 +14,25 @@ export class PagamentoPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  cards = [{name: 'CARTÃO 1'}, {name: 'CARTÃO 2'}];
+  groupIcons = [1, 2, 3, 4];
+  groupDigits = [1, 2, 3];
+
+  cards = [{brand: 'visa', lastDigits: '0355', expDate: '05/29'}, {brand: 'master', lastDigits: '5459', expDate: '08/23'}];
+
   ionViewDidLoad() { 
     this.setCardSlidesOptions();
     this.firstSlides.lockSwipes(true);
+  }
+
+  getCardIconClass(brand: string){
+    brand = brand.toLowerCase();
+    if(brand == 'master'){
+      return 'fab fa-cc-mastercard fa-3x';
+    }else if(brand == 'visa'){
+      return 'fab fa-cc-visa fa-3x';
+    }else{
+      return '';
+    }
   }
 
   setCardSlidesOptions(){

@@ -14,18 +14,22 @@ page-estabelecimento-list {
 
     .buttonBadge{
         position: relative;
-        width: 55px;
         top:1px;
         right: 1px;
         overflow: visible!important;
     }
 
     .cartBadge{
+        align-items: center;
         position: absolute;
-        top: -3px;
-        right: 5px;
-        border-radius: 100px;
-        padding: 3px 3px;
+        top: -5px;
+        right: -6px;
+        border-radius: 100%;
+        padding: 0;
+        width: 19px;
+        height: 19px;
+        display: inline-flex;
+        justify-content: center;
     } 
 
     .toolbar-ios ion-title{
@@ -40,8 +44,7 @@ page-estabelecimento-list {
     .bar-button-default-ios{text-align: left;}
     
     .iconHeader{
-        //margin-left: 7px;
-        width: 30px;
+        margin-left: 7px;
     }
 
     .ion-rating-container grid{
