@@ -26,11 +26,11 @@ export class IonRatingComponent {
     let tmp = this.rateValue;
     for(let i=0; i < this.numStars; i++, tmp--){
       if(tmp >= 1)
-        this.stars.push("star");
+        this.stars.push("fas fa-star"); 
       else if(tmp > 0 && tmp < 1)
-        this.stars.push("star-half");
+        this.stars.push("fas fa-star-half");
       else
-        this.stars.push("star-outline");
+        this.stars.push("far fa-star");
     }
     this.detector.detectChanges();
   }

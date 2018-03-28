@@ -3,8 +3,8 @@
   <ion-navbar class="myNavBar" hideBackButton="true" color="primary">
     <ion-title>Pagamento</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only (click)="closeModal()">
-        <ion-icon name="close"></ion-icon>
+      <button ion-button icon-only class="iconHeader" (click)="closeModal()">
+        <i class="fas fa-times fa-lg"></i>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -20,8 +20,13 @@
       <ion-slides #secondSlides pager="true">
         <ion-slide *ngFor="let card of cards">
           <ion-card class="sliderCard"> 
+            <ion-card-header>
+              <div class="cardDivHeader">
+                <i class="fab fa-cc-visa fa-2x"></i> 
+              </div>
+            </ion-card-header>
             <ion-card-content>
-              {{card.name}}
+              
             </ion-card-content>
           </ion-card>
         </ion-slide>

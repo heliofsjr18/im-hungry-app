@@ -16,14 +16,14 @@
 
     <ion-buttons end *ngIf="!showSearch">
       <button class="buttonBadge" (click)="openCart()" ion-button icon-only>
-        <ion-icon name="md-cart"></ion-icon>
+        <i class="fas fa-shopping-cart fa-lg"></i>
         <ion-badge *ngIf="getTotalCarrinho() > 0" class="cartBadge">{{getTotalCarrinho()}}</ion-badge>
       </button>
       <button class="iconHeader" (click)="openFilterMenu()" ion-button icon-only>
-        <ion-icon name="ios-funnel"></ion-icon>
+        <i class="fas fa-filter fa-lg"></i>
       </button>
       <button (click)="clickSearch()" class="iconHeader" ion-button icon-only>
-        <ion-icon name="md-search"></ion-icon>
+        <i class="fas fa-search fa-lg"></i>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -48,7 +48,7 @@
             <span>{{item.name}}</span>
             <span>
               <span>{{item.status == 1 ? "Aberto" : "Fechado"}}</span>
-              <ion-icon [ngClass]="(item.status == 1)?'statusOpen' : 'statusClose'" name="ios-radio-button-on-outline"></ion-icon>
+              <i [ngClass]="(item.status == 1)?'statusOpen' : 'statusClose'" class="fas fa-circle"></i>
             </span>
           </div>
           <div>
@@ -59,7 +59,7 @@
               <ion-rating class="smallRating" [showOnly]="true" [numStars]="5" [rateValue]="item.rate" (ionClick)="logStars($event)"></ion-rating>
             </div>
             <div class="textNote">
-              <ion-icon name="pin"></ion-icon>
+              <i class="fas fa-map-marker-alt"></i>
               {{item.distance}}
             </div>
           </div>

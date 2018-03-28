@@ -4,6 +4,15 @@ page-pagamento {
         bottom: inherit; 
     }*/
 
+    .iconHeader{
+        margin-right: 7px;
+    }
+
+    .cardDivHeader{
+        display: flex;
+        align-items: center;
+    }
+
     .swiper-pagination-bullet-active{
         background: color($colors, secondary-light);
     }
