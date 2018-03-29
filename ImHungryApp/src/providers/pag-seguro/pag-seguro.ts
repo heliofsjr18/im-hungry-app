@@ -1,0 +1,49 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { RestClientProvider } from '../rest-client/rest-client';
+
+declare var PagSeguroDirectPayment;
+
+@Injectable()
+export class PagSeguroProvider {
+
+  constructor(public http: HttpClient, private restClient: RestClientProvider) {
+  }
+
+  private paymentMethod = 'CREDIT_CARD';
+  private pedido = {
+    senderHash: '',
+    creditCard: {
+      num: '',
+      cvv: '',
+      name: '',
+      expMon: '',
+      expYe: '',
+      brand: '',
+      token: ''
+    },
+    items: [{id: 0, qtd: 0}],
+    total: 0
+  }
+
+  public doPayment(){
+    
+  }
+
+  private getSession(){
+    return this.restClient.getJson('session');
+  }
+
+  private initSession(sessionId){
+    PagSeguroDirectPayment.setSessionId(sessionId);
+  }
+
+  private getCardBrand(){
+
+  }
+
+  private getCardToken(){
+
+  }
+
+}

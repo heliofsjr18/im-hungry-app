@@ -4,6 +4,19 @@ page-pagamento {
         bottom: inherit; 
     }*/
 
+    .payDiv{
+        width: 100%;
+        bottom: 0;
+        position: fixed;
+        padding: 0 60px 20px 60px;
+        margin: auto;
+    }
+
+    .divHalf{
+        display: flex;
+        align-items: center;
+    }
+
     .iconHeader{
         margin-right: 7px;
     }
@@ -87,5 +100,10 @@ page-pagamento {
     .slide-zoom{
         height: 100%;
         width: 100%;
+    }
+
+    .inputCard{
+        border-color: color($colors, primary-light);
+        padding: 0 20px;
     }
 }

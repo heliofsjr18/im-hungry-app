@@ -17,7 +17,7 @@
 
    <ion-slide>  
     <div class="bodyHeader">
-      <ion-slides #secondSlides pager="true">
+      <ion-slides #secondSlides pager="true" (ionSlideDidChange)="slideChanged()">
         <ion-slide *ngFor="let card of cards">
           <ion-card class="sliderCard" [ngStyle]="{ 'background' : 'linear-gradient(90deg, #FFF, #ededed)' }"> 
             <ion-card-content>
@@ -46,7 +46,7 @@
                 </div>
                 <div>
                   <div>
-                    <span>{{card.expDate}}</span>
+                    <span>{{card.expMon}}/{{card.expYe}}</span>
                   </div>
                 </div>
               </div>
@@ -55,7 +55,35 @@
         </ion-slide>
       </ion-slides>
     </div>
-    <div class="bodyContent"></div>
+    <div class="bodyContent">
+      <div>
+        <ion-item-divider>
+          Detalhes do Cartão
+        </ion-item-divider>
+        <ion-item class="inputCard">
+          <ion-label color="secondary" floating>Titular</ion-label>
+          <ion-input type="text" disabled [(ngModel)]="selectedCard.titular"></ion-input>
+        </ion-item>
+        <ion-item class="inputCard">
+          <ion-label color="secondary" floating>Número do Cartão</ion-label>
+          <ion-input type="text" disabled [(ngModel)]="selectedCard.cardNumber"></ion-input>
+        </ion-item>
+        <div class="divHalf">
+          <ion-item class="inputCard">
+            <ion-label color="secondary" floating>Data Exp.</ion-label>
+            <ion-datetime disabled cancelText="Cancelar" doneText="Ok" displayFormat="MM/YY"
+              pickerFormat="MM YYYY"
+              max="2100"
+              [(ngModel)]="selectedCard.expDate">
+            </ion-datetime>
+          </ion-item>
+          <ion-item no-lines></ion-item>
+        </div>
+      </div>
+      <div class="payDiv">
+        <button color="secondary-light" round ion-button block>Confirmar Pagamento</button>
+      </div>
+    </div>
   </ion-slide>
 
  </ion-slides>

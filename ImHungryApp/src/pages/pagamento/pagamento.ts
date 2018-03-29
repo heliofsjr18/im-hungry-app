@@ -17,10 +17,13 @@ export class PagamentoPage {
   groupIcons = [1, 2, 3, 4];
   groupDigits = [1, 2, 3];
 
-  cards = [{brand: 'visa', lastDigits: '0355', expDate: '05/29'}, {brand: 'master', lastDigits: '5459', expDate: '08/23'}];
+  cards = [{brand: 'visa', lastDigits: '0355', expMon: '05', expYe: '29', titular: 'Terry Crews'},
+  {brand: 'master', lastDigits: '5459', expMon: '08', expYe: '23', titular: 'Matheus Guilherme'}];
+  selectedCard = {brand: '', titular: '', cardNumber: '', expDate: ''};
 
   ionViewDidLoad() { 
     this.setCardSlidesOptions();
+    //this.slideChanged();
     this.firstSlides.lockSwipes(true);
   }
 
@@ -42,6 +45,23 @@ export class PagamentoPage {
       this.secondSlides.spaceBetween = 250;
     }
     this.secondSlides.slidesPerView = this.cards.length > 1 ? 2 : 1;
+  }
+
+  slideChanged(){
+    let currentIndex = this.secondSlides.realIndex;
+    this.setSelectedCard(currentIndex);
+  }
+
+  setSelectedCard(currentIndex: number){
+
+    this.selectedCard.brand = this.cards[currentIndex].brand;
+    this.selectedCard.cardNumber = '**** **** **** ' + this.cards[currentIndex].lastDigits;
+    let year = (2000 +  Number.parseInt(this.cards[currentIndex].expYe));
+    let month = Number.parseInt(this.cards[currentIndex].expMon) -1;
+    this.selectedCard.expDate = new Date(year, month).toISOString(); 
+    this.selectedCard.titular = this.cards[currentIndex].titular;
+
+    console.log(this.selectedCard);
   }
 
   showSlidePager(){

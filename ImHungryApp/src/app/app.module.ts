@@ -22,6 +22,7 @@ import { IonRatingComponent } from '../components/ion-rating/ion-rating';
 import { EstabelecimentoServiceProvider } from '../providers/estabelecimento-service/estabelecimento-service';
 import { RestClientProvider } from '../providers/rest-client/rest-client';
 import { CarrinhoProvider } from '../providers/carrinho/carrinho';
+import { PagSeguroProvider } from '../providers/pag-seguro/pag-seguro';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { CarrinhoProvider } from '../providers/carrinho/carrinho';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     EstabelecimentoServiceProvider,
     RestClientProvider,
-    CarrinhoProvider
+    CarrinhoProvider,
+    PagSeguroProvider
   ]
 })
 export class AppModule {}
