@@ -36,7 +36,7 @@ export class PagSeguroProvider {
 
       let body = {};
 
-      return this.restClient.getPostJson('url', body); // executa o end point de pagamento
+      this.restClient.getPostJson('url', body); // executa o end point de pagamento
 
     });
   }
