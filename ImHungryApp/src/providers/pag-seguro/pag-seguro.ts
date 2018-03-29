@@ -27,8 +27,21 @@ export class PagSeguroProvider {
   }
 
   public doPayment(){
-    
+    //retorna tudo quando a sessão for iniciada
+    return this.getSession().then((data) => {
+      
+      this.initSession(data);
+      this.getCardBrand();
+      this.getCardToken();
+
+      let body = {};
+
+      return this.restClient.getPostJson('url', body); // executa o end point de pagamento
+
+    });
   }
+
+
 
   private getSession(){
     return this.restClient.getJson('session');
@@ -38,12 +51,17 @@ export class PagSeguroProvider {
     PagSeguroDirectPayment.setSessionId(sessionId);
   }
 
-  private getCardBrand(){
+  private prepareCreditCard(){
 
+    
+  }
+
+  private getCardBrand(){
+    
   }
 
   private getCardToken(){
-
+    
   }
 
 }
