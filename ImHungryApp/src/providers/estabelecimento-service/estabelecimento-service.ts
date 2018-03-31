@@ -20,4 +20,8 @@ export class EstabelecimentoServiceProvider {
   public getEstabelecimentos(url: string, bodyJson) {
     return this.rest.getPostJson(url, bodyJson);
   }
+
+  public getMenuList(url: string, bodyJson){
+    return this.rest.getPostJson(url, bodyJson);
+  }
 }

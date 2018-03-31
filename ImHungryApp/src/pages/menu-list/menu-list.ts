@@ -5,7 +5,7 @@ import { IonicPage, NavController, NavParams, Platform, MenuController, LoadingC
 import { MenuDetailPage } from '../menu-detail/menu-detail';
 import { CarrinhoPage } from '../carrinho/carrinho';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
-import { RestClientProvider } from '../../providers/rest-client/rest-client';
+import { EstabelecimentoServiceProvider } from '../../providers/estabelecimento-service/estabelecimento-service';
 import $ from "jquery";
 
 @IonicPage()
@@ -28,7 +28,7 @@ import $ from "jquery";
 export class MenuListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
-  private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private restClient: RestClientProvider,
+  private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private estabService: EstabelecimentoServiceProvider,
   private loadingCtrl: LoadingController, private http: HttpClient) {
   }
 
@@ -39,12 +39,14 @@ export class MenuListPage {
         $(".back-button-text").text("");
       },100);
     }
+    this.pageTitle = this.navParams.get("filial_nome");
 
     this.loadList();
   }
 
   showSearch: boolean = false;
   searchTerm: string = '';
+  pageTitle: string = 'Menu';
   //Deve ser implementado aqui a recepção do objeto Json que virá do web service e distribuição do objeto no Array abaixo
 
   data = [];
@@ -78,7 +80,12 @@ export class MenuListPage {
 
     loading.present();
 
-    this.getMenuItems().then(data => {
+    let body = {
+      "search": this.searchTerm,
+      "filial_id": this.navParams.get("filial_id")
+    }
+
+    this.estabService.getMenuList('menu/list', body).then(data => {
       this.data = [];
 
       var obj = JSON.parse(data.toString());
@@ -95,8 +102,6 @@ export class MenuListPage {
           qtd: 1
         });
       }
-      this.restClient.Token = obj.token;
-
       loading.dismiss();
     });
   }
@@ -126,25 +131,5 @@ export class MenuListPage {
   onClearSearch(){
     this.searchTerm = '';
     this.loadList();
-  }
-
-  getMenuItems(){
-    let token = this.restClient.Token;
-
-    let body = {
-      "search": this.searchTerm,
-      "filial_id": this.navParams.data
-    }
-
-    return new Promise(resolve => {
-      this.http.post("https:api.rafafreitas.com/app/menu/list", body, {
-        headers: new HttpHeaders().set('Authorization', token)
-      })
-      .subscribe(res => {
-        resolve(JSON.stringify(res));
-      }, (err) => {
-        console.log(err);
-      });
-    });
   }
 }

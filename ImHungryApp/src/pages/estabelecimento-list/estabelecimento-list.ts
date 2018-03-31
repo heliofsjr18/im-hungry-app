@@ -136,7 +136,10 @@ export class EstabelecimentoListPage {
   }
 
   navigateToMenuPage(item) {
-    this.navCtrl.push(MenuListPage, item.id);
+    this.navCtrl.push(MenuListPage, {
+      filial_id: item.id,
+      filial_nome: item.name
+    });
   }
 
   doRefresh(refresher) {
