@@ -22,10 +22,6 @@
     </ion-toolbar>
 
     <ion-buttons end *ngIf="!showSearch">
-      <button class="buttonBadge" (click)="openCart()" ion-button icon-only>
-        <ion-icon name="md-cart"></ion-icon>
-        <ion-badge *ngIf="getTotalCarrinho() > 0" class="cartBadge">{{getTotalCarrinho()}}</ion-badge>
-      </button>
       <button class="iconHeader" (click)="openFilterMenu()" ion-button icon-only>
         <ion-icon name="ios-funnel"></ion-icon>
       </button>
@@ -48,22 +44,22 @@
       <ion-row>
         <ion-col>
           <ion-list inset>
-            
+
             <ion-item>
-              <ion-input id= "loginEmail" type="text"   name="email"  required></ion-input>
+              <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
             </ion-item>
-            
+
             <ion-item>
-              <ion-input id="loginPassword" type="password"  name="password"  required></ion-input>
+              <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
             </ion-item>
-            
+
           </ion-list>
         </ion-col>
       </ion-row>
       
       <ion-row>
         <ion-col class="signup-col">
-          <button ion-button class="submit-btn" full type="submit" (click)="logar()" [disabled]="!registerForm.form.valid">Login</button>
+          <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
           <button ion-button class="register-btn" block clear (click)="createAccount()">Criar conta</button>
         </ion-col>
       </ion-row>

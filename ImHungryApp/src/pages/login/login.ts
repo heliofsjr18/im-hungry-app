@@ -1,7 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
-import { CarrinhoPage } from '../carrinho/carrinho';
 import { EstabelecimentoListPage } from '../estabelecimento-list/estabelecimento-list';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
 
@@ -20,47 +19,51 @@ import { RestClientProvider } from '../../providers/rest-client/rest-client';
 })
 export class LoginPage {
 
-  @ViewChild('loginEmail') emailRef: ElementRef;
-  @ViewChild('loginPassword') passwordRef: ElementRef;
-
+  loading: Loading;
+  registerCredentials = { email: '', password: '' };
+  //@ViewChild('loginEmail') emailRef: ElementRef;
+  //@ViewChild('loginPassword') passwordRef: ElementRef;
+  
   public url = "usuario/login";
-
-  public tipoUsuario = 2;
-  public email = this.emailRef.nativeElement.innerText;
-  public password = this.passwordRef.nativeElement.innerText;
+  public tipoUsuario = 2; 
 
 
 
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController,  public navParams: NavParams, public restClient: RestClientProvider, private loadingCtrl: LoadingController) {  
 
-  constructor(public navCtrl: NavController, private carrinho: CarrinhoProvider, public navParams: NavParams, public restClient: RestClientProvider) {
-  }
+}
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
   }
+  
+  login() {
+    this.showLoading();
 
-
-  getTotalCarrinho() {
-    return this.carrinho.getCountCarrinho();
-  }
-
-  openCart(): void {
-    this.navCtrl.push(CarrinhoPage);
-  }
-
-  logar() {
+    //let body = {
+    //  'email': this.emailRef.nativeElement.innerText,
+    //  'senha': this.passwordRef.nativeElement.innerText,
+    //  'tipo': this.tipoUsuario
+    //}
 
     let body = {
-      'email': this.email,
-      'password': this.password,
-      'tipoUsuario': this.tipoUsuario
+      'email': this.registerCredentials.email,
+      'senha': this.registerCredentials.password,
+      'tipo': this.tipoUsuario
     }
 
     this.restClient.getLoginJson(body, this.url)
-      .then((res) => { this.navCtrl.push(EstabelecimentoListPage) })
+      .then((res) => { this.navCtrl.push(EstabelecimentoListPage); })
       .catch((rej) => { console.log(rej); });
     
   }
 
+  showLoading() {
+    this.loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      dismissOnPageChange: true
+    });
+    this.loading.present();
+  }
 
 }

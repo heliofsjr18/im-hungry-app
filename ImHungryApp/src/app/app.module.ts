@@ -15,6 +15,7 @@ import { MenuListPage } from '../pages/menu-list/menu-list';
 import { CarrinhoPage } from '../pages/carrinho/carrinho';
 import { PagamentoPage } from '../pages/pagamento/pagamento';
 import { MenuDetailPage } from '../pages/menu-detail/menu-detail';
+import { LoginPage } from '../pages/login/login';
 
 
 //Components
@@ -33,7 +34,8 @@ import { PagSeguroProvider } from '../providers/pag-seguro/pag-seguro';
     CarrinhoPage,
     PagamentoPage,
     IonRatingComponent,
-    MenuDetailPage
+    MenuDetailPage,
+    LoginPage
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ import { PagSeguroProvider } from '../providers/pag-seguro/pag-seguro';
     CarrinhoPage,
     PagamentoPage,
     MenuListPage,
-    MenuDetailPage
+    MenuDetailPage,
+    LoginPage
   ],
   providers: [
     StatusBar,

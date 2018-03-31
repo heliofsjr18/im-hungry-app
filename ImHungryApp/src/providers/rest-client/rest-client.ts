@@ -5,6 +5,9 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class RestClientProvider {
 
+  private tokenResult;
+
+
   constructor(public http: HttpClient) {
     console.log('Hello RestClientProvider Provider');
   }
@@ -35,17 +38,16 @@ export class RestClientProvider {
     })
   }
 
-  public getLoginJson(bodyJson, url: string) {
+  public getLoginJson(bodyJson, url: string) {    
 
     return new Promise((resolve, reject) => {
-      this.http.post(this.Server + this.ApiUrl + url, bodyJson)
+      this.tokenResult = this.http.get(this.Server + this.ApiUrl + url, bodyJson)
         .subscribe(res => {
           resolve(JSON.stringify(res));
         }, (err) => {
           reject(JSON.stringify(err));
         });
-    });
-
+    });    
   }
 
   public Server = 'http://api.rafafreitas.com/';
