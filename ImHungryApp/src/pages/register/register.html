@@ -1,0 +1,47 @@
+<!--
+  Generated template for the RegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>register</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label fixed>Nome</ion-label>
+      <ion-input type="text" [(ngModel)]="nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>CPF</ion-label>
+      <ion-input type="text" [(ngModel)]="cpf"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Data de Nascimento</ion-label>
+      <ion-input type="text" [(ngModel)]="dataDeNascimento"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>E-mail</ion-label>
+      <ion-input type="text" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Senha</ion-label>
+      <ion-input type="text" [(ngModel)]="senha"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label fixed>Telefone</ion-label>
+      <ion-input type="text" [(ngModel)]="telefone"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div padding>
+    <button ion-button (click)="Cadastrar()"> Salvar</button>
+
+    <button ion-button (click)="Cancelar()"> Cancelar</button>
+  </div>

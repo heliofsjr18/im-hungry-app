@@ -41,12 +41,6 @@ export class LoginPage {
   login() {
     this.showLoading();
 
-    //let body = {
-    //  'email': this.emailRef.nativeElement.innerText,
-    //  'senha': this.passwordRef.nativeElement.innerText,
-    //  'tipo': this.tipoUsuario
-    //}
-
     let body = {
       'email': this.registerCredentials.email,
       'senha': this.registerCredentials.password,

@@ -16,7 +16,7 @@ import { CarrinhoPage } from '../pages/carrinho/carrinho';
 import { PagamentoPage } from '../pages/pagamento/pagamento';
 import { MenuDetailPage } from '../pages/menu-detail/menu-detail';
 import { LoginPage } from '../pages/login/login';
-
+import { RegisterPage } from '../pages/register/register';
 
 //Components
 import { IonRatingComponent } from '../components/ion-rating/ion-rating';
@@ -36,7 +36,8 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
     PagamentoPage,
     IonRatingComponent,
     MenuDetailPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   imports: [
     BrowserModule,
@@ -53,7 +54,8 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
     PagamentoPage,
     MenuListPage,
     MenuDetailPage,
-    LoginPage
+    LoginPage,
+    RegisterPage
   ],
   providers: [
     StatusBar,
