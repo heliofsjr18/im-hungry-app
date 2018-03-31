@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, NgZone } from '@angular/core';
 import { RestClientProvider } from '../rest-client/rest-client';
 
 declare var PagSeguroDirectPayment;
@@ -7,7 +7,7 @@ declare var PagSeguroDirectPayment;
 @Injectable()
 export class PagSeguroProvider {
 
-  constructor(public http: HttpClient, private restClient: RestClientProvider) {
+  constructor(public http: HttpClient, private restClient: RestClientProvider, private zone: NgZone) {
   }
 
   private paymentMethod = 'CREDIT_CARD';
@@ -29,14 +29,22 @@ export class PagSeguroProvider {
   public doPayment(){
     //retorna tudo quando a sessão for iniciada
     return this.getSession().then((data) => {
-      
-      this.initSession(data);
-      this.getCardBrand();
-      this.getCardToken();
+      //sessionId
+      let obj = JSON.parse(data.toString());
+      this.initSession(obj.sessionId);
 
-      let body = {};
+      //método de pagamento
+      let pay = () => {
+        /*this.restClient.getPostJson('urlPagamento', 'bodyPagamento').then((data) =>{
+          console.log('DEU CERTO ' + data);
+        });*/ console.log('DEU CERTO');
+              console.log(this.pedido);
+      };
 
-      this.restClient.getPostJson('url', body); // executa o end point de pagamento
+      this.prepareCreditCard().then(() => {
+        (<any>data).token = this.pedido.creditCard.token;
+        pay();
+      }, (error) => {console.log(error); console.log(this.pedido);});
 
     });
   }
@@ -52,16 +60,47 @@ export class PagSeguroProvider {
   }
 
   private prepareCreditCard(){
-
-    
+    return this.getCardBrand().then(() => {
+      return this.getCardToken();
+    });
   }
 
-  private getCardBrand(){
-    
+  private getCardBrand(): Promise<any>{
+    return new Promise((resolve, reject) => {
+      PagSeguroDirectPayment.getBrand({
+        cardBin: this.pedido.creditCard.num.substring(0, 6),
+        success: (response) => {
+          this.zone.run(() => {
+            this.pedido.creditCard.brand = response.brand.name;
+            console.log(response);
+            resolve({brand: response.brand.name});
+          });
+        },
+        error(error) { reject('ERRO NA BRAND') }
+      });
+    });
   }
 
-  private getCardToken(){
-    
+  private getCardToken(): Promise<any>{
+
+    return new Promise((resolve, reject) => {
+      PagSeguroDirectPayment.createCardToken({
+        cardNumber: this.pedido.creditCard.num,
+        brand: this.pedido.creditCard.brand,
+        cvv: this.pedido.creditCard.cvv,
+        expirationMonth: this.pedido.creditCard.expMon,
+        expirationYear: this.pedido.creditCard.expYe,
+        success: (response) => {
+          this.zone.run(() => {
+            this.pedido.creditCard.token = response.card.token;
+            resolve({token: response.card.token});
+            console.log(response);
+          });
+        },
+        error(error) { reject('ERRO NO CARD TOKEN') }
+      });
+    });
+
   }
 
 }

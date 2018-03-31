@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, Slide } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Slides, Slide, LoadingController } from 'ionic-angular';
+import { PagSeguroProvider } from '../../providers/pag-seguro/pag-seguro';
 
 
 @IonicPage()
@@ -11,7 +12,8 @@ export class PagamentoPage {
 
   @ViewChild('secondSlides') secondSlides: Slides;
   @ViewChild('firstSlides') firstSlides: Slides;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private pagSeguro: PagSeguroProvider,
+    private loadingCtrl: LoadingController) {
   }
 
   groupIcons = [1, 2, 3, 4];
@@ -23,7 +25,6 @@ export class PagamentoPage {
 
   ionViewDidLoad() { 
     this.setCardSlidesOptions();
-    //this.slideChanged();
     this.firstSlides.lockSwipes(true);
   }
 
@@ -61,11 +62,18 @@ export class PagamentoPage {
     this.selectedCard.expDate = new Date(year, month).toISOString(); 
     this.selectedCard.titular = this.cards[currentIndex].titular;
 
-    console.log(this.selectedCard);
   }
 
-  showSlidePager(){
-    return this.cards.length > 1;
+  doPayment(){
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent'
+    });
+
+    loading.present();
+
+    this.pagSeguro.doPayment().then(() => {
+      loading.dismiss();
+    });
   }
 
   closeModal(){
