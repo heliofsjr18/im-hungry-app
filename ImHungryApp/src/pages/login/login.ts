@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertC
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
 import { EstabelecimentoListPage } from '../estabelecimento-list/estabelecimento-list';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
+import { LoginServiceProvider } from '../../providers/login-service/login-service';
 
 
 /**
@@ -29,7 +30,7 @@ export class LoginPage {
 
 
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController,  public navParams: NavParams, public restClient: RestClientProvider, private loadingCtrl: LoadingController) {  
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController) {  
 
 }
 
@@ -52,7 +53,7 @@ export class LoginPage {
       'tipo': this.tipoUsuario
     }
 
-    this.restClient.getLoginJson(body, this.url)
+    this.restLoginClient.getLoginRest(this.url, body)
       .then((res) => { this.navCtrl.push(EstabelecimentoListPage); })
       .catch((rej) => { console.log(rej); });
     

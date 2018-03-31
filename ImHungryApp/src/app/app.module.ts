@@ -24,6 +24,7 @@ import { EstabelecimentoServiceProvider } from '../providers/estabelecimento-ser
 import { RestClientProvider } from '../providers/rest-client/rest-client';
 import { CarrinhoProvider } from '../providers/carrinho/carrinho';
 import { PagSeguroProvider } from '../providers/pag-seguro/pag-seguro';
+import { LoginServiceProvider } from '../providers/login-service/login-service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { PagSeguroProvider } from '../providers/pag-seguro/pag-seguro';
     EstabelecimentoServiceProvider,
     RestClientProvider,
     CarrinhoProvider,
-    PagSeguroProvider
+    PagSeguroProvider,
+    LoginServiceProvider
   ]
 })
 export class AppModule {}
