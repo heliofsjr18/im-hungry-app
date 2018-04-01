@@ -90,7 +90,7 @@ export class PagamentoPage {
         this.firstSlideNext(false);
         this.inPayment = false;
         this.paymentDone = true;
-      });
+      }, (error) => {this.showErrorToast(error)});
       
     }, (error) => {
       this.showErrorToast(error);

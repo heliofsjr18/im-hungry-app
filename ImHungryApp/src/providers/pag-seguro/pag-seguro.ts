@@ -62,7 +62,7 @@ export class PagSeguroProvider {
         };
 
         return pay(body);
-      });//, (error) => {console.log(error); console.log(this.pedido); return error;});
+      }, (error) => {console.log(error); console.log(this.pedido); return error;});
 
     });
   }
