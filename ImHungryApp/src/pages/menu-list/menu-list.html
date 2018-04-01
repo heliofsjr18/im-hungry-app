@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar class="myNavBar" color="secondary">
-    <ion-title>{{pageTitle}}</ion-title>
+    <ion-title *ngIf="!showSearch">{{pageTitle}}</ion-title>
 
     <ion-toolbar *ngIf="showSearch" [@fadeInOut] no-border-top>
       <ion-searchbar class="mySearchBar" [showCancelButton]="true" (ionCancel)="onCancel($event)" placeholder="Buscar" (search)="onSearchTermChanged()"

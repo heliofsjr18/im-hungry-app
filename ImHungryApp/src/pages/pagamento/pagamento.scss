@@ -106,4 +106,42 @@ page-pagamento {
         border-color: color($colors, primary-light);
         padding: 0 20px;
     }
+
+    .divPayProgress{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .divPayProgress > ion-spinner > svg{
+        height: 35px;
+        width: 35px;
+    }
+
+    .divPayProgress > span{
+        margin-left: 15px;
+        font-size: 25px;
+    }
+
+    .divPayDone{
+        height: 100%;
+        align-items: center;
+        padding-top: 50%;
+        justify-content: center;
+        background-color: color($colors, success);
+        color: color($colors, light);
+        
+    }
+
+    .divPayDone > div {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .divPayDone > div > span{
+        margin-bottom: 10px;
+        font-size: 27px;
+    }
 }

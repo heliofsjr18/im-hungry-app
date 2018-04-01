@@ -27,10 +27,12 @@ export class PagamentoPage {
 
   groupIcons = [1, 2, 3, 4];
   groupDigits = [1, 2, 3];
-
-  cards = [{brand: 'visa', lastDigits: '0355', expMon: '05', expYe: '29', titular: 'Terry Crews'},
+  paymentDone: boolean = false;
+  inPayment: boolean = false;
+  checkOutId = '';
+  cards = [{brand: 'visa', lastDigits: '4993', expMon: '11', expYe: '18', titular: 'Terry Crews'},
   {brand: 'master', lastDigits: '5459', expMon: '08', expYe: '23', titular: 'Matheus Guilherme'}];
-  selectedCard = {brand: '', titular: '', cardNumber: '', expDate: ''};
+  selectedCard = {brand: '', titular: '', cardNumber: '', expDate: '', cvv: ''};
 
   ionViewDidLoad() { 
     this.setCardSlidesOptions();
@@ -74,24 +76,48 @@ export class PagamentoPage {
   }
 
   doPayment(Cvv){
-    let loading = this.loadingCtrl.create({
-      spinner: 'crescent',
-      content: 'Efetuando Pagamento ...'
-    });
 
-    loading.present();
+    //this.firstSlideNext(false);
 
-    this.pagSeguro.doPayment(Cvv).then(() => {
-      loading.dismiss();
-      this.firstSlides.lockSwipes(false);
-      this.firstSlides.slideNext();
-      this.firstSlides.lockSwipes(true);
+    this.inPayment = true;
+    this.pagSeguro.doPayment(Cvv).then((data) => {
+
+      var obj = JSON.parse(data.toString());
+      console.log(obj);
+      
+      this.getPagamentoStatus(obj.reference).then(() => {
+        this.checkOutId = obj.reference.substring(8, 13);
+        this.firstSlideNext(false);
+        this.inPayment = false;
+        this.paymentDone = true;
+      });
+      
     }, (error) => {
       this.showErrorToast(error);
     })
     .catch((data) => {
       this.showErrorToast(data);
     });
+
+    
+  }
+
+  getPagamentoStatus(referencia){
+    return this.pagSeguro.getCheckOutStatus(referencia).then((data) => {
+      var obj = JSON.parse(data.toString());
+      //console.log(obj);
+      if(obj.code != 4 && obj.code != 3){
+        return this.getPagamentoStatus(referencia);
+      }else{
+        return data;
+      }
+    });
+  }
+
+  firstSlideNext(isPayment: boolean){
+    this.firstSlides.lockSwipes(false);
+    this.firstSlides.slideNext();
+    this.firstSlides.lockSwipes(true);
   }
 
   showErrorToast(message){
@@ -121,7 +147,12 @@ export class PagamentoPage {
           role: 'confirmar',
           handler: data => {
             console.log(data);
-            this.doPayment(data.CVV);
+            if(data.CVV != ''){
+              this.firstSlideNext(true);
+              this.inPayment = true;
+              this.doPayment(data.CVV);
+            }
+            this.selectedCard.cvv = data.CVV;
           }
         },
         {
@@ -135,7 +166,12 @@ export class PagamentoPage {
   }
 
   closeModal(){
-    this.navCtrl.pop();
+    if(this.inPayment && !this.paymentDone){
+      //PAGAMENTO ESTÁ EM ANDANMENTO
+    }else{
+      this.navCtrl.pop();
+    }
+    
   }
 
 }

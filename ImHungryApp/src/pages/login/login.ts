@@ -22,12 +22,12 @@ export class LoginPage {
 
   rootPage : any;
   loading: Loading;
-  registerCredentials = { email: '', password: '' };
+  registerCredentials = { email: 'cliente@teste.com', password: '123' };
   //@ViewChild('loginEmail') emailRef: ElementRef;
   //@ViewChild('loginPassword') passwordRef: ElementRef;
   
   public url = "usuario/login";
-  public tipoUsuario = 2; 
+  public tipoUsuario = 2;
 
 
 

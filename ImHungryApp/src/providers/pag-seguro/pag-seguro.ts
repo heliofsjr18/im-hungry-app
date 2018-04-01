@@ -62,12 +62,17 @@ export class PagSeguroProvider {
         };
 
         return pay(body);
-      }, (error) => {console.log(error); console.log(this.pedido);});
+      });//, (error) => {console.log(error); console.log(this.pedido); return error;});
 
     });
   }
 
-
+  public getCheckOutStatus(referencia){
+    let body = {
+      'referencia' : referencia
+    };
+    return this.restClient.getPostJson('checkout/status', body);
+  }
 
   private getSession(){
     return this.restClient.getJson('session');
