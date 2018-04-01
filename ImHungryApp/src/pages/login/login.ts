@@ -20,6 +20,7 @@ import { LoginServiceProvider } from '../../providers/login-service/login-servic
 })
 export class LoginPage {
 
+  rootPage : any;
   loading: Loading;
   registerCredentials = { email: '', password: '' };
   //@ViewChild('loginEmail') emailRef: ElementRef;
@@ -48,7 +49,7 @@ export class LoginPage {
     }
 
     this.restLoginClient.getLoginRest(this.url, body)
-      .then((res) => { this.navCtrl.push(EstabelecimentoListPage); })
+      .then((res) => { this.navCtrl.setRoot(EstabelecimentoListPage); })
       .catch((rej) => { console.log(rej); });
     
   }

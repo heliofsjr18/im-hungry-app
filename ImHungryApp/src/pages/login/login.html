@@ -7,28 +7,7 @@
 
 <ion-header>
   <ion-navbar #myContent class="myNavBar" color="secondary">
-    <ion-title *ngIf="!showSearch">ImHungry</ion-title>
-    
-    <ion-toolbar *ngIf="showSearch" [@fadeInOut] no-border-top>
-      <ion-searchbar
-        class="mySearchBar"
-        [showCancelButton]="true"
-        (ionCancel)="onCancel($event)"
-        placeholder="Buscar"
-        [(ngModel)]="searchTerm"
-        (search)="onSearchChanged()"
-        (ionClear)="onClearSearch()">
-      </ion-searchbar>
-    </ion-toolbar>
-
-    <ion-buttons end *ngIf="!showSearch">
-      <button class="iconHeader" (click)="openFilterMenu()" ion-button icon-only>
-        <ion-icon name="ios-funnel"></ion-icon>
-      </button>
-      <button (click)="clickSearch()" class="iconHeader" ion-button icon-only>
-        <ion-icon name="md-search"></ion-icon>
-      </button>
-    </ion-buttons>
+    <ion-title *ngIf="!showSearch">ImHungry</ion-title>       
   </ion-navbar>
 </ion-header>
 
@@ -44,11 +23,9 @@
       <ion-row>
         <ion-col>
           <ion-list inset>
-
             <ion-item>
               <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
             </ion-item>
-
             <ion-item>
               <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
             </ion-item>

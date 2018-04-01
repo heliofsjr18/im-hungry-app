@@ -11,42 +11,42 @@ export class RestClientProvider {
     console.log('Hello RestClientProvider Provider');
   }
 
-  public getPostJson(url: string, bodyJson){
+  public getPostJson(url: string, bodyJson) {
     return new Promise((resolve, reject) => {
       this.http.post(this.Server + this.ApiUrl + url, bodyJson, {
         headers: new HttpHeaders().set('Authorization', this.Token)
       })
-      .subscribe(res => {
-        resolve(JSON.stringify(res));
-      }, (err) => {
-        reject(JSON.stringify(err));
-      });
+        .subscribe(res => {
+          resolve(JSON.stringify(res));
+        }, (err) => {
+          reject(JSON.stringify(err));
+        });
     });
   }
 
-  public getJson(url: string){
+  public getJson(url: string) {
     return new Promise((resolve, reject) => {
       this.http.get(this.Server + this.ApiUrl + url, {
         headers: new HttpHeaders().set('Authorization', this.Token)
       })
-      .subscribe(res => {
-        resolve(JSON.stringify(res));
-      }, (err) => {
-        reject(JSON.stringify(err));
-      });
+        .subscribe(res => {
+          resolve(JSON.stringify(res));
+        }, (err) => {
+          reject(JSON.stringify(err));
+        });
     })
   }
 
-  public getLoginJson(url: string, bodyJson) {    
+  public getLoginJson(url: string, bodyJson) {
 
     return new Promise((resolve, reject) => {
-      this.http.post(this.Server + url, bodyJson);
-        //.subscribe(res => {
-        //  resolve(JSON.stringify(res));
-        //}, (err) => {
-        //  reject(JSON.stringify(err));
-        //});
-    });    
+      this.http.post(this.Server + url, bodyJson)
+        .subscribe(res => {
+          resolve(JSON.stringify(res));
+        }, (err) => {
+          reject(JSON.stringify(err));
+        });
+    });
   }
 
   public Server = 'http://api.rafafreitas.com/';

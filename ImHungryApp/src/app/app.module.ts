@@ -25,6 +25,7 @@ import { RestClientProvider } from '../providers/rest-client/rest-client';
 import { CarrinhoProvider } from '../providers/carrinho/carrinho';
 import { PagSeguroProvider } from '../providers/pag-seguro/pag-seguro';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
+import { UsuarioProvider } from '../providers/usuario/usuario';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
     RestClientProvider,
     CarrinhoProvider,
     PagSeguroProvider,
-    LoginServiceProvider
+    LoginServiceProvider,
+    UsuarioProvider
   ]
 })
 export class AppModule {}
