@@ -1,5 +1,14 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Slides, Slide, LoadingController } from 'ionic-angular';
+import { 
+  IonicPage,
+  NavController,
+  NavParams,
+  Slides,
+  Slide,
+  LoadingController,
+  AlertController,
+  ToastController
+} from 'ionic-angular';
 import { PagSeguroProvider } from '../../providers/pag-seguro/pag-seguro';
 
 
@@ -13,7 +22,7 @@ export class PagamentoPage {
   @ViewChild('secondSlides') secondSlides: Slides;
   @ViewChild('firstSlides') firstSlides: Slides;
   constructor(public navCtrl: NavController, public navParams: NavParams, private pagSeguro: PagSeguroProvider,
-    private loadingCtrl: LoadingController) {
+    private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController) {
   }
 
   groupIcons = [1, 2, 3, 4];
@@ -64,16 +73,65 @@ export class PagamentoPage {
 
   }
 
-  doPayment(){
+  doPayment(Cvv){
     let loading = this.loadingCtrl.create({
-      spinner: 'crescent'
+      spinner: 'crescent',
+      content: 'Efetuando Pagamento ...'
     });
 
     loading.present();
 
-    this.pagSeguro.doPayment().then(() => {
+    this.pagSeguro.doPayment(Cvv).then(() => {
       loading.dismiss();
+      this.firstSlides.lockSwipes(false);
+      this.firstSlides.slideNext();
+      this.firstSlides.lockSwipes(true);
+    }, (error) => {
+      this.showErrorToast(error);
+    })
+    .catch((data) => {
+      this.showErrorToast(data);
     });
+  }
+
+  showErrorToast(message){
+    let toast = this.toastCtrl.create({
+      message: 'Ocorreu um erro: ' + message,
+      position: 'bottom',
+      duration: 3000
+    });
+
+    toast.present();
+  }
+
+  showPaymentAlert(){
+    let alert = this.alertCtrl.create({
+      title: 'Código de Segurança',
+      message: 'Insira o código de segurança do cartão para finalizar o pagamento',
+      inputs: [
+        {
+          name: 'CVV',
+          placeholder: 'Código de Segurança',
+          type: 'password'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Confirmar',
+          role: 'confirmar',
+          handler: data => {
+            console.log(data);
+            this.doPayment(data.CVV);
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancelar'
+        }
+      ]
+    });
+
+    alert.present();
   }
 
   closeModal(){

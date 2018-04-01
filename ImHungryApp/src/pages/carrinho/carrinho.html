@@ -44,8 +44,8 @@
     </div>
   </div>
 
-  <div class="pay">
-    <button round (click)="cartPay()" ion-button full color="primary">
+  <div class="pay"> 
+    <button round *ngIf="data.total > 0" (click)="cartPay()" ion-button full color="primary">
       <span>Pagar R$ {{data.total.toFixed(2)}}</span>
     </button>
   </div>

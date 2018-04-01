@@ -16,11 +16,10 @@ export class PagSeguroProvider {
   private pedido = {
     senderHash: '',
     creditCard: {
-      num: '',
+      num: '4485810539414993',
       cvv: '',
-      name: '',
-      expMon: '',
-      expYe: '',
+      expMon: '11',
+      expYe: '2018',
       brand: '',
       token: ''
     },
@@ -28,26 +27,41 @@ export class PagSeguroProvider {
     total: 0
   }
 
-  public doPayment(){
+  public doPayment(Cvv){
     //retorna tudo quando a sessão for iniciada
     return this.getSession().then((data) => {
       //sessionId
       let obj = JSON.parse(data.toString());
       this.initSession(obj.sessionId);
       
+      this.pedido.creditCard.cvv = Cvv;
+
       this.pedido.items = this.carrinho.generateCartForApi();
 
+      
+
       //método de pagamento
-      let pay = () => {
-        /*this.restClient.getPostJson('urlPagamento', 'bodyPagamento').then((data) =>{
+      let pay = (body) => {
+        return this.restClient.getPostJson('checkout', body);/*.then((data) =>{
           console.log('DEU CERTO ' + data);
-        });*/ console.log('DEU CERTO');
-              console.log(this.pedido);
+          console.log(this.pedido);
+        })
+        .catch((err) => {
+          console.log(err);
+          console.log(this.pedido);
+        });*/
       };
 
-      this.prepareCreditCard().then(() => {
-        (<any>data).token = this.pedido.creditCard.token;
-        pay();
+      return this.prepareCreditCard().then(() => {
+
+        let body = {
+          'item_id': this.pedido.items.items_id,
+          'item_qtd': this.pedido.items.items_qtd,
+          'token': this.pedido.creditCard.token,
+          'hash': PagSeguroDirectPayment.getSenderHash()
+        };
+
+        return pay(body);
       }, (error) => {console.log(error); console.log(this.pedido);});
 
     });
@@ -72,7 +86,7 @@ export class PagSeguroProvider {
   private getCardBrand(): Promise<any>{
     return new Promise((resolve, reject) => {
       PagSeguroDirectPayment.getBrand({
-        cardBin: this.pedido.creditCard.num.substring(0, 6),
+        cardBin: this.pedido.creditCard.num,//.substring(0, 6),
         success: (response) => {
           this.zone.run(() => {
             this.pedido.creditCard.brand = response.brand.name;
@@ -80,7 +94,7 @@ export class PagSeguroProvider {
             resolve({brand: response.brand.name});
           });
         },
-        error(error) { reject('ERRO NA BRAND') }
+        error(error) { reject('Informações do Cartão estão incorretas') }
       });
     });
   }
@@ -101,7 +115,7 @@ export class PagSeguroProvider {
             console.log(response);
           });
         },
-        error(error) { reject('ERRO NO CARD TOKEN') }
+        error(error) { reject('Informações do Cartão estão incorretas') }
       });
     });
 

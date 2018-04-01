@@ -39,12 +39,6 @@ export class CarrinhoPage {
 
   loadCart(){
     this.data = this.carrinho.getCart();
-    console.log(this.data);
-    this.sumCart();
-  }
-
-  sumCart(){
-    
   }
 
   cartPay(){
@@ -60,10 +54,12 @@ export class CarrinhoPage {
 
   addButton(item) {
     this.carrinho.adicionarCarrinho(item);
+    this.loadCart();
   }
 
   removeButton(item){
     this.carrinho.removerCarrinho(item);
+    this.loadCart();
   }
 
 
