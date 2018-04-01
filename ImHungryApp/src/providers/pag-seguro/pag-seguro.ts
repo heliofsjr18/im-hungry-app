@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { RestClientProvider } from '../rest-client/rest-client';
+import { CarrinhoProvider } from '../carrinho/carrinho';
 
 declare var PagSeguroDirectPayment;
 
 @Injectable()
 export class PagSeguroProvider {
 
-  constructor(public http: HttpClient, private restClient: RestClientProvider, private zone: NgZone) {
+  constructor(public http: HttpClient, private restClient: RestClientProvider, private zone: NgZone,
+   private carrinho: CarrinhoProvider) {
   }
 
   private paymentMethod = 'CREDIT_CARD';
@@ -22,7 +24,7 @@ export class PagSeguroProvider {
       brand: '',
       token: ''
     },
-    items: [{id: 0, qtd: 0}],
+    items: {items_id: [], items_qtd: []},
     total: 0
   }
 
@@ -32,6 +34,8 @@ export class PagSeguroProvider {
       //sessionId
       let obj = JSON.parse(data.toString());
       this.initSession(obj.sessionId);
+      
+      this.pedido.items = this.carrinho.generateCartForApi();
 
       //método de pagamento
       let pay = () => {

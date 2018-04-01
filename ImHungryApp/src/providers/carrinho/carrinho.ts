@@ -9,7 +9,6 @@ export class CarrinhoProvider {
   }
 
   carrinho = { array: [], total: 0.00};
-  cartForApi = [];
 
 
   public adicionarCarrinho(produto): void {
@@ -38,7 +37,16 @@ export class CarrinhoProvider {
   }
 
   public generateCartForApi(){
-    return '';
+    let apiCart = {
+      items_id: [],
+      items_qtd: []
+    };
+    for (let index = 0; index < this.carrinho.array.length; index++) {
+      const element = this.carrinho.array[index];
+      apiCart.items_id.push(element.id);
+      apiCart.items_qtd.push(element.qtd);
+    }
+    return apiCart;
   }
 
   public removerCarrinho(produto): void {
