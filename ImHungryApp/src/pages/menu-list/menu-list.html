@@ -28,16 +28,16 @@
 <ion-content class="List_Body" padding (ionScroll)="onScroll()">
   <ion-list padding-top>
 
-    <div *ngFor="let item of data" (click)="navegateToDetail(item)" class="Card_Item">
-      <img src="{{item.image}}">
+    <div *ngFor="let item of data" class="Card_Item">
+      <img (click)="navegateToDetail(item)" src="{{item.image}}">
       <div class="Card_Info">
         <div>
-          <span>{{item.name}}</span>
-          <span>
+          <span (click)="navegateToDetail(item)">{{item.name}}</span>
+          <span (click)="addToCart(item)">
             <i class="fas fa-shopping-cart iconCart"></i>
           </span>
         </div>
-        <div>
+        <div (click)="navegateToDetail(item)">
           <!--{{item.description}}-->É um fato conhecido de todos que um leitor se distrairá com o conteúdo de texto legível de uma página quando estiver
           examinando sua diagramação.
         </div>
@@ -45,7 +45,7 @@
           <div>
             <ion-rating class="smallRating" [showOnly]="true" [numStars]="5" [rateValue]="item.rate" (ionClick)="logStars($event)"></ion-rating>
           </div>
-          <div class="textListPrice smallListPrice">
+          <div (click)="navegateToDetail(item)" class="textListPrice smallListPrice">
             R$ {{item.price.toFixed(2)}}
           </div>
         </div>

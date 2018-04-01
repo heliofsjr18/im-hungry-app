@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { style, state, animate, transition, trigger } from '@angular/animations';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IonicPage, NavController, NavParams, Platform, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, MenuController, LoadingController, ToastController } from 'ionic-angular';
 import { MenuDetailPage } from '../menu-detail/menu-detail';
 import { CarrinhoPage } from '../carrinho/carrinho';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
@@ -29,7 +29,7 @@ export class MenuListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
   private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private estabService: EstabelecimentoServiceProvider,
-  private loadingCtrl: LoadingController, private http: HttpClient) {
+  private loadingCtrl: LoadingController, private http: HttpClient, private detector: ChangeDetectorRef, private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -104,6 +104,23 @@ export class MenuListPage {
       }
       loading.dismiss();
     });
+  }
+
+  addToCart(item){
+    this.carrinho.adicionarCarrinho(item);
+    this.detector.detectChanges();
+
+    let toast = this.toastCtrl.create({
+      message: "Item adicionado com sucesso.",
+      duration: 1000,
+      position: 'bottom',
+      showCloseButton: true,
+      closeButtonText: 'X',
+      dismissOnPageChange: true,
+      cssClass: "myToast"
+    });
+
+    toast.present();
   }
 
   onCancel(event){
