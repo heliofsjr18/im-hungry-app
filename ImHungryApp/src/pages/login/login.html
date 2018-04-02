@@ -7,7 +7,7 @@
 
 <ion-header>
   <ion-navbar #myContent class="myNavBar" color="secondary">
-    <ion-title *ngIf="!showSearch">ImHungry</ion-title>       
+    <ion-title *ngIf="!showSearch">ImHungry</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -33,14 +33,21 @@
           </ion-list>
         </ion-col>
       </ion-row>
-      
+
       <ion-row>
         <ion-col class="signup-col">
           <button ion-button class="submit-btn" full type="submit" [disabled]="!registerForm.form.valid">Login</button>
           <button ion-button class="register-btn" block clear (click)="createAccount()">Criar conta</button>
         </ion-col>
       </ion-row>
-      
+
     </form>
   </div>
+
+  <ion-content padding>
+    <button ion-button full icon-left (click)='loginFacebook();'>
+      <ion-icon name="logo-facebook"></ion-icon>Login com Facebook
+    </button>
+  </ion-content>
+
 </ion-content>
