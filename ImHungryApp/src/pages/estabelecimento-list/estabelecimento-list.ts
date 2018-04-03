@@ -117,7 +117,13 @@ export class EstabelecimentoListPage {
   }
 
   ionViewDidLoad() {
+    this.updateUserToken();
     this.loadList(false, null);
+  }
+
+  updateUserToken(){
+    let userData = this.navParams.get('userData');
+    this.restClient.Token = userData.token;
   }
 
   onSearchChanged() {

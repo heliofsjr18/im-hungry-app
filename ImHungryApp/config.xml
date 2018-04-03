@@ -85,4 +85,5 @@
         <variable name="APP_ID" value="414679185647587" />
         <variable name="APP_NAME" value="ImHungryApp" />
     </plugin>
+    <engine name="browser" spec="5.0.3" />
 </widget>
