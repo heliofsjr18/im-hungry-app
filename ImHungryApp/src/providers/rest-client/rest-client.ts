@@ -43,6 +43,7 @@ export class RestClientProvider {
       this.http.post(this.Server + url, bodyJson)
         .subscribe(res => {
           resolve(JSON.stringify(res));
+          console.log(res);
         }, (err) => {
           reject(JSON.stringify(err));
         });

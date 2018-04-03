@@ -1,11 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, ToastController } from 'ionic-angular';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
 import { EstabelecimentoListPage } from '../estabelecimento-list/estabelecimento-list';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
 import { LoginServiceProvider } from '../../providers/login-service/login-service';
 import { Facebook } from '@ionic-native/facebook';
-
+import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 /**
  * Generated class for the LoginPage page.
@@ -23,6 +23,7 @@ export class LoginPage {
 
   rootPage: any;
   loading: Loading;
+  data: any;
   registerCredentials = { email: 'cliente@teste.com', password: '123' };
   //@ViewChild('loginEmail') emailRef: ElementRef;
   //@ViewChild('loginPassword') passwordRef: ElementRef;
@@ -33,7 +34,7 @@ export class LoginPage {
   isLoggedIn: boolean = false;
   users: any;
 
-  constructor(private fb: Facebook, public navCtrl: NavController, private alertCtrl: AlertController, public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController) {
+  constructor(private fb: Facebook, public navCtrl: NavController, private alertCtrl: AlertController, private toast: ToastController,public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController, private usuario :UsuarioProvider) {
     fb.getLoginStatus()
       .then(res => {
         console.log(res.status);
@@ -90,8 +91,23 @@ export class LoginPage {
     }
 
     this.restLoginClient.getLoginRest(this.url, body)
-      .then((res) => { this.navCtrl.setRoot(EstabelecimentoListPage); })
-      .catch((rej) => { console.log(rej); });
+      .then((res) => {
+        // this.saveUserinfo(res);
+        this.data = JSON.parse(res.toString());
+         this.navCtrl.setRoot(EstabelecimentoListPage, {userData: this.data }); })
+      .catch((rej) => {
+        this.data = JSON.parse(rej.toString());
+        let toast = this.toast.create({
+          message: this.data.error.result,
+          duration: 1500,
+          position: 'top'
+        })
+
+        toast.present();
+        this.navCtrl.setRoot(LoginPage);
+      });
+
+      ;
 
   }
 
