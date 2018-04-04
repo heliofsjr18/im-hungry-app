@@ -30,6 +30,7 @@ export class PagamentoPage {
   groupIcons = [1, 2, 3, 4];
   groupDigits = [1, 2, 3];
   paymentDone: boolean = false;
+  paymentError: boolean = false;
   inPayment: boolean = false;
   checkOutId = '';
   cards = [{brand: 'visa', lastDigits: '4993', expMon: '11', expYe: '18', titular: 'Terry Crews'},
@@ -89,7 +90,7 @@ export class PagamentoPage {
       
       this.getPagamentoStatus(obj.reference).then(() => {
         this.checkOutId = obj.reference.substring(8, 13);
-        this.firstSlideNext(false);
+        this.firstSlideNext();
         this.carrinho.clearCart();
         this.inPayment = false;
         this.paymentDone = true;
@@ -97,7 +98,8 @@ export class PagamentoPage {
     })
     .catch((data) => {
       this.inPayment = false;
-      this.slideError(data);
+      this.paymentError = true;
+      this.firstSlideNext();
     });
 
     
@@ -108,23 +110,21 @@ export class PagamentoPage {
       var obj = JSON.parse(data.toString());
       //console.log(obj);
       if(obj.code != 4 && obj.code != 3){
-        return this.getPagamentoStatus(referencia);
-      }else if(obj.code == 6 || obj.code == 7){
-        throw new Error('Erro de Pagamento');
+        if(obj.code != 6 && obj.code != 7){
+          return this.getPagamentoStatus(referencia);
+        }else{
+          return Promise.reject('ERRO DE PAGAMENTO');
+        }
       }else{
         return data;
       }
+    }).catch((error) => {
+      this.inPayment = false;
+      this.paymentError = true;
     });
   }
 
-  slideError(error){
-    console.log(error);
-    this.firstSlides.lockSwipes(false);
-    this.firstSlides.slideTo(3);
-    this.firstSlides.lockSwipes(true);
-  }
-
-  firstSlideNext(isPayment: boolean){
+  firstSlideNext(){
     this.firstSlides.lockSwipes(false);
     this.firstSlides.slideNext();
     this.firstSlides.lockSwipes(true);
@@ -152,7 +152,7 @@ export class PagamentoPage {
           handler: data => {
             console.log(data);
             if(data.CVV != ''){
-              this.firstSlideNext(true);
+              this.firstSlideNext();
               this.inPayment = true;
               this.doPayment(data.CVV);
             }

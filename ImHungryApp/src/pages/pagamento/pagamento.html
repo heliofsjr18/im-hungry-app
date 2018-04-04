@@ -92,16 +92,14 @@
     </div>
   </ion-slide>
   <ion-slide>
-    <div class="divPayDone" *ngIf="paymentDone">
+    <div class="divPayDone" *ngIf="paymentDone && paymentError == false">
       <div><span>Pagamento finalizado!</span></div>
       <div>
         <span>Este é ID do seu pedido:</span>
       </div>
       <div><span>#{{checkOutId}}</span></div>
     </div>
-  </ion-slide>
-  <ion-slide>
-    <div class="divPayError">
+    <div *ngIf="paymentError == true" class="divPayError">
       <div><span>Ops! Ocorreu um erro no pagamento</span></div>
       <div>
         <span><button ion-button>Tentar Novamente</button></span>
