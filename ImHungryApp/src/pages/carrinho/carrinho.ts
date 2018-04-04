@@ -53,6 +53,11 @@ export class CarrinhoPage {
     });
   }
 
+  removeItemFromCart(item){
+    this.carrinho.removeElement(item);
+    this.loadCart();
+  }
+
   addButton(item) {
     this.carrinho.adicionarCarrinho(item);
     this.loadCart();

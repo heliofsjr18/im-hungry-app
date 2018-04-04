@@ -10,38 +10,40 @@
 <ion-content>
 
   <div class="cards">
-    <div *ngFor="let item of data" class="Card_Item">
-      <ion-card>
-        <ion-card-header>
-          <span (click)="navegateToDetail(item)">{{item.name}}</span>
-        </ion-card-header>
+    <ion-list>
+      <div *ngFor="let item of data" class="Card_Item">
+        <ion-card>
+          <ion-card-header>
+            <span (click)="navegateToDetail(item)">{{item.name}}</span>
+          </ion-card-header>
 
-      <ion-item-sliding>
-        <ion-item>
-          <ion-thumbnail item-start>
-            <img (click)="navegateToDetail(item)" src="{{item.image}}">
-          </ion-thumbnail>
-          <ion-thumbnail item-end>
-            <button (click)="removeButton(item)" ion-button color="danger">
-              <i class="fas fa-minus"></i>
-            </button>
-            <button (click)="addButton(item)" ion-button color="danger">
-              <i class="fas fa-plus"></i>
-            </button>
-          </ion-thumbnail>
-          <h3 (click)="navegateToDetail(item)">
-              É um fato conhecido
-          </h3>
-          <h3 (click)="navegateToDetail(item)">
-            {{item.price.toFixed(2)}} x {{item.qtd}}
-          </h3>
-        </ion-item>
-        <ion-item-options side="right">
-          <button ion-button>Remover</button>
-        </ion-item-options>
-      </ion-item-sliding>
-      </ion-card>
-    </div>
+        <ion-item-sliding>
+          <ion-item>
+            <ion-thumbnail item-start>
+              <img (click)="navegateToDetail(item)" src="{{item.image}}">
+            </ion-thumbnail>
+            <ion-thumbnail item-end>
+              <button (click)="removeButton(item)" ion-button color="danger">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button (click)="addButton(item)" ion-button color="danger">
+                <i class="fas fa-plus"></i>
+              </button>
+            </ion-thumbnail>
+            <h3 (click)="navegateToDetail(item)">
+                É um fato conhecido
+            </h3>
+            <h3 (click)="navegateToDetail(item)">
+              {{item.price.toFixed(2)}} x {{item.qtd}}
+            </h3>
+          </ion-item>
+          <ion-item-options side="right">
+            <button ion-button (click)="removeItemFromCart(item)">Remover</button>
+          </ion-item-options>
+        </ion-item-sliding>
+        </ion-card>
+      </div>
+    </ion-list> 
   </div>
 
   <div class="pay"> 

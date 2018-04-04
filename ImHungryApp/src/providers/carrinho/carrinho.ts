@@ -69,6 +69,13 @@ export class CarrinhoProvider {
     this.carrinho = [];
   }
 
+  public removeElement(element){
+    let index = this.carrinho.findIndex(x => x.id === element.id);
+    if(index > -1){
+      this.carrinho.splice(index, 1);
+    }
+  }
+
   checkItemsFilial_Diff(filial_id){
     let index = this.carrinho.findIndex(x => x.filial_id != filial_id);
     return index > -1;
