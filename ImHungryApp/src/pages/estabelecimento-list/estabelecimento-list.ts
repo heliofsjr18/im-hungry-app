@@ -25,7 +25,6 @@ import $ from "jquery";
       ])
     ])
   ],
-  //changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EstabelecimentoListPage {
 
@@ -37,7 +36,7 @@ export class EstabelecimentoListPage {
   searchTerm: string = '';
   showSearch: boolean = false;
   totalCarrinho: string = '';
-  data = []; // PRECISA ESTAR AQUI PARA ESTAR ACESSÍVEL NO HTML
+  data = []; 
 
   toggleSearch() {
     this.showSearch = !this.showSearch;

@@ -12,7 +12,6 @@ import { RestClientProvider } from '../rest-client/rest-client';
 export class LoginServiceProvider {
 
   constructor(public http: HttpClient, private rest: RestClientProvider) {
-    console.log('Hello LoginServiceProvider Provider');
   }
 
 

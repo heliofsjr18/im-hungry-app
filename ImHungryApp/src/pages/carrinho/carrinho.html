@@ -10,7 +10,7 @@
 <ion-content>
 
   <div class="cards">
-    <div *ngFor="let item of data.array" class="Card_Item">
+    <div *ngFor="let item of data" class="Card_Item">
       <ion-card>
         <ion-card-header>
           <span (click)="navegateToDetail(item)">{{item.name}}</span>
@@ -45,8 +45,8 @@
   </div>
 
   <div class="pay"> 
-    <button round *ngIf="data.total > 0" (click)="cartPay()" ion-button full color="primary">
-      <span>Pagar R$ {{data.total.toFixed(2)}}</span>
+    <button round *ngIf="total > 0" (click)="cartPay()" ion-button full color="primary">
+      <span>Pagar R$ {{total.toFixed(2)}}</span>
     </button>
   </div>
 

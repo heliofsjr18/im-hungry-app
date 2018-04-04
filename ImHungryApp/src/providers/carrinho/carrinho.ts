@@ -5,30 +5,26 @@ import { Injectable } from '@angular/core';
 export class CarrinhoProvider {
 
   constructor() {
-    console.log('Hello CarrinhoProvider Provider');
   }
 
-  carrinho = { array: [], total: 0.00};
+  carrinho = [];
 
 
   public adicionarCarrinho(produto): void {
 
-    if (this.carrinho.array.length > 0) {
+    if (this.carrinho.length > 0) {
 
-      let index = this.carrinho.array.findIndex(x => x.id === produto.id);
+      let index = this.carrinho.findIndex(x => x.id === produto.id);
 
       if (index < 0) {
 
-        this.carrinho.array.push(produto);
-        this.carrinho.total = this.carrinho.total + (produto.price * 1);
+        this.carrinho.push(produto);
 
       } else {
-        this.carrinho.array[index].qtd = produto.qtd + 1;
-        this.carrinho.total = (produto.price * produto.qtd);
+        this.carrinho[index].qtd = produto.qtd + 1;
       }
     } else {
-      this.carrinho.array.push(produto);
-      this.carrinho.total = produto.price * produto.qtd;
+      this.carrinho.push(produto);
     }
   }
 
@@ -36,13 +32,26 @@ export class CarrinhoProvider {
     return this.carrinho;
   }
 
+  public calcTotal(){
+
+    let total = 0;
+
+    for (let index = 0; index < this.carrinho.length; index++) {
+      const element = this.carrinho[index];
+
+      total += (element.price * element.qtd);
+    }
+
+    return total;
+  }
+
   public generateCartForApi(){
     let apiCart = {
       items_id: [],
       items_qtd: []
     };
-    for (let index = 0; index < this.carrinho.array.length; index++) {
-      const element = this.carrinho.array[index];
+    for (let index = 0; index < this.carrinho.length; index++) {
+      const element = this.carrinho[index];
       apiCart.items_id.push(element.id);
       apiCart.items_qtd.push(element.qtd);
     }
@@ -51,14 +60,22 @@ export class CarrinhoProvider {
 
   public removerCarrinho(produto): void {
     if (produto.qtd > 1) {
-      let index = this.carrinho.array.findIndex(x => x.id === produto.id);
-      this.carrinho.array[index].qtd = produto.qtd - 1;
-      this.carrinho.total = this.carrinho.total - produto.price;
+      let index = this.carrinho.findIndex(x => x.id === produto.id);
+      this.carrinho[index].qtd = produto.qtd - 1;
     }
   }
 
+  public clearCart(){
+    this.carrinho = [];
+  }
+
+  checkItemsFilial_Diff(filial_id){
+    let index = this.carrinho.findIndex(x => x.filial_id != filial_id);
+    return index > -1;
+  }
+
   public getCountCarrinho(): number {
-    return this.carrinho.array.length;
+    return this.carrinho.length;
   }
 
 }

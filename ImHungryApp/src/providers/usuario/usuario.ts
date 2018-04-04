@@ -24,7 +24,6 @@ export class UsuarioProvider {
   private user_telefone: String
 
   constructor(public http: HttpClient) {
-    console.log('Hello UsuarioProvider Provider');
   }
 
 

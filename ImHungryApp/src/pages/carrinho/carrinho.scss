@@ -5,8 +5,13 @@ page-carrinho {
         bottom: 0;
         position: fixed;
         padding: 0 60px 20px 60px;
+        z-index: 9999;
     }
     .cards{
         margin-bottom: 10px;
+    }
+
+    .Card_Item:last-child{
+        margin-bottom: 100px;
     }
 }

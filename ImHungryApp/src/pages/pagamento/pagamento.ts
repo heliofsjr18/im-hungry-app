@@ -143,6 +143,10 @@ export class PagamentoPage {
       ],
       buttons: [
         {
+          text: 'Cancelar',
+          role: 'cancelar'
+        },
+        {
           text: 'Confirmar',
           role: 'confirmar',
           handler: data => {
@@ -154,10 +158,6 @@ export class PagamentoPage {
             }
             this.selectedCard.cvv = data.CVV;
           }
-        },
-        {
-          text: 'Cancelar',
-          role: 'cancelar'
         }
       ]
     });

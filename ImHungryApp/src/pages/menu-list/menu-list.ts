@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { style, state, animate, transition, trigger } from '@angular/animations';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IonicPage, NavController, NavParams, Platform, MenuController, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Platform, MenuController, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { MenuDetailPage } from '../menu-detail/menu-detail';
 import { CarrinhoPage } from '../carrinho/carrinho';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
@@ -29,7 +29,8 @@ export class MenuListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
   private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private estabService: EstabelecimentoServiceProvider,
-  private loadingCtrl: LoadingController, private http: HttpClient, private detector: ChangeDetectorRef, private toastCtrl: ToastController) {
+  private loadingCtrl: LoadingController, private http: HttpClient, private detector: ChangeDetectorRef, private toastCtrl: ToastController,
+  private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -40,7 +41,7 @@ export class MenuListPage {
       },100);
     }
     this.pageTitle = this.navParams.get("filial_nome");
-
+    this.filial_id = this.navParams.get("filial_id");
     this.loadList();
   }
 
@@ -50,6 +51,7 @@ export class MenuListPage {
   //Deve ser implementado aqui a recepção do objeto Json que virá do web service e distribuição do objeto no Array abaixo
 
   data = [];
+  filial_id = 0;
 
   onScroll(){
      
@@ -99,11 +101,48 @@ export class MenuListPage {
           rate: 4.5,
           price: parseFloat(items[i].item_valor),
           id: items[i].item_id,
+          filial_id: this.filial_id,
           qtd: 1
         });
       }
       loading.dismiss();
     });
+  }
+
+  makeCartDiffAlert(item){
+    let cartAlert = this.alertCtrl.create({
+      title: 'Esvaziar Carrinho',
+      message: 'Existem Itens de um FoodTruck diferente no carrinho. Deseja esvaziar antes de adicionar?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancelar'
+        },
+        {
+          text: 'Confirmar',
+          role: 'confirmar',
+          handler: e => {
+            this.clearCart();
+            this.addToCart(item);
+          }
+        }
+      ]
+    });
+
+    cartAlert.present();
+  }
+
+  addToCart_Validade(item){
+
+    if(this.carrinho.checkItemsFilial_Diff(this.filial_id)){
+      this.makeCartDiffAlert(item);
+    }else{
+      this.addToCart(item); 
+    }
+  }
+
+  clearCart(){
+    this.carrinho.clearCart();
   }
 
   addToCart(item){
@@ -119,7 +158,6 @@ export class MenuListPage {
       dismissOnPageChange: true,
       cssClass: "myToast"
     });
-
     toast.present();
   }
 

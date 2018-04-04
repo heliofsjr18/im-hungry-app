@@ -8,7 +8,6 @@ export class RestClientProvider {
 
 
   constructor(public http: HttpClient) {
-    console.log('Hello RestClientProvider Provider');
   }
 
   public getPostJson(url: string, bodyJson) {

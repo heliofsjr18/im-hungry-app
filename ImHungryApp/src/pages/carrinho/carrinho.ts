@@ -18,15 +18,15 @@ export class CarrinhoPage {
   @ViewChild('lblPreco') lblPrecoRef: ElementRef;
 
   someWhereInCode() {
-    console.log(this.mylblRef.nativeElement.innerText);
+    
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
    private carrinho: CarrinhoProvider, private modalCtrl: ModalController) {
   }
 
-  data = {array: [], total: 0.00};
-  total = '0,00';
+  data = [];
+  total = 0.00;
 
   ionViewDidLoad() {
     if(this.platform.is('ios')){
@@ -39,6 +39,7 @@ export class CarrinhoPage {
 
   loadCart(){
     this.data = this.carrinho.getCart();
+    this.total = this.carrinho.calcTotal();
   }
 
   cartPay(){
