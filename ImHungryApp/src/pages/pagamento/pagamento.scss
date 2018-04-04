@@ -144,4 +144,23 @@ page-pagamento {
         margin-bottom: 10px;
         font-size: 27px;
     }
+
+    .divPayError{
+        height: 100%;
+        align-items: center;
+        padding-top: 50%;
+        justify-content: center;
+        background-color: color($colors, danger);
+        color: color($colors, light);
+    }
+
+    .divPayError > div{
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .divPayError > div > span{
+        margin-bottom: 10px;
+        font-size: 27px;
+    }
 }

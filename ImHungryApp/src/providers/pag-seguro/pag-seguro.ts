@@ -42,14 +42,7 @@ export class PagSeguroProvider {
 
       //método de pagamento
       let pay = (body) => {
-        return this.restClient.getPostJson('checkout', body);/*.then((data) =>{
-          console.log('DEU CERTO ' + data);
-          console.log(this.pedido);
-        })
-        .catch((err) => {
-          console.log(err);
-          console.log(this.pedido);
-        });*/
+        return this.restClient.getPostJson('checkout', body);
       };
 
       return this.prepareCreditCard().then(() => {
@@ -58,11 +51,11 @@ export class PagSeguroProvider {
           'item_id': this.pedido.items.items_id,
           'item_qtd': this.pedido.items.items_qtd,
           'token': this.pedido.creditCard.token,
-          'hash': PagSeguroDirectPayment.getSenderHash()
+          'hash': PagSeguroDirectPayment.getSenderHash(),
+          'cartao_id': 3
         };
-
         return pay(body);
-      }, (error) => {console.log(error); console.log(this.pedido); return error;});
+      });
 
     });
   }
@@ -85,7 +78,7 @@ export class PagSeguroProvider {
   private prepareCreditCard(){
     return this.getCardBrand().then(() => {
       return this.getCardToken();
-    });
+    })
   }
 
   private getCardBrand(): Promise<any>{
@@ -99,7 +92,7 @@ export class PagSeguroProvider {
             resolve({brand: response.brand.name});
           });
         },
-        error(error) { reject('Informações do Cartão estão incorretas') }
+        error(error) { reject(error); }
       });
     });
   }
@@ -120,7 +113,7 @@ export class PagSeguroProvider {
             console.log(response);
           });
         },
-        error(error) { reject('Informações do Cartão estão incorretas') }
+        error(error) {reject(error); }
       });
     });
 

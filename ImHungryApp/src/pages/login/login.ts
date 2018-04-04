@@ -113,7 +113,8 @@ export class LoginPage {
 
   showLoading() {
     this.loading = this.loadingCtrl.create({
-      content: 'Please wait...',
+      content: 'Aguarde...',
+      spinner: 'crescent',
       dismissOnPageChange: true
     });
     this.loading.present();

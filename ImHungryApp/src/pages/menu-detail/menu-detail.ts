@@ -73,7 +73,6 @@ export class MenuDetailPage {
       position: 'bottom',
       showCloseButton: true,
       closeButtonText: 'X',
-      dismissOnPageChange: true,
       cssClass: "myToast"
     });
 

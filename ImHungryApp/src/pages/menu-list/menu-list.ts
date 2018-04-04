@@ -155,7 +155,6 @@ export class MenuListPage {
       position: 'bottom',
       showCloseButton: true,
       closeButtonText: 'X',
-      dismissOnPageChange: true,
       cssClass: "myToast"
     });
     toast.present();

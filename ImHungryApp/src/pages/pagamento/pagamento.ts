@@ -10,6 +10,7 @@ import {
   ToastController
 } from 'ionic-angular';
 import { PagSeguroProvider } from '../../providers/pag-seguro/pag-seguro';
+import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
 
 
 @IonicPage()
@@ -22,7 +23,8 @@ export class PagamentoPage {
   @ViewChild('secondSlides') secondSlides: Slides;
   @ViewChild('firstSlides') firstSlides: Slides;
   constructor(public navCtrl: NavController, public navParams: NavParams, private pagSeguro: PagSeguroProvider,
-    private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController) {
+    private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController,
+    private carrinho: CarrinhoProvider) {
   }
 
   groupIcons = [1, 2, 3, 4];
@@ -88,15 +90,14 @@ export class PagamentoPage {
       this.getPagamentoStatus(obj.reference).then(() => {
         this.checkOutId = obj.reference.substring(8, 13);
         this.firstSlideNext(false);
+        this.carrinho.clearCart();
         this.inPayment = false;
         this.paymentDone = true;
-      }, (error) => {this.showErrorToast(error)});
-      
-    }, (error) => {
-      this.showErrorToast(error);
+      });
     })
     .catch((data) => {
-      this.showErrorToast(data);
+      this.inPayment = false;
+      this.slideError(data);
     });
 
     
@@ -108,26 +109,25 @@ export class PagamentoPage {
       //console.log(obj);
       if(obj.code != 4 && obj.code != 3){
         return this.getPagamentoStatus(referencia);
+      }else if(obj.code == 6 || obj.code == 7){
+        throw new Error('Erro de Pagamento');
       }else{
         return data;
       }
     });
   }
 
+  slideError(error){
+    console.log(error);
+    this.firstSlides.lockSwipes(false);
+    this.firstSlides.slideTo(3);
+    this.firstSlides.lockSwipes(true);
+  }
+
   firstSlideNext(isPayment: boolean){
     this.firstSlides.lockSwipes(false);
     this.firstSlides.slideNext();
     this.firstSlides.lockSwipes(true);
-  }
-
-  showErrorToast(message){
-    let toast = this.toastCtrl.create({
-      message: 'Ocorreu um erro: ' + message,
-      position: 'bottom',
-      duration: 3000
-    });
-
-    toast.present();
   }
 
   showPaymentAlert(){
