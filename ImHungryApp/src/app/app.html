@@ -2,13 +2,25 @@
 <ion-menu id="filtersMenu" type="overlay" swipeEnabled="false" side="right" [content]="myContent">
     <ion-header>
         <ion-navbar class="myNavBar" color="primary">
-
+            <ion-title>Filtros</ion-title>
+            <ion-buttons end>
+                <button ion-button icon-only class="iconMenuHeader" (click)="closeMenu('filtersMenu')">
+                    <i class="fas fa-times fa-lg"></i>
+                </button>
+            </ion-buttons>
         </ion-navbar>
     </ion-header>
     <ion-content padding>
-        <button ion-button>
-            FILTROS
-        </button>
+        <ion-list>
+            <ion-item no-lines>
+                <ion-label>Apenas cartão fidelidade</ion-label>
+                <ion-checkbox color="secondary"></ion-checkbox>
+            </ion-item>
+            <ion-item no-lines>
+                <ion-label>Food trucks próximos</ion-label>
+                <ion-checkbox color="secondary"></ion-checkbox>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-menu>
 <ion-nav [root]="rootPage" #myContent></ion-nav>
