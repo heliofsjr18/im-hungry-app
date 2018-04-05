@@ -101,8 +101,6 @@ export class PagamentoPage {
       this.paymentError = true;
       this.firstSlideNext();
     });
-
-    
   }
 
   getPagamentoStatus(referencia){

@@ -1,6 +1,7 @@
 import { Component, ChangeDetectorRef, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { style, animate, transition, trigger } from '@angular/animations';
+import { Geolocation } from '@ionic-native/geolocation';
 import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
 import { MenuListPage } from '../menu-list/menu-list';
 import { CarrinhoPage } from '../carrinho/carrinho';
@@ -30,7 +31,8 @@ export class EstabelecimentoListPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private detector: ChangeDetectorRef,
     private elRef: ElementRef, private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private estabelecimentoServiceProvider: EstabelecimentoServiceProvider,
-    private loadingCtrl: LoadingController, private http: HttpClient, private restClient: RestClientProvider) {
+    private loadingCtrl: LoadingController, private http: HttpClient, private restClient: RestClientProvider,
+    private geolocation: Geolocation) {
   }
 
   searchTerm: string = '';
@@ -73,13 +75,17 @@ export class EstabelecimentoListPage {
       loading.present();
     }
 
-    let body = {
-      'latitude': '-8.0282236',
-      'longitude' : '-34.8855557',
-      'search': this.searchTerm
-    }
+    this.geolocation.getCurrentPosition().then((resp) => {
 
-    this.estabelecimentoServiceProvider.getEstabelecimentos('filial/list', body)
+      let body = {
+        'latitude': resp.coords.latitude.toString(),
+        'longitude' : resp.coords.longitude.toString(),
+        'search': this.searchTerm
+      }
+  
+      console.log(body);
+
+      this.estabelecimentoServiceProvider.getEstabelecimentos('filial/list', body)
       .then((data)=>{
         this.data = [];
         let parseObj = JSON.parse(data.toString());
@@ -102,7 +108,6 @@ export class EstabelecimentoListPage {
         } else {
           loading.dismiss();
         }
-
       })
       .catch((rej) =>{
         this.data = [];
@@ -113,6 +118,10 @@ export class EstabelecimentoListPage {
           refresher.complete();
         }
       });
+    })
+    .catch((error) => {
+      console.log('ERRO AO OBTER LOCALIZAÇÃO', error);
+    }); 
   }
 
   ionViewDidLoad() {
