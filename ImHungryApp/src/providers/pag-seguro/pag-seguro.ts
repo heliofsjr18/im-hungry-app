@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, NgZone } from '@angular/core';
 import { RestClientProvider } from '../rest-client/rest-client';
 import { CarrinhoProvider } from '../carrinho/carrinho';
+import { UsuarioProvider } from '../usuario/usuario';
 
 declare var PagSeguroDirectPayment;
 
@@ -9,17 +10,18 @@ declare var PagSeguroDirectPayment;
 export class PagSeguroProvider {
 
   constructor(public http: HttpClient, private restClient: RestClientProvider, private zone: NgZone,
-   private carrinho: CarrinhoProvider) {
+   private carrinho: CarrinhoProvider, private userProvider: UsuarioProvider) {
   }
 
   private paymentMethod = 'CREDIT_CARD';
   private pedido = {
     senderHash: '',
     creditCard: {
-      num: '4485810539414993',
+      id: '',
+      num: '',
       cvv: '',
-      expMon: '11',
-      expYe: '2018',
+      expMon: '',
+      expYe: '',
       brand: '',
       token: ''
     },
@@ -27,18 +29,16 @@ export class PagSeguroProvider {
     total: 0
   }
 
-  public doPayment(Cvv){
+  public doPayment(creditCardId){
     //retorna tudo quando a sessão for iniciada
     return this.getSession().then((data) => {
       //sessionId
       let obj = JSON.parse(data.toString());
       this.initSession(obj.sessionId);
       
-      this.pedido.creditCard.cvv = Cvv;
+      this.setPagamentoCard(creditCardId);
 
       this.pedido.items = this.carrinho.generateCartForApi();
-
-      
 
       //método de pagamento
       let pay = (body) => {
@@ -52,12 +52,21 @@ export class PagSeguroProvider {
           'item_qtd': this.pedido.items.items_qtd,
           'token': this.pedido.creditCard.token,
           'hash': PagSeguroDirectPayment.getSenderHash(),
-          'cartao_id': 3
+          'cartao_id': this.pedido.creditCard.id
         };
         return pay(body);
       });
 
     });
+  }
+
+  private setPagamentoCard(creditCardId){
+    let referencedCard = this.userProvider.getCreditCardById(creditCardId);
+
+    let tmpPedidoCard = {id: referencedCard.cartao_id, num: referencedCard.cartao_digitos,
+      cvv: referencedCard.cartao_cvc, expMon: referencedCard.cartao_mes, expYe: referencedCard.cartao_ano, brand: '', token: ''
+    };
+    this.pedido.creditCard = tmpPedidoCard;
   }
 
   public getCheckOutStatus(referencia){

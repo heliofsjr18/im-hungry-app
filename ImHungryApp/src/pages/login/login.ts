@@ -34,7 +34,8 @@ export class LoginPage {
   isLoggedIn: boolean = false;
   users: any;
 
-  constructor(private fb: Facebook, public navCtrl: NavController, private alertCtrl: AlertController, private toast: ToastController,public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController, private usuario :UsuarioProvider) {
+  constructor(private fb: Facebook, public navCtrl: NavController, private alertCtrl: AlertController, private toast: ToastController,public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController, private usuario :UsuarioProvider,
+    private rest: RestClientProvider) {
     fb.getLoginStatus()
       .then(res => {
         console.log(res.status);
@@ -94,7 +95,11 @@ export class LoginPage {
       .then((res) => {
         // this.saveUserinfo(res);
         this.data = JSON.parse(res.toString());
-         this.navCtrl.setRoot(EstabelecimentoListPage, {userData: this.data }); })
+        this.rest.Token = this.data.token;
+        this.usuario.setUserObject(this.data.usuario);
+        this.navCtrl.setRoot(EstabelecimentoListPage);
+        
+      })
       .catch((rej) => {
         this.data = JSON.parse(rej.toString());
         let toast = this.toast.create({

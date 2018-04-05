@@ -1,30 +1,54 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-/*
-  Generated class for the UsuarioProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UsuarioProvider {
 
-  private dateAniversario: String
-  private dateCadastro: String
-  private tipo_id: String
-  private user_cadastro: String
-  private user_cpf: String
-  private user_data: String
-  private user_email: String
-  private user_foto_perfil: String
-  private user_id: String
-  private user_nome: String
-  private user_status: String
-  private user_telefone: String
+  private user = {
+    user_id: '',
+    user_nome: '',
+    user_cpf: '',
+    user_email: '',
+    user_telefone: '',
+    user_data: '',
+    user_cadastro: '',
+    user_foto_perfil: null,
+    user_status: '',
+    tipo_id: '',
+    dateAniversario: '',
+    dateCadastro: '',
+    credCards: {
+      qtd: 0,
+      list: [
+        {
+          cartao_id: '',
+          cartao_digitos: '',
+          cartao_ano: '',
+          cartao_mes: '',
+          cartao_brand: '',
+          cartao_status: '',
+          cartao_cvc: ''
+        }
+      ]
+    }
+  };
 
   constructor(public http: HttpClient) {
   }
 
+  public setUserObject(userObj){
+    this.user = userObj;
+  }
 
+  public getUserObject(){
+    return this.user;
+  }
+
+  public getCreditCards(){
+    return {cards: this.user.credCards.list, user_name: this.user.user_nome};
+  }
+
+  public getCreditCardById(cartao_id){
+    return this.user.credCards.list.find(x => x.cartao_id == cartao_id);
+  }
 }

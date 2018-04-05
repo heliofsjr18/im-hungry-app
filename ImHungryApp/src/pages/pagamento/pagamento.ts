@@ -11,6 +11,7 @@ import {
 } from 'ionic-angular';
 import { PagSeguroProvider } from '../../providers/pag-seguro/pag-seguro';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
+import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 
 @IonicPage()
@@ -24,7 +25,7 @@ export class PagamentoPage {
   @ViewChild('firstSlides') firstSlides: Slides;
   constructor(public navCtrl: NavController, public navParams: NavParams, private pagSeguro: PagSeguroProvider,
     private loadingCtrl: LoadingController, private alertCtrl: AlertController, private toastCtrl: ToastController,
-    private carrinho: CarrinhoProvider) {
+    private carrinho: CarrinhoProvider, private userProvider: UsuarioProvider) {
   }
 
   groupIcons = [1, 2, 3, 4];
@@ -33,13 +34,23 @@ export class PagamentoPage {
   paymentError: boolean = false;
   inPayment: boolean = false;
   checkOutId = '';
-  cards = [{brand: 'visa', lastDigits: '4993', expMon: '11', expYe: '18', titular: 'Terry Crews'},
-  {brand: 'master', lastDigits: '5459', expMon: '08', expYe: '23', titular: 'Matheus Guilherme'}];
-  selectedCard = {brand: '', titular: '', cardNumber: '', expDate: '', cvv: ''};
+  cards = [];
+  selectedCard = {id: '', brand: '', titular: '', cardNumber: '', expDate: '', cvv: ''};
 
   ionViewDidLoad() { 
     this.setCardSlidesOptions();
+    this.loadCards();
     this.firstSlides.lockSwipes(true);
+  }
+
+  loadCards(){
+    let tempCards = this.userProvider.getCreditCards();
+    for(let i of tempCards.cards){
+      let element = { id: i.cartao_id, brand: i.cartao_brand, lastDigits: i.cartao_digitos.substring(12, 16),
+        expMon: i.cartao_mes, expYe: i.cartao_ano.substring(2,4), titular: tempCards.user_name, cvv: i.cartao_cvc
+      };
+      this.cards.push(element);
+    }
   }
 
   getCardIconClass(brand: string){
@@ -69,21 +80,23 @@ export class PagamentoPage {
 
   setSelectedCard(currentIndex: number){
 
+    this.selectedCard.id = this.cards[currentIndex].id;
     this.selectedCard.brand = this.cards[currentIndex].brand;
     this.selectedCard.cardNumber = '**** **** **** ' + this.cards[currentIndex].lastDigits;
     let year = (2000 +  Number.parseInt(this.cards[currentIndex].expYe));
     let month = Number.parseInt(this.cards[currentIndex].expMon) -1;
     this.selectedCard.expDate = new Date(year, month).toISOString(); 
     this.selectedCard.titular = this.cards[currentIndex].titular;
+    this.selectedCard.cvv = this.cards[currentIndex].cvv;
 
   }
 
-  doPayment(Cvv){
+  doPayment(creditCardId){
 
     //this.firstSlideNext(false);
 
     this.inPayment = true;
-    this.pagSeguro.doPayment(Cvv).then((data) => {
+    this.pagSeguro.doPayment(creditCardId).then((data) => {
 
       var obj = JSON.parse(data.toString());
       console.log(obj);
@@ -149,12 +162,11 @@ export class PagamentoPage {
           role: 'confirmar',
           handler: data => {
             console.log(data);
-            if(data.CVV != ''){
+            if(data.CVV != '' && data.CVV == this.selectedCard.cvv){
               this.firstSlideNext();
               this.inPayment = true;
-              this.doPayment(data.CVV);
+              this.doPayment(this.selectedCard.id);
             }
-            this.selectedCard.cvv = data.CVV;
           }
         }
       ]
