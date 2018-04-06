@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
+import { Push } from '@ionic-native/push';
 
 import { MyApp } from './app.component';
 
@@ -71,7 +72,8 @@ import { UsuarioProvider } from '../providers/usuario/usuario';
     LoginServiceProvider,
     UsuarioProvider,
     Facebook,
-    Geolocation
+    Geolocation,
+    Push
   ]
 })
 export class AppModule {}
