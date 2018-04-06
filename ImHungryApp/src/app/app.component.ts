@@ -3,6 +3,11 @@ import { Platform, MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import fontawesome from '@fortawesome/fontawesome';
+import faFreeSolid from '@fortawesome/fontawesome-free-solid';
+import faFreeRegular from '@fortawesome/fontawesome-free-regular';
+import faFreeBrands from '@fortawesome/fontawesome-free-brands';
+
 
 import { HomePage } from '../pages/home/home';
 import { EstabelecimentoListPage } from '../pages/estabelecimento-list/estabelecimento-list';
@@ -20,7 +25,14 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      this.initFontAwesome();
     });
+  }
+
+  initFontAwesome(){
+    fontawesome.library.add(faFreeSolid);
+    fontawesome.library.add(faFreeRegular);
+    fontawesome.library.add(faFreeBrands);
   }
 
   closeMenu(id: string){
