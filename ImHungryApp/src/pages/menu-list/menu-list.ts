@@ -106,6 +106,9 @@ export class MenuListPage {
         });
       }
       loading.dismiss();
+    }).catch((error) => {
+      console.log(error);
+      loading.dismiss();
     });
   }
 

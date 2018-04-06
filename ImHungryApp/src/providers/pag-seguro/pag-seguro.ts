@@ -55,8 +55,12 @@ export class PagSeguroProvider {
           'cartao_id': this.pedido.creditCard.id
         };
         return pay(body);
+      }).catch((error) => {
+        return Promise.reject(error);
       });
 
+    }).catch((error) => {
+      return Promise.reject(error);
     });
   }
 
@@ -87,7 +91,9 @@ export class PagSeguroProvider {
   private prepareCreditCard(){
     return this.getCardBrand().then(() => {
       return this.getCardToken();
-    })
+    }).catch((error) => {
+      return Promise.reject(error);
+    });
   }
 
   private getCardBrand(): Promise<any>{

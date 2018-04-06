@@ -117,6 +117,7 @@ export class PagamentoPage {
   }
 
   getPagamentoStatus(referencia){
+    
     return this.pagSeguro.getCheckOutStatus(referencia).then((data) => {
       var obj = JSON.parse(data.toString());
       //console.log(obj);
@@ -127,7 +128,7 @@ export class PagamentoPage {
           return Promise.reject('ERRO DE PAGAMENTO');
         }
       }else{
-        return data;
+        Promise.resolve();
       }
     }).catch((error) => {
       this.inPayment = false;
