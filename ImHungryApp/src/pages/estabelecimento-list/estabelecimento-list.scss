@@ -127,11 +127,15 @@ page-estabelecimento-list {
         line-height: 1.4;
         color: rgba(0,0,0,0.67);
         font-size: 12px;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
         min-height: 46px;
+    }
+
+    .Card_Info > div:nth-child(2) > svg{
+        margin-left: 7px;
     }
     
     .Card_Info > div:nth-child(3){
