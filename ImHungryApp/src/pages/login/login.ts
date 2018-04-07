@@ -6,6 +6,7 @@ import { RestClientProvider } from '../../providers/rest-client/rest-client';
 import { LoginServiceProvider } from '../../providers/login-service/login-service';
 import { Facebook } from '@ionic-native/facebook';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
+import { GooglePlus } from '@ionic-native/google-plus';
 
 /**
  * Generated class for the LoginPage page.
@@ -18,8 +19,18 @@ import { UsuarioProvider } from '../../providers/usuario/usuario';
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
+  providers: [GooglePlus]
 })
 export class LoginPage {
+
+  displayName: any;
+  email: any;
+  familyName: any;
+  givenName: any;
+  userId: any;
+  imageUrl: any;
+
+  isLoggedIn:boolean = false;
 
   rootPage: any;
   loading: Loading;
@@ -31,10 +42,9 @@ export class LoginPage {
   public url = "usuario/login";
   public tipoUsuario = 2;
 
-  isLoggedIn: boolean = false;
   users: any;
 
-  constructor(private fb: Facebook, public navCtrl: NavController, private alertCtrl: AlertController, private toast: ToastController,public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController, private usuario :UsuarioProvider,
+  constructor(private googlePlus: GooglePlus, private fb: Facebook, public navCtrl: NavController, private alertCtrl: AlertController, private toast: ToastController,public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController, private usuario :UsuarioProvider,
     private rest: RestClientProvider) {
     fb.getLoginStatus()
       .then(res => {
@@ -46,6 +56,22 @@ export class LoginPage {
         }
       })
       .catch(e => console.log(e));
+  }
+
+  loginGoogle() {
+    this.googlePlus.login({})
+      .then(res => {
+        console.log(res);
+        this.displayName = res.displayName;
+        this.email = res.email;
+        this.familyName = res.familyName;
+        this.givenName = res.givenName;
+        this.userId = res.userId;
+        this.imageUrl = res.imageUrl;
+
+        this.isLoggedIn = true;
+      })
+      .catch(err => console.error(err));
   }
 
   loginFacebook() {
@@ -61,7 +87,23 @@ export class LoginPage {
       .catch(e => console.log('Error logging into Facebook', e));
   }
 
-  logout() {
+  logoutGoogle() {
+    this.googlePlus.logout()
+      .then(res => {
+        console.log(res);
+        this.displayName = "";
+        this.email = "";
+        this.familyName = "";
+        this.givenName = "";
+        this.userId = "";
+        this.imageUrl = "";
+
+        this.isLoggedIn = false;
+      })
+      .catch(err => console.error(err));
+  }
+
+  logoutFacebook() {
     this.fb.logout()
       .then( res => this.isLoggedIn = false)
       .catch(e => console.log('Error logout from Facebook', e));

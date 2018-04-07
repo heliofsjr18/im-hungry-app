@@ -85,7 +85,7 @@
     </edit-config>
     <allow-navigation href="http://192.168.15.4:8100" />
     <engine name="browser" spec="5.0.3" />
-    <engine name="android" spec="7.1.0" />
+    <engine name="android" spec="~7.1.0" />
     <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
         <variable name="APP_ID" value="414679185647587" />
         <variable name="APP_NAME" value="ImHungryApp" />
@@ -98,5 +98,11 @@
     <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
-    <plugin name="phonegap-plugin-push" spec="^2.2.2" />
+    <plugin name="phonegap-plugin-push" spec="^2.2.2">
+        <variable name="ANDROID_SUPPORT_V13_VERSION" value="27.+" />
+        <variable name="FCM_VERSION" value="11.6.2" />
+    </plugin>
+    <plugin name="cordova-plugin-googleplus" spec="^5.2.3">
+        <variable name="REVERSED_CLIENT_ID" value="15135084724-5tabjcqfol033317c9mnd4mb98hvarti.apps.googleusercontent.com" />
+    </plugin>
 </widget>
