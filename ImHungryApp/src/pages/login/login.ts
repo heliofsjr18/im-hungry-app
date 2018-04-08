@@ -127,13 +127,16 @@ export class LoginPage {
   login() {
     this.showLoading();
 
-    let body = {
-      'email': this.registerCredentials.email,
-      'senha': this.registerCredentials.password,
-      'tipo': this.tipoUsuario
-    }
+    this.restLoginClient.prepareDeviceToken().then(token => {
 
-    this.restLoginClient.getLoginRest(this.url, body)
+      let body = {
+        'email': this.registerCredentials.email,
+        'senha': this.registerCredentials.password,
+        'tipo': this.tipoUsuario,
+        'token': token
+      }
+
+      this.restLoginClient.getLoginRest(this.url, body)
       .then((res) => {
         // this.saveUserinfo(res);
         this.data = JSON.parse(res.toString());
@@ -144,18 +147,24 @@ export class LoginPage {
       })
       .catch((rej) => {
         this.data = JSON.parse(rej.toString());
-        let toast = this.toast.create({
-          message: this.data.error.result,
-          duration: 1500,
-          position: 'top'
-        })
-
-        toast.present();
         this.navCtrl.setRoot(LoginPage);
+        this.showErrorToast(this.data.error.result);
       });
 
-      ;
+    }).catch((error) => {
+      this.showErrorToast(error);
+    });
 
+  }
+
+  showErrorToast(error){
+    let toast = this.toast.create({
+      message: error.toString(),
+      duration: 1500,
+      position: 'top'
+    });
+
+    toast.present();
   }
 
   showLoading() {
