@@ -39,6 +39,7 @@
     "cordova-ios": "4.5.4",
     "cordova-plugin-device": "^2.0.1",
     "cordova-plugin-facebook4": "^1.9.1",
+    "cordova-plugin-fcm": "^2.1.2",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-googleplus": "^5.2.3",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
@@ -73,7 +74,8 @@
       },
       "cordova-plugin-googleplus": {
         "REVERSED_CLIENT_ID": "15135084724-5tabjcqfol033317c9mnd4mb98hvarti.apps.googleusercontent.com"
-      }
+      },
+      "cordova-plugin-fcm": {}
     },
     "platforms": [
       "browser",

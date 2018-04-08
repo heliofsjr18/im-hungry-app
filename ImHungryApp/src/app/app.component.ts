@@ -35,7 +35,8 @@ export class MyApp {
     this.fcm.subscribeToTopic('all');
     this.fcm.getToken().then(token => {
       // backend.registerToken(token);
-      alert(token);
+      this.showToken(token);
+      console.log(token);
     });
     this.fcm.onNotification().subscribe(data => {
       alert('message received')
@@ -46,8 +47,13 @@ export class MyApp {
       };
     });
     this.fcm.onTokenRefresh().subscribe(token => {
-      // backend.registerToken(token);
+      this.showToken(token);
+      console.log(token);
     });
+  }
+
+  showToken(token){
+    alert(token);
   }
 
   initFontAwesome(){
