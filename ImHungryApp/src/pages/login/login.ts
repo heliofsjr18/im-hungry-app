@@ -127,32 +127,25 @@ export class LoginPage {
   login() {
     this.showLoading();
 
-    this.restLoginClient.prepareDeviceToken().then(token => {
+    let body = {
+      'email': this.registerCredentials.email,
+      'senha': this.registerCredentials.password,
+      'tipo': this.tipoUsuario
+    }
 
-      let body = {
-        'email': this.registerCredentials.email,
-        'senha': this.registerCredentials.password,
-        'tipo': this.tipoUsuario,
-        'token': token
-      }
-
-      this.restLoginClient.getLoginRest(this.url, body)
-      .then((res) => {
-        // this.saveUserinfo(res);
-        this.data = JSON.parse(res.toString());
-        this.rest.Token = this.data.token;
-        this.usuario.setUserObject(this.data.usuario);
-        this.navCtrl.setRoot(EstabelecimentoListPage);
-        
-      })
-      .catch((rej) => {
-        this.data = JSON.parse(rej.toString());
-        this.navCtrl.setRoot(LoginPage);
-        this.showErrorToast(this.data.error.result);
-      });
-
-    }).catch((error) => {
-      this.showErrorToast(error);
+    this.restLoginClient.getLoginRest(this.url, body)
+    .then((res) => {
+      // this.saveUserinfo(res);
+      this.data = JSON.parse(res.toString());
+      this.rest.Token = this.data.token;
+      this.usuario.setUserObject(this.data.usuario);
+      this.navCtrl.setRoot(EstabelecimentoListPage);
+      
+    })
+    .catch((rej) => {
+      this.data = JSON.parse(rej.toString());
+      this.navCtrl.setRoot(LoginPage);
+      this.showErrorToast(this.data.error.result);
     });
 
   }
