@@ -1,26 +1,22 @@
 <!--Menu de Filtros da listagem de estabelecimentos-->
-<ion-menu id="filtersMenu" type="overlay" swipeEnabled="false" side="right" [content]="myContent">
+<ion-menu id="filtersMenu_Estab" type="overlay" swipeEnabled="false" side="right" [content]="myContent">
     <ion-header>
         <ion-navbar class="myNavBar" color="primary">
             <ion-title>Filtros</ion-title>
-            <ion-buttons end>
-                <button ion-button icon-only class="iconMenuHeader" (click)="closeMenu('filtersMenu')">
-                    <i class="fas fa-times fa-lg"></i>
-                </button>
-            </ion-buttons>
         </ion-navbar>
     </ion-header>
     <ion-content padding>
         <ion-list>
             <ion-item no-lines>
                 <ion-label>Apenas cartão fidelidade</ion-label>
-                <ion-checkbox color="secondary"></ion-checkbox>
+                <ion-checkbox [(ngModel)]="estabList_Filters.apenasFidelidade" color="secondary"></ion-checkbox>
             </ion-item>
             <ion-item no-lines>
                 <ion-label>Food trucks próximos</ion-label>
-                <ion-checkbox color="secondary"></ion-checkbox>
+                <ion-checkbox [(ngModel)]="estabList_Filters.apenasProximos" color="secondary"></ion-checkbox>
             </ion-item>
         </ion-list>
+        <button ion-button round (click)="updateMenuFilters('filtersMenu_Estab')">Aplicar</button>
     </ion-content>
 </ion-menu>
 <ion-nav [root]="rootPage" #myContent></ion-nav>

@@ -168,7 +168,7 @@ export class MenuListPage {
   }
 
   openFilterMenu(){
-    this.menuCtrl.open("filtersMenu");
+    this.menuCtrl.open("filtersMenu_Estab"); //LEMBRAR DE TROCAR PARA FILTROS DO MENU
   }
 
   openCart() : void{

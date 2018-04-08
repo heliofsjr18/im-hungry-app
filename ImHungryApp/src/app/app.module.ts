@@ -29,6 +29,7 @@ import { CarrinhoProvider } from '../providers/carrinho/carrinho';
 import { PagSeguroProvider } from '../providers/pag-seguro/pag-seguro';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { UsuarioProvider } from '../providers/usuario/usuario';
+import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { UsuarioProvider } from '../providers/usuario/usuario';
     PagSeguroProvider,
     LoginServiceProvider,
     UsuarioProvider,
+    MenuFilterProvider,
     Facebook,
     Geolocation,
     FCM

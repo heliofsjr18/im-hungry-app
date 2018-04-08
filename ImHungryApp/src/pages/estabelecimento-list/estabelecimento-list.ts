@@ -6,9 +6,11 @@ import { IonicPage, NavController, NavParams, MenuController, LoadingController 
 import { MenuListPage } from '../menu-list/menu-list';
 import { CarrinhoPage } from '../carrinho/carrinho';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
+import { MenuFilterProvider } from '../../providers/menu-filter/menu-filter';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
 import { EstabelecimentoServiceProvider } from '../../providers/estabelecimento-service/estabelecimento-service';
 import $ from "jquery";
+
 
 @IonicPage()
 @Component({
@@ -32,13 +34,21 @@ export class EstabelecimentoListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private detector: ChangeDetectorRef,
     private elRef: ElementRef, private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private estabelecimentoServiceProvider: EstabelecimentoServiceProvider,
     private loadingCtrl: LoadingController, private http: HttpClient, private restClient: RestClientProvider,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation, private menuFilter: MenuFilterProvider) {
+
+      this.getMenuEvents();
   }
 
   searchTerm: string = '';
   showSearch: boolean = false;
   totalCarrinho: string = '';
   data = []; 
+
+  getMenuEvents(){
+    this.menuCtrl.get('filtersMenu_Estab').ionClose.subscribe(() => {
+      this.loadList(false, true);
+    });
+  }
 
   toggleSearch() {
     this.showSearch = !this.showSearch;
@@ -77,10 +87,14 @@ export class EstabelecimentoListPage {
 
     this.geolocation.getCurrentPosition().then((resp) => {
 
+      let filters = this.menuFilter.getEstabListFilters();
+
       let body = {
         'latitude': resp.coords.latitude.toString(),
         'longitude' : resp.coords.longitude.toString(),
-        'search': this.searchTerm
+        'search': this.searchTerm,
+        'onlyNear': filters.apenasProximos,
+        'onlyFidelidade': filters.apenasFidelidade
       }
   
       console.log(body);
@@ -140,7 +154,7 @@ export class EstabelecimentoListPage {
   }
 
   openFilterMenu() {
-    this.menuCtrl.open("filtersMenu");
+    this.menuCtrl.open("filtersMenu_Estab");
   }
 
   navigateToMenuPage(item) {
