@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { FCM } from '@ionic-native/fcm';
 
 @Injectable()
 export class UsuarioProvider {
@@ -33,11 +34,18 @@ export class UsuarioProvider {
     }
   };
 
-  constructor(public http: HttpClient) {
+  fcmTopicPrefix: string = 'com.br.ImHungryApp-';
+
+  constructor(public http: HttpClient, private fcm: FCM) {
   }
 
   public setUserObject(userObj){
     this.user = userObj;
+    this.userSubscribeToTopic();
+  }
+
+  private userSubscribeToTopic(){
+    this.fcm.subscribeToTopic(this.fcmTopicPrefix + this.user.user_id);
   }
 
   public getUserObject(){

@@ -62,7 +62,7 @@ export class MyApp {
 
   initFCM(){
     //this.fcm.subscribeToTopic('all');
-    this.fcm.subscribeToTopic('com.br.ImHungryApp-2');
+    //this.fcm.subscribeToTopic('com.br.ImHungryApp-2');
     /*this.fcm.getToken().then(token => {
       // backend.registerToken(token);
       this.showToken(token);
