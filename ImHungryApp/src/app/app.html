@@ -2,7 +2,7 @@
 <ion-menu id="filtersMenu_Estab" type="overlay" swipeEnabled="false" side="right" [content]="myContent">
     <ion-header>
         <ion-navbar class="myNavBar" color="primary">
-            <ion-title>Filtros</ion-title>
+            <ion-title>Filtar Foodtrucks</ion-title>
         </ion-navbar>
     </ion-header>
     <ion-content padding>
@@ -17,6 +17,14 @@
             </ion-item>
         </ion-list>
         <button ion-button round (click)="updateMenuFilters('filtersMenu_Estab')">Aplicar</button>
+    </ion-content>
+</ion-menu>
+<ion-menu id="filtersMenu_Menu" type="overlay" swipeEnabled="false" side="right" [content]="myContent">
+    <ion-navbar class="myNavBar" color="primary">
+        <ion-title>Filtar Itens</ion-title>
+    </ion-navbar>
+    <ion-content padding>
+        <button ion-button round>Aplicar</button>
     </ion-content>
 </ion-menu>
 <ion-nav [root]="rootPage" #myContent></ion-nav>

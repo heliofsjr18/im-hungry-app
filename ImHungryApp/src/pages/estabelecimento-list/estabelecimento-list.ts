@@ -93,8 +93,8 @@ export class EstabelecimentoListPage {
         'latitude': resp.coords.latitude.toString(),
         'longitude' : resp.coords.longitude.toString(),
         'search': this.searchTerm,
-        'onlyNear': filters.apenasProximos,
-        'onlyFidelidade': filters.apenasFidelidade
+        'onlyNear': filters.apenasProximos ? 1 : 2,
+        'onlyFidelidade': filters.apenasFidelidade ? 1 : 2
       }
   
       console.log(body);
