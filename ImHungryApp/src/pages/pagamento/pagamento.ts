@@ -41,6 +41,7 @@ export class PagamentoPage {
     this.setCardSlidesOptions();
     this.loadCards();
     this.firstSlides.lockSwipes(true);
+    this.setSelectedCard(0);
   }
 
   loadCards(){

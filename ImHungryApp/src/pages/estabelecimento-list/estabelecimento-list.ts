@@ -154,6 +154,7 @@ export class EstabelecimentoListPage {
   }
 
   openFilterMenu() {
+    this.menuCtrl.enable(true, "filtersMenu_Estab");
     this.menuCtrl.open("filtersMenu_Estab");
   }
 

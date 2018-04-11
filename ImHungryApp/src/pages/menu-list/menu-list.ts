@@ -168,6 +168,7 @@ export class MenuListPage {
   }
 
   openFilterMenu(){
+    this.menuCtrl.enable(true, "filtersMenu_Menu");
     this.menuCtrl.open("filtersMenu_Menu");
   }
 
