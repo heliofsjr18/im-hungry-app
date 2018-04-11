@@ -2,9 +2,14 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\app",
     "\\src\\pages",
-    "\\src\\pages\\carrinho",
-    "\\src\\pages\\menu-list"
+    "\\src\\pages\\cartao-fidelidade",
+    "\\src\\pages\\pagamento",
+    "\\src\\pages\\register",
+    "\\src\\providers",
+    "\\src\\providers\\usuario"
   ],
+  "SelectedNode": "\\src\\pages\\cartao-fidelidade\\cartao-fidelidade.ts",
   "PreviewInSolutionExplorer": false
 }

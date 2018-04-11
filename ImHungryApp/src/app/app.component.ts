@@ -13,6 +13,7 @@ import { HomePage } from '../pages/home/home';
 import { EstabelecimentoListPage } from '../pages/estabelecimento-list/estabelecimento-list';
 import { LoginPage } from '../pages/login/login';
 import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
+import { CartaoFidelidadePage } from '../pages/cartao-fidelidade/cartao-fidelidade';
 
 @Component({
   templateUrl: 'app.html'
