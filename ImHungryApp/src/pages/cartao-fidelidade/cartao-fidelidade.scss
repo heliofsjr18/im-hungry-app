@@ -7,12 +7,18 @@ page-cartao-fidelidade {
           padding-bottom: 20px;
         }
      
-        .cartaoFidelidade-box {
+        .ButtonBack-box {
           background: #f4511e;
-          padding: 20px 20px 0px 20px;
-          margin-top: 30px;
+          //padding: 20px 20px 0px 20px;
+          //margin-top: 230px;
         }
      
+        .Label-box {
+          background: #f4511e;
+          //padding: 20px 20px 0px 20px;
+          //margin-top: 230px;
+        }
+
         ion-row {
            align-items: center;
            text-align: center;
@@ -28,9 +34,9 @@ page-cartao-fidelidade {
              box-shadow: none !important;
          }
      
-         .signup-col {
-           margin: 0px 16px 0px 16px;
-           padding-bottom: 20px;
+         .backButton {
+           margin: 0px 0px 0px 0px;
+           padding-bottom: 1px;
          }
      
          .item-inner {
@@ -41,8 +47,15 @@ page-cartao-fidelidade {
          .ok-btn {
            background: #f4511e;
            border-radius: 10px !important;
-           border: 1px solid #ffffff;
+           border: 1px solid #ffffff
+           ;
          }
+
+         .help-btn {
+          background: #f4511e;
+          border-radius: 90px !important;
+          border: 0px solid #ffffff;
+        }
      
          .register-btn {
            color: #ffffff;
