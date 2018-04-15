@@ -2,7 +2,6 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\app",
     "\\src\\pages",
     "\\src\\pages\\cartao-fidelidade",
     "\\src\\pages\\pagamento",
@@ -10,6 +9,6 @@
     "\\src\\providers",
     "\\src\\providers\\usuario"
   ],
-  "SelectedNode": "\\src\\pages\\cartao-fidelidade\\cartao-fidelidade.ts",
+  "SelectedNode": "\\src\\pages\\cartao-fidelidade\\cartao-fidelidade.html",
   "PreviewInSolutionExplorer": false
 }

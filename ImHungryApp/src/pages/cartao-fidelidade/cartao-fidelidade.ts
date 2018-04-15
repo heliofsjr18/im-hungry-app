@@ -64,4 +64,8 @@ export class CartaoFidelidadePage {
 
   }
 
+  pushBack(){
+    this.navCtrl.last();
+  }
+
 }
