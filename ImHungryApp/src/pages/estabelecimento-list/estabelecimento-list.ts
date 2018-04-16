@@ -2,7 +2,7 @@ import { Component, ChangeDetectorRef, ElementRef, ChangeDetectionStrategy } fro
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { style, animate, transition, trigger } from '@angular/animations';
 import { Geolocation } from '@ionic-native/geolocation';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, Platform, AlertController } from 'ionic-angular';
 import { MenuListPage } from '../menu-list/menu-list';
 import { CarrinhoPage } from '../carrinho/carrinho';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
@@ -10,6 +10,7 @@ import { MenuFilterProvider } from '../../providers/menu-filter/menu-filter';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
 import { EstabelecimentoServiceProvider } from '../../providers/estabelecimento-service/estabelecimento-service';
 import $ from "jquery";
+import { LoginPage } from '../login/login';
 
 
 @IonicPage()
@@ -34,8 +35,11 @@ export class EstabelecimentoListPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private detector: ChangeDetectorRef,
     private elRef: ElementRef, private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private estabelecimentoServiceProvider: EstabelecimentoServiceProvider,
     private loadingCtrl: LoadingController, private http: HttpClient, private restClient: RestClientProvider,
-    private geolocation: Geolocation, private menuFilter: MenuFilterProvider) {
+    private geolocation: Geolocation, private menuFilter: MenuFilterProvider, private platform: Platform, private alertCtrl: AlertController) {
 
+      platform.registerBackButtonAction(() => {
+        this.showLogoutAlert();
+      });
       this.getMenuEvents();
   }
 
@@ -43,6 +47,26 @@ export class EstabelecimentoListPage {
   showSearch: boolean = false;
   totalCarrinho: string = '';
   data = []; 
+
+  showLogoutAlert(){
+    let alert = this.alertCtrl.create({
+      title: 'LogOut',
+      message: 'Se sair terá de fazer login novamente. Tem certeza?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancelar'
+        },
+        {
+          text: 'Confirmar',
+          role: 'confirmar',
+          handler: () => {
+            this.navCtrl.setRoot(LoginPage);
+          }
+        }
+      ]
+    });
+  }
 
   getMenuEvents(){
     this.menuCtrl.get('filtersMenu_Estab').ionClose.subscribe(() => {
