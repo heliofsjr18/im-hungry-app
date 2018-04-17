@@ -7,6 +7,7 @@ import { LoginServiceProvider } from '../../providers/login-service/login-servic
 import { Facebook } from '@ionic-native/facebook';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { RegisterPage } from '../register/register';
 
 /**
  * Generated class for the LoginPage page.
@@ -30,7 +31,7 @@ export class LoginPage {
   userId: any;
   imageUrl: any;
 
-  isLoggedIn:boolean = false;
+  isLoggedIn: boolean = false;
 
   rootPage: any;
   loading: Loading;
@@ -44,7 +45,7 @@ export class LoginPage {
 
   users: any;
 
-  constructor(private googlePlus: GooglePlus, private fb: Facebook, public navCtrl: NavController, private alertCtrl: AlertController, private toast: ToastController,public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController, private usuario :UsuarioProvider,
+  constructor(private googlePlus: GooglePlus, private fb: Facebook, public navCtrl: NavController, private alertCtrl: AlertController, private toast: ToastController, public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController, private usuario: UsuarioProvider,
     private rest: RestClientProvider) {
     fb.getLoginStatus()
       .then(res => {
@@ -77,7 +78,7 @@ export class LoginPage {
   loginFacebook() {
     this.fb.login(['public_profile', 'user_friends', 'email'])
       .then(res => {
-        if(res.status === "connected") {
+        if (res.status === "connected") {
           this.isLoggedIn = true;
           this.getUserDetail(res.authResponse.userID);
         } else {
@@ -85,6 +86,15 @@ export class LoginPage {
         }
       })
       .catch(e => console.log('Error logging into Facebook', e));
+  }
+
+  loginMain() {
+    let body = {
+      'email': this.registerCredentials.email,
+      'senha': this.registerCredentials.password,
+      'tipo': this.tipoUsuario
+    }
+    this.login(body);
   }
 
   logoutGoogle() {
@@ -105,15 +115,22 @@ export class LoginPage {
 
   logoutFacebook() {
     this.fb.logout()
-      .then( res => this.isLoggedIn = false)
+      .then(res => this.isLoggedIn = false)
       .catch(e => console.log('Error logout from Facebook', e));
   }
 
   getUserDetail(userid) {
-    this.fb.api("/"+userid+"/?fields=id,email,name,picture,gender",["public_profile"])
+
+    //this.fb.api("/" + userid + "/?fields=name", ['public_profile'])
+    this.fb.api("/me?fields=email,id", ['public_profile', 'email'])
       .then(res => {
         console.log(res);
-        this.users = res;
+        let body = {
+          'email': res.email,
+          'senha': res.id,
+          'tipo': this.tipoUsuario
+        }
+        this.login(body);
       })
       .catch(e => {
         console.log(e);
@@ -124,33 +141,27 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login() {
+  login(body) {
     this.showLoading();
 
-    let body = {
-      'email': this.registerCredentials.email,
-      'senha': this.registerCredentials.password,
-      'tipo': this.tipoUsuario
-    }
-
     this.restLoginClient.getLoginRest(this.url, body)
-    .then((res) => {
-      // this.saveUserinfo(res);
-      this.data = JSON.parse(res.toString());
-      this.rest.Token = this.data.token;
-      this.usuario.setUserObject(this.data.usuario);
-      this.navCtrl.setRoot(EstabelecimentoListPage);
-      
-    })
-    .catch((rej) => {
-      this.data = JSON.parse(rej.toString());
-      this.navCtrl.setRoot(LoginPage);
-      this.showErrorToast(this.data.error.result);
-    });
+      .then((res) => {
+        // this.saveUserinfo(res);
+        this.data = JSON.parse(res.toString());
+        this.rest.Token = this.data.token;
+        this.usuario.setUserObject(this.data.usuario);
+        this.navCtrl.setRoot(EstabelecimentoListPage);
+
+      })
+      .catch((rej) => {
+        this.data = JSON.parse(rej.toString());
+        this.navCtrl.setRoot(LoginPage);
+        this.showErrorToast(this.data.error.result);
+      });
 
   }
 
-  showErrorToast(error){
+  showErrorToast(error) {
     let toast = this.toast.create({
       message: error.toString(),
       duration: 1500,
@@ -167,6 +178,10 @@ export class LoginPage {
       dismissOnPageChange: true
     });
     this.loading.present();
+  }
+
+  createAccount() {
+    this.navCtrl.push(RegisterPage);
   }
 
 }
