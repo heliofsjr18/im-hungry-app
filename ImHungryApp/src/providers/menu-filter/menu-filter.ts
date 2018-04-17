@@ -9,7 +9,7 @@ export class MenuFilterProvider {
 
   private estabList_Filters = {
     apenasProximos: false,
-    apenasFidelidade: true
+    apenasFidelidade: false
   }
 
   /**

@@ -19,7 +19,7 @@ import { CartaoFidelidadePage } from '../pages/cartao-fidelidade/cartao-fidelida
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage: any = CartaoFidelidadePage;
+  rootPage: any = LoginPage;
 
   //Filtros da listagem de estabelecimentos
   estabList_Filters = {

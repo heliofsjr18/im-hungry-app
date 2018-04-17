@@ -129,6 +129,7 @@ export class EstabelecimentoListPage {
         let parseObj = JSON.parse(data.toString());
         let listItem = parseObj.filiais;
 
+
         for (let i in listItem) {
           this.data.push({
             name: listItem[i].filial_nome,
@@ -137,9 +138,12 @@ export class EstabelecimentoListPage {
             rate: parseFloat(listItem[i].avaliacao),
             distance: parseFloat(listItem[i].distancia).toFixed(2) + ' Km',
             status: parseInt(listItem[i].filial_status),
-            id: parseInt(listItem[i].filial_id)
+            id: parseInt(listItem[i].filial_id),
+            fidelidade: listItem[i].filial_fidelidade
           });
         }
+
+        console.log(this.data);
 
         if (isRefresh) {
           refresher.complete();
@@ -159,6 +163,11 @@ export class EstabelecimentoListPage {
     })
     .catch((error) => {
       console.log('ERRO AO OBTER LOCALIZAÇÃO', error);
+      if(!isRefresh){
+        loading.dismiss();
+      }else{
+        refresher.complete();
+      }
     }); 
   }
 
