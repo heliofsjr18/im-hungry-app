@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController,ToastController } from 'ionic-angular';
 
 /**
  * Generated class for the CartaoFidelidadePage page.
@@ -15,10 +15,11 @@ import { IonicPage, NavController, NavParams, MenuController, LoadingController 
 })
 export class CartaoFidelidadePage {
 
+  message: string = "A quantidade de pedidos exigida por esse estabelecimento é o limite para que você, usuário possa liberar seu cartão fidelidade, e usá-lo com o beneficio de 1(UM) lanches grátis. Siginifica que ao comprar @param:qtdPedidos você receberá @param: benCartãoFidelidade.";
   showSearch: boolean = false;
   searchTerm: string = '';
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private toast:ToastController) {
   }
 
   ionViewDidLoad() {
@@ -66,6 +67,16 @@ export class CartaoFidelidadePage {
 
   pushBack(){
     this.navCtrl.last();
+  }
+
+  helpClick(){
+
+    let toast = this.toast.create({
+    message: this.message.toString(),
+    duration: 5000,
+    position: 'center'
+    });
+    toast.present();
   }
 
 }

@@ -35,53 +35,55 @@
 
 </ion-header>
 
-<ion-content class="cartaoFidelidade-content" padding color="secondary">
-  <ion-row class="logo-row">
-    <ion-col></ion-col>
-
-    <ion-col></ion-col>
-  </ion-row>
-  <div >
-      <form >
- 
-  <ion-row>
-      <ion-col>
-       
-            <ion-item>
-                <ion-label stacked>Quantidade de pedidos:</ion-label>              
-                <ion-input></ion-input>
-              </ion-item>
-
-              <ion-item>
-                  <ion-label stacked>Beneficios do cartao:</ion-label>
-                  <ion-input></ion-input>
-              </ion-item>
-              
-          <!-- <ion-item>
-            <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input type="password" placeholder="Password" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
-          </ion-item> -->
-
-       
-      </ion-col>
-    </ion-row>
-    </form>
-  </div>
-  <div class="ButtonBack-box">
-    <form (ngSubmit)="pushBack()" #registerForm="ngForm">
-      <ion-row>
-        <ion-col class="backButton">
-          <button ion-button class="ok-btn" full type="submit" [disabled]="!registerForm.form.valid">Voltar</button>          
-        </ion-col>
-        <ion-col class="backButton">
-        <button ion-button round class="help-btn">?</button>
-      </ion-col>
-      </ion-row>
-
-    </form>
-  </div>
+<ion-content class="cartaoFidelidade-content" padding color="secondary">  
+   <form (ngSubmit)="pushBack()">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+              <img src="http://placehold.it/300x200"/>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <strong>@Param: Nome do Estabelecimento</strong>
+            </ion-col>        
+          </ion-row>
+      </ion-grid>
+     <ion-grid>        
+       <ion-row>
+         <ion-col text-left>
+            <strong>Quantidade de Pedidos?</strong>
+         </ion-col>        
+       </ion-row>
+       <ion-row>
+          <ion-col>            
+            <ion-input style="border:1px" type="text"></ion-input>                          
+          </ion-col>        
+        </ion-row>
+        <ion-row>
+            <ion-col text-left>
+                <strong>Beneficios do cartão:</strong>
+            </ion-col>        
+          </ion-row>
+          <ion-row>
+             <ion-col>
+                <ion-input style="border:1px" type="text"></ion-input>                    
+             </ion-col>        
+           </ion-row>
+     </ion-grid>
+     <ion-grid>
+        <ion-row>
+          <ion-col col-4>              
+          </ion-col>   
+          <ion-col col-4>
+              <button ion-button class="ok-btn" full type="submit" >Voltar</button>
+          </ion-col>   
+          <ion-col col-4>
+              <ion-icon (click)="helpClick()" name="help"></ion-icon>
+          </ion-col>                    
+        </ion-row>
+      </ion-grid>
+   </form>
 <ion-content padding>
 
 </ion-content>
