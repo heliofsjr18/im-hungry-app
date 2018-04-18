@@ -33,12 +33,19 @@ export class LoginPage {
   //@ViewChild('loginEmail') emailRef: ElementRef;
   //@ViewChild('loginPassword') passwordRef: ElementRef;
 
-  public url = "usuario/login";
-
+  public url = "app/cliente/login";
   users: any;
 
-  constructor(private googlePlus: GooglePlus, private fb: Facebook, public navCtrl: NavController, private alertCtrl: AlertController, private toast: ToastController, public navParams: NavParams, public restLoginClient: LoginServiceProvider, private loadingCtrl: LoadingController, private usuario: UsuarioProvider,
-    private rest: RestClientProvider) {
+  constructor(private googlePlus: GooglePlus,
+    private fb: Facebook,
+    public navCtrl: NavController,
+    private alertCtrl: AlertController,
+    private toast: ToastController,
+    public navParams: NavParams,
+    public restLoginClient: LoginServiceProvider,
+    private loadingCtrl: LoadingController,
+    private usuario: UsuarioProvider,
+    private rest: RestClientProvider,) {
     fb.getLoginStatus()
       .then(res => {
         console.log(res.status);
@@ -102,7 +109,6 @@ export class LoginPage {
   }
 
   getUserDetail(userid) {
-
     //this.fb.api("/" + userid + "/?fields=name", ['public_profile'])
     this.fb.api("/me?fields=email,id", ['public_profile', 'email'])
       .then(res => {
@@ -132,14 +138,12 @@ export class LoginPage {
         this.rest.Token = this.data.token;
         this.usuario.setUserObject(this.data.usuario);
         this.navCtrl.setRoot(EstabelecimentoListPage);
-
       })
       .catch((rej) => {
         this.data = JSON.parse(rej.toString());
         this.navCtrl.setRoot(LoginPage);
         this.showErrorToast(this.data.error.result);
       });
-
   }
 
   showErrorToast(error) {

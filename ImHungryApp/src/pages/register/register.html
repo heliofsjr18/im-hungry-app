@@ -28,16 +28,14 @@
       <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label fixed>Senha</ion-label>
       <ion-input type="text" placeholder="Senha" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label fixed>Telefone</ion-label>
       <ion-input type="text" placeholder="Telefone" name="telefone" [(ngModel)]="registerCredentials.telefone" required></ion-input>
     </ion-item>
   </ion-list>
   <div padding>
-    <button ion-button (click)="Cadastrar()"> Salvar</button>
+    <button ion-button (click)="cadastrar()"> Salvar</button>
 
-    <button ion-button (click)="Cancelar()"> Cancelar</button>
+    <button ion-button (click)="cancelar()"> Cancelar</button>
   </div>
