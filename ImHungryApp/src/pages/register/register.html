@@ -16,28 +16,24 @@
 <ion-content padding>
   <ion-list>
     <ion-item>
-      <ion-label fixed>Nome</ion-label>
-      <ion-input type="text" [(ngModel)]="nome"></ion-input>
+      <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="registerCredentials.nome" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label fixed>CPF</ion-label>
-      <ion-input type="text" [(ngModel)]="cpf"></ion-input>
+      <ion-input type="text" placeholder="CPF" name="cpf" [(ngModel)]="registerCredentials.cpf" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label fixed>Data de Nascimento</ion-label>
-      <ion-input type="text" [(ngModel)]="dataDeNascimento"></ion-input>
+      <ion-input type="text" placeholder="Nascimento" name="nascimento" [(ngModel)]="registerCredentials.nascimento" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label fixed>E-mail</ion-label>
-      <ion-input type="text" [(ngModel)]="email"></ion-input>
+      <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label fixed>Senha</ion-label>
-      <ion-input type="text" [(ngModel)]="senha"></ion-input>
+      <ion-input type="text" placeholder="Senha" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-label fixed>Telefone</ion-label>
-      <ion-input type="text" [(ngModel)]="telefone"></ion-input>
+      <ion-input type="text" placeholder="Telefone" name="telefone" [(ngModel)]="registerCredentials.telefone" required></ion-input>
     </ion-item>
   </ion-list>
   <div padding>

@@ -24,13 +24,6 @@ import { RegisterPage } from '../register/register';
 })
 export class LoginPage {
 
-  displayName: any;
-  email: any;
-  familyName: any;
-  givenName: any;
-  userId: any;
-  imageUrl: any;
-
   isLoggedIn: boolean = false;
 
   rootPage: any;
@@ -41,7 +34,6 @@ export class LoginPage {
   //@ViewChild('loginPassword') passwordRef: ElementRef;
 
   public url = "usuario/login";
-  public tipoUsuario = 2;
 
   users: any;
 
@@ -63,13 +55,11 @@ export class LoginPage {
     this.googlePlus.login({})
       .then(res => {
         console.log(res);
-        this.displayName = res.displayName;
-        this.email = res.email;
-        this.familyName = res.familyName;
-        this.givenName = res.givenName;
-        this.userId = res.userId;
-        this.imageUrl = res.imageUrl;
-
+        let body = {
+          'email': res.email,
+          'senha': res.userId,
+        }
+        this.login(body);
         this.isLoggedIn = true;
       })
       .catch(err => console.error(err));
@@ -92,7 +82,6 @@ export class LoginPage {
     let body = {
       'email': this.registerCredentials.email,
       'senha': this.registerCredentials.password,
-      'tipo': this.tipoUsuario
     }
     this.login(body);
   }
@@ -101,13 +90,6 @@ export class LoginPage {
     this.googlePlus.logout()
       .then(res => {
         console.log(res);
-        this.displayName = "";
-        this.email = "";
-        this.familyName = "";
-        this.givenName = "";
-        this.userId = "";
-        this.imageUrl = "";
-
         this.isLoggedIn = false;
       })
       .catch(err => console.error(err));
@@ -128,7 +110,6 @@ export class LoginPage {
         let body = {
           'email': res.email,
           'senha': res.id,
-          'tipo': this.tipoUsuario
         }
         this.login(body);
       })

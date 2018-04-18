@@ -16,6 +16,17 @@ import { LoginPage } from '../login/login';
 })
 export class RegisterPage {
 
+  registerCredentials = {
+    nome: '',
+    cpf: '',
+    nascimento: '',
+    email: '@teste.com',
+    password: '',
+    telefone: ''
+  };
+  public tipoUsuario = 2;
+  public url = "usuario/cadastro";
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
@@ -25,7 +36,16 @@ export class RegisterPage {
 
   Cadastrar() {    
     
-    this.navCtrl.push(LoginPage);
+    let body = {
+      'nome': this.registerCredentials.nome,
+      'cpf': this.registerCredentials.cpf,
+      'nascimento': this.registerCredentials.nascimento,
+      'email': this.registerCredentials.email,
+      'password': this.registerCredentials.password,
+      'telefone': this.registerCredentials.telefone,
+      'tipo': this.tipoUsuario
+    }
+    
 
   }
 
