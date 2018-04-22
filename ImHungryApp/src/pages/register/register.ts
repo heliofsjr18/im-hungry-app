@@ -26,9 +26,10 @@ export class RegisterPage {
     nome: '',
     cpf: '',
     nascimento: '',
-    email: '@teste.com',
-    password: '',
-    telefone: ''
+    email: '',
+    senha: '',
+    telefone: '',
+    fot64: 'register',
   };
   public url = "app/cliente/insert";
 
@@ -51,8 +52,9 @@ export class RegisterPage {
       'cpf': this.registerCredentials.cpf,
       'nascimento': this.registerCredentials.nascimento,
       'email': this.registerCredentials.email,
-      'password': this.registerCredentials.password,
-      'telefone': this.registerCredentials.telefone
+      'senha': this.registerCredentials.senha,
+      'telefone': this.registerCredentials.telefone,
+      'fot64': this.registerCredentials.fot64
     }
     this.save(body)
   }
@@ -69,7 +71,6 @@ export class RegisterPage {
       })
       .catch((rej) => {
         this.data = JSON.parse(rej.toString());
-        this.navCtrl.setRoot(LoginPage);
         this.showErrorToast(this.data.error.result);
       });
   }
@@ -89,12 +90,11 @@ export class RegisterPage {
       duration: 1500,
       position: 'top'
     });
-
     toast.present();
   }
 
-  Cancelar() {
-    this.navCtrl.push(LoginPage);
+  cancelar() {
+    this.navCtrl.setRoot(LoginPage);
   }
 
 }
