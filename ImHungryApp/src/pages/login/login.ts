@@ -45,7 +45,7 @@ export class LoginPage {
     public restLoginClient: LoginServiceProvider,
     private loadingCtrl: LoadingController,
     private usuario: UsuarioProvider,
-    private rest: RestClientProvider,) {
+    private rest: RestClientProvider, ) {
     fb.getLoginStatus()
       .then(res => {
         console.log(res.status);
@@ -110,12 +110,15 @@ export class LoginPage {
 
   getUserDetail(userid) {
     //this.fb.api("/" + userid + "/?fields=name", ['public_profile'])
-    this.fb.api("/me?fields=email,id", ['public_profile', 'email'])
+    this.fb.api("/me?fields=name,email,id,picture", ['public_profile', 'email'])
       .then(res => {
         console.log(res);
         let body = {
+          'nome': res.name,
           'email': res.email,
           'senha': res.id,
+          'fot64': res.picture.data.url,
+          'tipoUsuario': "redeSocial"
         }
         this.login(body);
       })
@@ -141,7 +144,21 @@ export class LoginPage {
       })
       .catch((rej) => {
         this.data = JSON.parse(rej.toString());
-        this.navCtrl.setRoot(LoginPage);
+        if (body.tipoUsuario == "redeSocial") {
+          this.restLoginClient.getLoginRest("app/cliente/insert", body)
+            .then((res) => {
+              this.data = JSON.parse(res.toString());
+              this.rest.Token = this.data.token;
+              this.usuario.setUserObject(this.data.usuario);
+              this.navCtrl.setRoot(EstabelecimentoListPage);
+            })
+            .catch((rej) => {
+              this.data = JSON.parse(rej.toString());
+              this.showErrorToast(this.data.error.result);
+            });
+        } else {
+          this.navCtrl.setRoot(LoginPage);
+        }
         this.showErrorToast(this.data.error.result);
       });
   }
