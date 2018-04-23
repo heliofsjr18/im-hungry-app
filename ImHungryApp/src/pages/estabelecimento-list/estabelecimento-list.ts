@@ -11,6 +11,7 @@ import { RestClientProvider } from '../../providers/rest-client/rest-client';
 import { EstabelecimentoServiceProvider } from '../../providers/estabelecimento-service/estabelecimento-service';
 import $ from "jquery";
 import { LoginPage } from '../login/login';
+import { CartaoFidelidadePage } from '../cartao-fidelidade/cartao-fidelidade';
 
 
 @IonicPage()
@@ -199,7 +200,7 @@ export class EstabelecimentoListPage {
   }
 
   openCartaoFidelidadePage(){
-    
+    this.navCtrl.push(CartaoFidelidadePage);
   }
 
   doRefresh(refresher) {

@@ -48,12 +48,14 @@
             <span>{{item.name}}</span>
             <span>
               <span>{{item.status == 1 ? "Aberto" : "Fechado"}}</span>
-              <i  class="fas fa-handshake fa-lg" [ngStyle]="{ 'color': '#6d6d6d', 'margin-right': '8px' }"></i>
               <i [ngClass]="(item.status == 1)?'statusOpen' : 'statusClose'" class="fas fa-circle"></i>
             </span>
           </div>
-          <div (click)="navigateToMenuPage(item)">
+          <div>
             {{item.description}}
+            <div *ngIf="item.fidelidade" (click)="openCartaoFidelidadePage()">
+              <i  class="fas fa-handshake fa-lg" [ngStyle]="{ 'color': '#6d6d6d', 'margin-right': '8px' }"></i>
+            </div>
           </div>
           <div (click)="navigateToMenuPage(item)">
             <div>

@@ -132,10 +132,11 @@ page-estabelecimento-list {
         overflow: hidden;
         text-overflow: ellipsis;
         min-height: 46px;
+        align-items: flex-end;
     }
 
-    .Card_Info > div:nth-child(2) > svg{
-        margin-left: 7px;
+    .Card_Info > div:nth-child(2) > div{
+        margin-top: 5px;
     }
     
     .Card_Info > div:nth-child(3){
