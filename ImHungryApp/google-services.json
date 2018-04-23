@@ -1,27 +1,27 @@
 {
   "project_info": {
-    "project_number": "125421574011",
-    "firebase_url": "https://imhungryapp-200318.firebaseio.com",
-    "project_id": "imhungryapp-200318",
-    "storage_bucket": "imhungryapp-200318.appspot.com"
+    "project_number": "99321385535",
+    "firebase_url": "https://imhungryapp-1306c.firebaseio.com",
+    "project_id": "imhungryapp-1306c",
+    "storage_bucket": "imhungryapp-1306c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:125421574011:android:f244051858c9fa8e",
+        "mobilesdk_app_id": "1:99321385535:android:f244051858c9fa8e",
         "android_client_info": {
           "package_name": "com.br.ImHungryApp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "125421574011-37f5eqh76k2evvogl7id37oclv6eb1om.apps.googleusercontent.com",
+          "client_id": "99321385535-efm0ophh99rlhr5dj6j20qkelnkiqaic.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCtmovLB6WA5HvEy91HbPj3BBraJ_pHKZc"
+          "current_key": "AIzaSyDYE8BxLeAmF4ttBHXnxiZgt30VynGM_mw"
         }
       ],
       "services": {
