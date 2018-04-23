@@ -22,7 +22,7 @@ export class CarrinhoPage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
-   private carrinho: CarrinhoProvider, private modalCtrl: ModalController) {
+   private carrinho: CarrinhoProvider) {
   }
 
   data = [];
@@ -43,8 +43,7 @@ export class CarrinhoPage {
   }
 
   cartPay(){
-    let paymentModal = this.modalCtrl.create(PagamentoPage);
-    paymentModal.present();
+    this.navCtrl.push(PagamentoPage);
   }
 
   navegateToDetail(item): void {

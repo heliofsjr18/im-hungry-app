@@ -39,7 +39,7 @@ export class RestClientProvider {
   public getLoginJson(url: string, bodyJson) {
 
     return new Promise((resolve, reject) => {
-      this.http.post(this.Server + url, bodyJson)
+      this.http.post(this.Server + this.ApiUrl +  url, bodyJson)
         .subscribe(res => {
           resolve(JSON.stringify(res));
           console.log(res);

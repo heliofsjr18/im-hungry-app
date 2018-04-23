@@ -12,6 +12,7 @@ import {
 import { PagSeguroProvider } from '../../providers/pag-seguro/pag-seguro';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
+import { EstabelecimentoListPage } from '../estabelecimento-list/estabelecimento-list';
 
 
 @IonicPage()
@@ -105,9 +106,9 @@ export class PagamentoPage {
       this.getPagamentoStatus(obj.reference).then(() => {
         this.checkOutId = obj.reference.substring(8, 13);
         this.firstSlideNext();
-        this.carrinho.clearCart();
         this.inPayment = false;
         this.paymentDone = true;
+        console.log();
       });
     })
     .catch((data) => {
@@ -129,6 +130,7 @@ export class PagamentoPage {
           return Promise.reject('ERRO DE PAGAMENTO');
         }
       }else{
+        this.carrinho.clearCart();
         Promise.resolve();
       }
     }).catch((error) => {
@@ -140,6 +142,12 @@ export class PagamentoPage {
   firstSlideNext(){
     this.firstSlides.lockSwipes(false);
     this.firstSlides.slideNext();
+    this.firstSlides.lockSwipes(true);
+  }
+
+  firstSlidePrevious(){
+    this.firstSlides.lockSwipes(false);
+    this.firstSlides.slidePrev();
     this.firstSlides.lockSwipes(true);
   }
 
@@ -175,6 +183,22 @@ export class PagamentoPage {
     });
 
     alert.present();
+  }
+
+  tryPayAgain(){
+    this.firstSlidePrevious();
+    this.inPayment = true;
+    this.paymentDone = false;
+    this.paymentError = false;
+    this.doPayment(this.selectedCard.id);
+  }
+
+  showCloseButton(){
+    return (!this.inPayment && !this.paymentDone) || this.paymentError;
+  }
+
+  backToRoot(){
+    this.navCtrl.popToRoot();
   }
 
   closeModal(){

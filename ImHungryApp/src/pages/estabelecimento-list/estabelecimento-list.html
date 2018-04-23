@@ -41,21 +41,21 @@
   </ion-refresher>
   <ion-list padding-top>
 
-      <div *ngFor="let item of data" (click)="navigateToMenuPage(item)" class="Card_Item">
-        <img src="{{item.image}}">
+      <div *ngFor="let item of data" class="Card_Item">
+        <img src="{{item.image}}" (click)="navigateToMenuPage(item)">
         <div class="Card_Info">
-          <div>
+          <div (click)="navigateToMenuPage(item)">
             <span>{{item.name}}</span>
             <span>
-              <!--<span>{{item.status == 1 ? "Aberto" : "Fechado"}}</span>-->
+              <span>{{item.status == 1 ? "Aberto" : "Fechado"}}</span>
               <i  class="fas fa-handshake fa-lg" [ngStyle]="{ 'color': '#6d6d6d', 'margin-right': '8px' }"></i>
               <i [ngClass]="(item.status == 1)?'statusOpen' : 'statusClose'" class="fas fa-circle"></i>
             </span>
           </div>
-          <div>
+          <div (click)="navigateToMenuPage(item)">
             {{item.description}}
           </div>
-          <div>
+          <div (click)="navigateToMenuPage(item)">
             <div>
               <ion-rating class="smallRating" [showOnly]="true" [numStars]="5" [rateValue]="item.rate" (ionClick)="logStars($event)"></ion-rating>
             </div>
