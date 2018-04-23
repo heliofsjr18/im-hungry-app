@@ -99,7 +99,7 @@
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="To locate you" />
     </plugin>
     <plugin name="cordova-plugin-googleplus" spec="^5.2.3">
-        <variable name="REVERSED_CLIENT_ID" value="15135084724-5tabjcqfol033317c9mnd4mb98hvarti.apps.googleusercontent.com" />
+        <variable name="REVERSED_CLIENT_ID" value="99321385535-efm0ophh99rlhr5dj6j20qkelnkiqaic.apps.googleusercontent.com" />
     </plugin>
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
 </widget>

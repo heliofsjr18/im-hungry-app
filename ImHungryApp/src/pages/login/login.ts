@@ -65,6 +65,9 @@ export class LoginPage {
         let body = {
           'email': res.email,
           'senha': res.userId,
+          'nome': res.displayName,
+          'fot64': res.imageUrl,
+          'tipoUsuario': "redeSocial"
         }
         this.login(body);
         this.isLoggedIn = true;
