@@ -136,7 +136,7 @@ export class EstabelecimentoListPage {
             description: listItem[i].logradouro + ', ' + listItem[i].filial_numero_endereco + ', ' + listItem[i].bairro + ', ' + listItem[i].cidade,
             image: "https://rafafreitas.com/api/uploads/empresa/" + listItem[i].empresa_foto_marca,
             rate: parseFloat(listItem[i].avaliacao),
-            distance: parseFloat(listItem[i].distancia).toFixed(2) + ' Km',
+            distance: parseFloat(listItem[i].distancia).toFixed(1) + ' Km',
             status: parseInt(listItem[i].filial_status),
             id: parseInt(listItem[i].filial_id),
             fidelidade: listItem[i].filial_fidelidade
@@ -196,6 +196,10 @@ export class EstabelecimentoListPage {
       filial_id: item.id,
       filial_nome: item.name
     });
+  }
+
+  openCartaoFidelidadePage(){
+    
   }
 
   doRefresh(refresher) {

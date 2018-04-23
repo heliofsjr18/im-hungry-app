@@ -33,7 +33,7 @@ export class LoginPage {
   //@ViewChild('loginEmail') emailRef: ElementRef;
   //@ViewChild('loginPassword') passwordRef: ElementRef;
 
-  public url = "app/cliente/login";
+  public url = "cliente/login";
   users: any;
 
   constructor(private googlePlus: GooglePlus,
@@ -148,7 +148,7 @@ export class LoginPage {
       .catch((rej) => {
         this.data = JSON.parse(rej.toString());
         if (body.tipoUsuario == "redeSocial") {
-          this.restLoginClient.getLoginRest("app/cliente/insert", body)
+          this.restLoginClient.getLoginRest("cliente/insert", body)
             .then((res) => {
               this.data = JSON.parse(res.toString());
               this.rest.Token = this.data.token;

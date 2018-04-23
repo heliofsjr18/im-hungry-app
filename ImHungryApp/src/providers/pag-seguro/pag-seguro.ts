@@ -29,12 +29,18 @@ export class PagSeguroProvider {
     total: 0
   }
 
+  private session = '';
+
   public doPayment(creditCardId){
     //retorna tudo quando a sessão for iniciada
     return this.getSession().then((data) => {
       //sessionId
       let obj = JSON.parse(data.toString());
-      this.initSession(obj.sessionId);
+      
+      if(this.session.length < 1){
+        this.session = obj.sessionId;
+        this.initSession(obj.sessionId);
+      }
       
       this.setPagamentoCard(creditCardId);
 

@@ -1,9 +1,9 @@
 <ion-header no-border>
 
-  <ion-navbar class="myNavBar" hideBackButton="true" color="primary">
+  <ion-navbar hideBackButton="true" class="myNavBar" hideBackButton="true" color="primary">
     <ion-title>Pagamento</ion-title>
     <ion-buttons end>
-      <button ion-button icon-only class="iconHeader" (click)="closeModal()">
+      <button *ngIf="showCloseButton()" ion-button icon-only class="iconHeader" (click)="closeModal()">
         <i class="fas fa-times fa-lg"></i>
       </button>
     </ion-buttons>
@@ -98,15 +98,20 @@
         <span>Este é ID do seu pedido:</span>
       </div>
       <div><span>#{{checkOutId}}</span></div>
+      <div>
+        <span>
+          <button ion-button (click)="backToRoot()">Voltar para o início</button>
+        </span>
+      </div>
     </div>
     <div *ngIf="paymentError == true" class="divPayError">
       <div><span>Ops! Ocorreu um erro no pagamento</span></div>
       <div>
-        <span><button ion-button>Tentar Novamente</button></span>
+        <span><button ion-button (click)="tryPayAgain()">Tentar Novamente</button></span>
       </div>
       <div><span>Ou</span></div>
       <div>
-        <span><button ion-button>Voltar para o início</button></span>
+        <span><button ion-button (click)="backToRoot()">Voltar para o início</button></span>
       </div>
     </div>
   </ion-slide>
