@@ -195,7 +195,8 @@ export class EstabelecimentoListPage {
   navigateToMenuPage(item) {
     this.navCtrl.push(MenuListPage, {
       filial_id: item.id,
-      filial_nome: item.name
+      filial_nome: item.name,
+      filial_status: item.status
     });
   }
 

@@ -33,7 +33,7 @@
       <div class="Card_Info">
         <div>
           <span (click)="navegateToDetail(item)">{{item.name}}</span>
-          <span (click)="addToCart_Validade(item)">
+          <span *ngIf="filial_status === 1" (click)="addToCart_Validade(item)">
             <i class="fas fa-shopping-cart iconCart"></i>
           </span>
         </div>

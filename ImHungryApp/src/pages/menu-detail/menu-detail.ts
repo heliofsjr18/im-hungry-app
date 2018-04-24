@@ -17,7 +17,10 @@ export class MenuDetailPage {
   private carrinho: CarrinhoProvider, private detector: ChangeDetectorRef, private toastCtrl: ToastController,
   private alertCtrl: AlertController) {
     this.item = navParams.get('objSelecionado');
+    this.filial_status = this.navParams.get("filial_status");
   }
+
+  filial_status = 0;
 
   ionViewDidLoad() {
     if(this.platform.is('ios')){

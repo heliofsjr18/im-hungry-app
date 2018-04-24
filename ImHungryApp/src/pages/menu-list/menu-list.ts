@@ -42,6 +42,7 @@ export class MenuListPage {
     }
     this.pageTitle = this.navParams.get("filial_nome");
     this.filial_id = this.navParams.get("filial_id");
+    this.filial_status = this.navParams.get("filial_status");
     this.loadList();
   }
 
@@ -52,6 +53,7 @@ export class MenuListPage {
 
   data = [];
   filial_id = 0;
+  filial_status = 0;
 
   onScroll(){
      
@@ -137,7 +139,10 @@ export class MenuListPage {
 
   addToCart_Validade(item){
 
-    if(this.carrinho.checkItemsFilial_Diff(this.filial_id)){
+    if(this.filial_status === 0){
+
+    }
+    else if(this.carrinho.checkItemsFilial_Diff(this.filial_id)){
       this.makeCartDiffAlert(item);
     }else{
       this.addToCart(item); 
@@ -178,7 +183,8 @@ export class MenuListPage {
 
   navegateToDetail(item): void {
     this.navCtrl.push(MenuDetailPage,{
-      objSelecionado : item
+      objSelecionado : item,
+      filial_status: this.filial_status
     });
   }
 
