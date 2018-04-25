@@ -18,6 +18,7 @@ export class CartaoFidelidadePage {
   message: string = "A quantidade de pedidos exigida por esse estabelecimento é o limite para que você, usuário possa liberar seu cartão fidelidade, e usá-lo com o beneficio de 1(UM) lanches grátis. Siginifica que ao comprar @param:qtdPedidos você receberá @param: benCartãoFidelidade.";
   showSearch: boolean = false;
   searchTerm: string = '';
+  filialImage = this.navParams.get("image");
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private toast:ToastController) {
   }

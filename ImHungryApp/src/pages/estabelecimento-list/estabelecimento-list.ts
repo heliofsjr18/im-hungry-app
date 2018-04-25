@@ -38,18 +38,18 @@ export class EstabelecimentoListPage {
     private loadingCtrl: LoadingController, private http: HttpClient, private restClient: RestClientProvider,
     private geolocation: Geolocation, private menuFilter: MenuFilterProvider, private platform: Platform, private alertCtrl: AlertController) {
 
-      platform.registerBackButtonAction(() => {
-        this.showLogoutAlert();
-      });
-      this.getMenuEvents();
+    platform.registerBackButtonAction(() => {
+      this.showLogoutAlert();
+    });
+    this.getMenuEvents();
   }
 
   searchTerm: string = '';
   showSearch: boolean = false;
   totalCarrinho: string = '';
-  data = []; 
+  data = [];
 
-  showLogoutAlert(){
+  showLogoutAlert() {
     let alert = this.alertCtrl.create({
       title: 'LogOut',
       message: 'Se sair terá de fazer login novamente. Tem certeza?',
@@ -69,7 +69,7 @@ export class EstabelecimentoListPage {
     });
   }
 
-  getMenuEvents(){
+  getMenuEvents() {
     this.menuCtrl.get('filtersMenu_Estab').ionClose.subscribe(() => {
       this.loadList(false, true);
     });
@@ -116,60 +116,60 @@ export class EstabelecimentoListPage {
 
       let body = {
         'latitude': resp.coords.latitude.toString(),
-        'longitude' : resp.coords.longitude.toString(),
+        'longitude': resp.coords.longitude.toString(),
         'search': this.searchTerm,
         'onlyNear': filters.apenasProximos ? 1 : 2,
         'onlyFidelidade': filters.apenasFidelidade ? 1 : 2
       }
-  
+
       console.log(body);
 
       this.estabelecimentoServiceProvider.getEstabelecimentos('filial/list', body)
-      .then((data)=>{
-        this.data = [];
-        let parseObj = JSON.parse(data.toString());
-        let listItem = parseObj.filiais;
+        .then((data) => {
+          this.data = [];
+          let parseObj = JSON.parse(data.toString());
+          let listItem = parseObj.filiais;
 
 
-        for (let i in listItem) {
-          this.data.push({
-            name: listItem[i].filial_nome,
-            description: listItem[i].logradouro + ', ' + listItem[i].filial_numero_endereco + ', ' + listItem[i].bairro + ', ' + listItem[i].cidade,
-            image: "https://rafafreitas.com/api/uploads/empresa/" + listItem[i].empresa_foto_marca,
-            rate: parseFloat(listItem[i].avaliacao),
-            distance: parseFloat(listItem[i].distancia).toFixed(1) + ' Km',
-            status: parseInt(listItem[i].filial_status),
-            id: parseInt(listItem[i].filial_id),
-            fidelidade: listItem[i].filial_fidelidade
-          });
-        }
+          for (let i in listItem) {
+            this.data.push({
+              name: listItem[i].filial_nome,
+              description: listItem[i].logradouro + ', ' + listItem[i].filial_numero_endereco + ', ' + listItem[i].bairro + ', ' + listItem[i].cidade,
+              image: "https://rafafreitas.com/api/uploads/empresa/" + listItem[i].empresa_foto_marca,
+              rate: parseFloat(listItem[i].avaliacao),
+              distance: parseFloat(listItem[i].distancia).toFixed(1) + ' Km',
+              status: parseInt(listItem[i].filial_status),
+              id: parseInt(listItem[i].filial_id),
+              fidelidade: listItem[i].filial_fidelidade
+            });
+          }
 
-        console.log(this.data);
+          console.log(this.data);
 
-        if (isRefresh) {
-          refresher.complete();
+          if (isRefresh) {
+            refresher.complete();
+          } else {
+            loading.dismiss();
+          }
+        })
+        .catch((rej) => {
+          this.data = [];
+          console.log(rej);
+          if (!isRefresh) {
+            loading.dismiss();
+          } else {
+            refresher.complete();
+          }
+        });
+    })
+      .catch((error) => {
+        console.log('ERRO AO OBTER LOCALIZAÇÃO', error);
+        if (!isRefresh) {
+          loading.dismiss();
         } else {
-          loading.dismiss();
-        }
-      })
-      .catch((rej) =>{
-        this.data = [];
-        console.log(rej);
-        if(!isRefresh){
-          loading.dismiss();
-        }else{
           refresher.complete();
         }
       });
-    })
-    .catch((error) => {
-      console.log('ERRO AO OBTER LOCALIZAÇÃO', error);
-      if(!isRefresh){
-        loading.dismiss();
-      }else{
-        refresher.complete();
-      }
-    }); 
   }
 
   ionViewDidLoad() {
@@ -200,8 +200,11 @@ export class EstabelecimentoListPage {
     });
   }
 
-  openCartaoFidelidadePage(){
-    this.navCtrl.push(CartaoFidelidadePage);
+  openCartaoFidelidadePage(item) {
+    console.log(item);
+    this.navCtrl.push(CartaoFidelidadePage, {
+      image: item.image      
+    });
   }
 
   doRefresh(refresher) {

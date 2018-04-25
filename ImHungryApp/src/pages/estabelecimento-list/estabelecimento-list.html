@@ -53,7 +53,7 @@
           </div>
           <div>
             {{item.description}}
-            <div *ngIf="item.fidelidade" (click)="openCartaoFidelidadePage()">
+            <div *ngIf="item.fidelidade" (click)="openCartaoFidelidadePage(item)">
               <i  class="fas fa-handshake fa-lg" [ngStyle]="{ 'color': '#6d6d6d', 'margin-right': '8px' }"></i>
             </div>
           </div>

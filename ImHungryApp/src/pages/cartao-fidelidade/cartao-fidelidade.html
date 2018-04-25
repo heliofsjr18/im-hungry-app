@@ -4,86 +4,63 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
+<ion-header>  
 
-  <ion-navbar>
     <ion-navbar #myContent class="myNavBar" color="secondary">
-      <ion-title *ngIf="!showSearch">Cartão Virtual</ion-title>
-      
-      <ion-toolbar *ngIf="showSearch" [@fadeInOut] no-border-top>
-        <ion-searchbar
-          class="mySearchBar"
-          [showCancelButton]="true"
-          (ionCancel)="onCancel($event)"
-          placeholder="Buscar"
-          [(ngModel)]="searchTerm"
-          (search)="onSearchChanged()"
-          (ionClear)="onClearSearch()">
-        </ion-searchbar>
-      </ion-toolbar>
-  
-      <ion-buttons end *ngIf="!showSearch">              
-        <button class="iconHeader" (click)="openFilterMenu()" ion-button icon-only>
-          <i class="fas fa-filter fa-lg"></i>
-        </button>
-        <button (click)="clickSearch()" class="iconHeader" ion-button icon-only>
-          <i class="fas fa-search fa-lg"></i>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-  </ion-navbar>
+      <ion-title *ngIf="!showSearch">Cartão Virtual</ion-title>           
+    </ion-navbar>  
 
 </ion-header>
 
-<ion-content class="cartaoFidelidade-content" padding color="secondary">  
-   <form (ngSubmit)="pushBack()">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-              <img src="http://placehold.it/300x200"/>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <strong>@Param: Nome do Estabelecimento</strong>
-            </ion-col>        
-          </ion-row>
-      </ion-grid>
-     <ion-grid>        
-       <ion-row>
-         <ion-col text-left>
-            <strong>Quantidade de Pedidos?</strong>
-         </ion-col>        
-       </ion-row>
-       <ion-row>
-          <ion-col>            
-            <ion-input style="border:1px" type="text"></ion-input>                          
-          </ion-col>        
-        </ion-row>
-        <ion-row>
-            <ion-col text-left>
-                <strong>Beneficios do cartão:</strong>
-            </ion-col>        
-          </ion-row>
-          <ion-row>
-             <ion-col>
-                <ion-input style="border:1px" type="text"></ion-input>                    
-             </ion-col>        
-           </ion-row>
-     </ion-grid>
-     <ion-grid>
-        <ion-row>
-          <ion-col col-4>              
-          </ion-col>   
-          <ion-col col-4>
-              <button ion-button class="ok-btn" full type="submit" >Voltar</button>
-          </ion-col>   
-          <ion-col col-4>
-              <ion-icon (click)="helpClick()" name="help"></ion-icon>
-          </ion-col>                    
-        </ion-row>
-      </ion-grid>
-   </form>
-<ion-content padding>
+<ion-content class="cartaoFidelidade-content" padding color="secondary">
+  <form (ngSubmit)="pushBack()">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-img width="120" height="120" src="{{filialImage}}" ></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <strong>@Param: Nome do Estabelecimento</strong>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col text-left>
+          <strong>Quantidade de Pedidos?</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input style="border:1px" type="text"></ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-left>
+          <strong>Beneficios do cartão:</strong>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-input style="border:1px" type="text"></ion-input>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-4>
+        </ion-col>
+        <ion-col col-4>
+          <button ion-button class="ok-btn" full type="submit">Voltar</button>
+        </ion-col>
+        <ion-col col-4>
+          <ion-icon (click)="helpClick()" name="help"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-content padding>
 
-</ion-content>
+  </ion-content>
