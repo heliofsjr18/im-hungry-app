@@ -19,12 +19,15 @@ export class CartaoFidelidadePage {
   showSearch: boolean = false;
   searchTerm: string = '';
   filialImage = this.navParams.get("image");
+  filialName = this.navParams.get("name");
+  fidelidadeDados = this.navParams.get("dadosFidelidade");
+  //fidelidadeQuantidade = this.fidelidadeDados;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private toast:ToastController) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad CartaoFidelidadePage');
+    console.log(this.fidelidadeDados);
   }
 
   

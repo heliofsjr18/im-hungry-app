@@ -48,6 +48,7 @@ export class EstabelecimentoListPage {
   showSearch: boolean = false;
   totalCarrinho: string = '';
   data = [];
+  objDadosFidelidade = [];
 
   showLogoutAlert() {
     let alert = this.alertCtrl.create({
@@ -127,8 +128,8 @@ export class EstabelecimentoListPage {
       this.estabelecimentoServiceProvider.getEstabelecimentos('filial/list', body)
         .then((data) => {
           this.data = [];
-          let parseObj = JSON.parse(data.toString());
-          let listItem = parseObj.filiais;
+          let parseObj = JSON.parse(data.toString());          
+          let listItem = parseObj.filiais;          
 
 
           for (let i in listItem) {
@@ -140,7 +141,8 @@ export class EstabelecimentoListPage {
               distance: parseFloat(listItem[i].distancia).toFixed(1) + ' Km',
               status: parseInt(listItem[i].filial_status),
               id: parseInt(listItem[i].filial_id),
-              fidelidade: listItem[i].filial_fidelidade
+              fidelidade: listItem[i].filial_fidelidade,
+              fidelidadeDados: listItem[i].fidelidade_desc
             });
           }
 
@@ -200,10 +202,11 @@ export class EstabelecimentoListPage {
     });
   }
 
-  openCartaoFidelidadePage(item) {
-    console.log(item);
+  openCartaoFidelidadePage(item) {    
     this.navCtrl.push(CartaoFidelidadePage, {
-      image: item.image      
+      image: item.image,
+      name: item.name,
+      dadosFidelidade: item.fidelidade_desc
     });
   }
 
