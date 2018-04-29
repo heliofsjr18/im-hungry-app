@@ -86,6 +86,7 @@
     <allow-navigation href="http://192.168.15.4:8100" />
     <engine name="browser" spec="5.0.3" />
     <engine name="ios" spec="4.5.4" />
+    <engine name="android" spec="~7.1.0" />
     <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
         <variable name="APP_ID" value="414679185647587" />
         <variable name="APP_NAME" value="ImHungryApp" />

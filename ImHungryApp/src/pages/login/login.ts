@@ -72,7 +72,10 @@ export class LoginPage {
         this.login(body);
         this.isLoggedIn = true;
       })
-      .catch(err => console.error(err));
+      .catch((err) => {
+        console.error(err);
+        this.showErrorToast(err);
+      });
   }
 
   loginFacebook() {

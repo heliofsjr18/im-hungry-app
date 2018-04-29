@@ -31,7 +31,7 @@ export class RegisterPage {
     telefone: '',
     fot64: 'register',
   };
-  public url = "app/cliente/insert";
+  public url = "cliente/insert";
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -61,7 +61,6 @@ export class RegisterPage {
 
   public save(body) {
     this.showLoading();
-
     this.restLoginClient.getLoginRest(this.url, body)
       .then((res) => {
         this.data = JSON.parse(res.toString());
@@ -73,6 +72,7 @@ export class RegisterPage {
         this.data = JSON.parse(rej.toString());
         this.showErrorToast(this.data.error.result);
       });
+      this.dismissLoadding();
   }
 
   showLoading() {
@@ -82,6 +82,10 @@ export class RegisterPage {
       dismissOnPageChange: true
     });
     this.loading.present();
+  }
+
+  dismissLoadding(){
+    this.loading.dismiss();
   }
 
   showErrorToast(error) {
