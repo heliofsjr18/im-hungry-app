@@ -59,8 +59,9 @@ export class LoginPage {
   }
 
   loginGoogle() {
-    this.googlePlus.login({})
-      .then(res => {
+    this.googlePlus.login({
+      'webClientId': '125421574011-37f5eqh76k2evvogl7id37oclv6eb1om.apps.googleusercontent.com'
+    }).then(res => {
         console.log(res);
         let body = {
           'email': res.email,
@@ -74,7 +75,7 @@ export class LoginPage {
       })
       .catch((err) => {
         console.error(err);
-        this.showErrorToast(err);
+        this.showErrorToast('Ocorreu um erro no login Google.');
       });
   }
 

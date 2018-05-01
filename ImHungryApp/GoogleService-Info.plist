@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>99321385535-udgdreuurnmepttfb5lcq8kr7n7sq88s.apps.googleusercontent.com</string>
+	<string>125421574011-k9bcad666h0o7sllrto0hnicqm5jep9f.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.99321385535-udgdreuurnmepttfb5lcq8kr7n7sq88s</string>
+	<string>com.googleusercontent.apps.125421574011-k9bcad666h0o7sllrto0hnicqm5jep9f</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBNRBMIWkwmleNQV0XE6NoLp5IftxVo_yY</string>
+	<string>AIzaSyDOUr-qY7YoYMmu_R2fdaoQo24LjH3L-Ek</string>
 	<key>GCM_SENDER_ID</key>
-	<string>99321385535</string>
+	<string>125421574011</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.br.ImHungryApp</string>
 	<key>PROJECT_ID</key>
-	<string>imhungryapp-1306c</string>
+	<string>imhungryapp-200318</string>
 	<key>STORAGE_BUCKET</key>
-	<string>imhungryapp-1306c.appspot.com</string>
+	<string>imhungryapp-200318.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:99321385535:ios:f244051858c9fa8e</string>
+	<string>1:125421574011:ios:f244051858c9fa8e</string>
 	<key>DATABASE_URL</key>
-	<string>https://imhungryapp-1306c.firebaseio.com</string>
+	<string>https://imhungryapp-200318.firebaseio.com</string>
 </dict>
 </plist>
