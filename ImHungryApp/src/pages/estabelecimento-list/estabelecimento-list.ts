@@ -206,7 +206,7 @@ export class EstabelecimentoListPage {
     this.navCtrl.push(CartaoFidelidadePage, {
       image: item.image,
       name: item.name,
-      dadosFidelidade: item.fidelidade_desc
+      dadosFidelidade: item.fidelidadeDados
     });
   }
 

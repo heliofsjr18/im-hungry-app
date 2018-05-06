@@ -70,7 +70,7 @@ export class CartaoFidelidadePage {
   }
 
   pushBack(){
-    this.navCtrl.last();
+    this.navCtrl.pop();
   }
 
   helpClick(){
