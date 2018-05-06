@@ -21,6 +21,10 @@ export class CartaoFidelidadePage {
   filialImage = this.navParams.get("image");
   filialName = this.navParams.get("name");
   fidelidadeDados = this.navParams.get("dadosFidelidade");
+  fidelidadeBeneficio = this.fidelidadeDados.cartao_fid_beneficio;
+  fidelidadeQtd = this.fidelidadeDados.cartao_fid_qtd;
+  
+
   //fidelidadeQuantidade = this.fidelidadeDados;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private toast:ToastController) {
