@@ -9,6 +9,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FCM } from '@ionic-native/fcm';
 import { GooglePlus } from '@ionic-native/google-plus';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 import { MyApp } from './app.component';
 
@@ -80,7 +81,8 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     Facebook,
     GooglePlus,
     Geolocation,
-    FCM
+    FCM,
+    NativeStorage
   ]
 })
 export class AppModule {}

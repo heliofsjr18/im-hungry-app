@@ -1,6 +1,14 @@
 <ion-header>
   <ion-navbar #myContent class="myNavBar" color="secondary">
-    <ion-title *ngIf="!showSearch">Food Trucks</ion-title>
+    
+    <ion-buttons *ngIf="!showSearch" class="menuButtonSection">
+      <button (click)="openMainMenu()" class="iconHeaderMenu" ion-button icon-only>
+          <i class="fas fa-bars fa-lg"></i>
+      </button>
+      <ion-title (click)="openMainMenu()" *ngIf="!showSearch">Food Trucks</ion-title>
+    </ion-buttons>
+    
+    
     
     <ion-toolbar *ngIf="showSearch" [@fadeInOut] no-border-top>
       <ion-searchbar

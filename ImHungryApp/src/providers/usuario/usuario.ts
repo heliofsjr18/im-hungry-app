@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FCM } from '@ionic-native/fcm';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @Injectable()
 export class UsuarioProvider {
@@ -8,6 +9,7 @@ export class UsuarioProvider {
   private user = {
     user_id: '',
     user_nome: '',
+    user_senha: '',
     user_cpf: '',
     user_email: '',
     user_telefone: '',
@@ -36,7 +38,7 @@ export class UsuarioProvider {
 
   fcmTopicPrefix: string = 'com.br.ImHungryApp-';
 
-  constructor(public http: HttpClient, private fcm: FCM) {
+  constructor(public http: HttpClient, private fcm: FCM, private storage: NativeStorage) {
   }
 
   public setUserObject(userObj){
@@ -44,8 +46,22 @@ export class UsuarioProvider {
     this.userSubscribeToTopic();
   }
 
+  public userLogout(){
+    this.userUnsubscribeToTopic();
+    this.storage.remove("IHU");
+    this.resetUser();
+  }
+
   private userSubscribeToTopic(){
     this.fcm.subscribeToTopic(this.fcmTopicPrefix + this.user.user_id);
+  }
+
+  private userUnsubscribeToTopic(){
+    this.fcm.unsubscribeFromTopic(this.fcmTopicPrefix + this.user.user_id);
+  }
+
+  private storageUser(){
+    this.storage.setItem("IHU", {email: this.user.user_email, password: this.user.user_senha});
   }
 
   public getUserObject(){
@@ -58,5 +74,37 @@ export class UsuarioProvider {
 
   public getCreditCardById(cartao_id){
     return this.user.credCards.list.find(x => x.cartao_id == cartao_id);
+  }
+
+  private resetUser(){
+    this.user = {
+      user_id: '',
+      user_nome: '',
+      user_senha: '',
+      user_cpf: '',
+      user_email: '',
+      user_telefone: '',
+      user_data: '',
+      user_cadastro: '',
+      user_foto_perfil: null,
+      user_status: '',
+      tipo_id: '',
+      dateAniversario: '',
+      dateCadastro: '',
+      credCards: {
+        qtd: 0,
+        list: [
+          {
+            cartao_id: '',
+            cartao_digitos: '',
+            cartao_ano: '',
+            cartao_mes: '',
+            cartao_brand: '',
+            cartao_status: '',
+            cartao_cvc: ''
+          }
+        ]
+      }
+    };
   }
 }

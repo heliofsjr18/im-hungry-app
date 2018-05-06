@@ -1,5 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, ToastController } from 'ionic-angular';
+import { NativeStorage } from '@ionic-native/native-storage';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
 import { EstabelecimentoListPage } from '../estabelecimento-list/estabelecimento-list';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
@@ -45,17 +46,33 @@ export class LoginPage {
     public restLoginClient: LoginServiceProvider,
     private loadingCtrl: LoadingController,
     private usuario: UsuarioProvider,
-    private rest: RestClientProvider, ) {
-    fb.getLoginStatus()
-      .then(res => {
-        console.log(res.status);
-        if (res.status === "connect") {
-          this.isLoggedIn = true;
-        } else {
-          this.isLoggedIn = false;
-        }
-      })
-      .catch(e => console.log(e));
+    private rest: RestClientProvider,
+    private storage: NativeStorage) {
+
+      this.storage.getItem("IHU")
+        .then(
+          data => {
+            let body = {
+              'email': data.email,
+              'senha': data.password
+            }
+            this.showErrorToast(data);
+            this.login(body);
+          },
+          error => {
+            this.showErrorToast(error);
+            fb.getLoginStatus()
+              .then(res => {
+                console.log(res.status);
+                if (res.status === "connect") {
+                  this.isLoggedIn = true;
+                } else {
+                  this.isLoggedIn = false;
+                }
+              })
+              .catch(e => console.log(e));
+          }
+        );
   }
 
   loginGoogle() {

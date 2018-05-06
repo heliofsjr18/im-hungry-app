@@ -153,6 +153,12 @@ export class EstabelecimentoListPage {
           } else {
             loading.dismiss();
           }
+        }, error => {
+          if (isRefresh) {
+            refresher.complete();
+          } else {
+            loading.dismiss();
+          }
         })
         .catch((rej) => {
           this.data = [];
@@ -192,6 +198,11 @@ export class EstabelecimentoListPage {
   openFilterMenu() {
     this.menuCtrl.enable(true, "filtersMenu_Estab");
     this.menuCtrl.open("filtersMenu_Estab");
+  }
+
+  openMainMenu(){
+    this.menuCtrl.enable(true, "main_Menu");
+    this.menuCtrl.open("main_Menu");
   }
 
   navigateToMenuPage(item) {

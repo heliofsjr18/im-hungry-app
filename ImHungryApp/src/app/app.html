@@ -27,4 +27,28 @@
         <button ion-button round>Aplicar</button>
     </ion-content>
 </ion-menu>
+<ion-menu id="main_Menu" type="overlay" swipeEnabled="false" side="left" [content]="myContent">
+    <ion-content padding>
+        <ion-list>
+           <ion-item no-lines>
+               <ion-avatar item-start>
+                   <img src="assets/imgs/test-logo.png">
+               </ion-avatar>
+               <h2>Usuário Cliente 1</h2>
+           </ion-item>
+           <button ion-item>
+                <i class="fas fa-calendar-check"></i>
+                <span class="spanIcon">Meus Pedidos</span>
+           </button>
+           <button ion-item (click)="mainLogOut()">
+                <i class="fas fa-sign-out-alt"></i>
+                <span class="spanIcon">Logout</span>
+           </button>
+           <button ion-item>
+                <i item-start class="fas fa-question-circle"></i>
+                <span class="spanIcon">Ajuda</span>
+           </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
 <ion-nav [root]="rootPage" #myContent></ion-nav>
