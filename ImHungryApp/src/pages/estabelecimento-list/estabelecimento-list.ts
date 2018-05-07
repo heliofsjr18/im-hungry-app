@@ -136,7 +136,7 @@ export class EstabelecimentoListPage {
             this.data.push({
               name: listItem[i].filial_nome,
               description: listItem[i].logradouro + ', ' + listItem[i].filial_numero_endereco + ', ' + listItem[i].bairro + ', ' + listItem[i].cidade,
-              image: "https://rafafreitas.com/api/uploads/empresa/" + listItem[i].empresa_foto_marca,
+              image: "https://api.rafafreitas.com/uploads/empresa/" + listItem[i].empresa_foto_marca,
               rate: parseFloat(listItem[i].avaliacao),
               distance: parseFloat(listItem[i].distancia).toFixed(1) + ' Km',
               status: parseInt(listItem[i].filial_status),

@@ -99,7 +99,7 @@ export class MenuListPage {
       for(let i in items){
         this.data.push({name: items[i].item_nome,
           description: '',
-          image: 'https://rafafreitas.com/api/uploads/itens/' + items[i].fotos[0].fot_file,
+          image: 'https://api.rafafreitas.com/uploads/itens/' + items[i].fotos[0].fot_file,
           rate: 4.5,
           price: parseFloat(items[i].item_valor),
           id: items[i].item_id,
