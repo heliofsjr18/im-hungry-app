@@ -14,8 +14,7 @@ import { IonicPage, NavController, NavParams, MenuController, LoadingController,
   templateUrl: 'cartao-fidelidade.html',
 })
 export class CartaoFidelidadePage {
-
-  message: string = "A quantidade de pedidos exigida por esse estabelecimento é o limite para que você, usuário possa liberar seu cartão fidelidade, e usá-lo com o beneficio de 1(UM) lanches grátis. Siginifica que ao comprar @param:qtdPedidos você receberá @param: benCartãoFidelidade.";
+  
   showSearch: boolean = false;
   searchTerm: string = '';
   filialImage = this.navParams.get("image");
@@ -23,6 +22,7 @@ export class CartaoFidelidadePage {
   fidelidadeDados = this.navParams.get("dadosFidelidade");
   fidelidadeBeneficio = this.fidelidadeDados.cartao_fid_beneficio;
   fidelidadeQtd = this.fidelidadeDados.cartao_fid_qtd;
+  message: string = "A quantidade de pedidos exigida por esse estabelecimento é o limite para que você, usuário possa liberar seu cartão fidelidade, e usá-lo com o beneficio de 1(UM) lanches grátis. Siginifica que ao comprar "+this.fidelidadeQtd.toString()+" você receberá o seguinte benefício: "+this.fidelidadeBeneficio.toString()+".";
   
 
   //fidelidadeQuantidade = this.fidelidadeDados;

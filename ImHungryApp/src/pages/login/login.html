@@ -44,16 +44,18 @@
     <button ion-button class="register-btn" block clear (click)="createAccount()">Criar conta</button>
   </div>
 
-  <ion-content padding>
+  <ion-row>
     <button class="fbButton" ion-button full icon-left (click)='loginFacebook();'>
       <i class="fab fa-facebook fa-lg"></i>
       <span class="fbButtonText">Login com Facebook</span>
     </button>
+  </ion-row>
 
+  <ion-row>
     <button class="fbButton" ion-button full icon-left (click)='loginGoogle();'>
       <i class="fab fa-google fa-lg"></i>
       <span class="fbButtonText">Login com Google</span>
     </button>
-  </ion-content>
+  </ion-row>
 
 </ion-content>
