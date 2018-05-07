@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Platform, MenuController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { Platform, MenuController, Nav } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FCM } from '@ionic-native/fcm';
@@ -15,12 +15,14 @@ import { LoginPage } from '../pages/login/login';
 import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
 import { CartaoFidelidadePage } from '../pages/cartao-fidelidade/cartao-fidelidade';
 
+import { UsuarioProvider } from '../providers/usuario/usuario';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   rootPage: any = LoginPage;
-
+  @ViewChild('myContent') content: Nav;
   //Filtros da listagem de estabelecimentos
   estabList_Filters = {
     apenasProximos: false,
@@ -28,7 +30,7 @@ export class MyApp {
   };
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-    private menuCtrl: MenuController, private fcm: FCM, private menuFilter: MenuFilterProvider) {
+    private menuCtrl: MenuController, private fcm: FCM, private menuFilter: MenuFilterProvider, private userProvider: UsuarioProvider) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -46,6 +48,12 @@ export class MyApp {
   initMenuFilters(){
     // Init estabelecimento-list Filters 
     this.estabList_Filters = this.menuFilter.getEstabListFilters();
+  }
+
+  mainLogOut(){
+    this.closeMenu("main_Menu")
+    this.userProvider.userLogout();
+    this.content.setRoot(LoginPage);
   }
 
   /**
