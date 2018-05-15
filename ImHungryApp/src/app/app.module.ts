@@ -23,6 +23,7 @@ import { MenuDetailPage } from '../pages/menu-detail/menu-detail';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { CartaoFidelidadePage } from '../pages/cartao-fidelidade/cartao-fidelidade';
+import { PedidosPage } from '../pages/pedidos/pedidos';
 
 //Components
 import { IonRatingComponent } from '../components/ion-rating/ion-rating';
@@ -46,7 +47,8 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     MenuDetailPage,
     LoginPage,
     RegisterPage,
-    CartaoFidelidadePage
+    CartaoFidelidadePage,
+    PedidosPage
   ],
   imports: [
     BrowserModule,
@@ -65,7 +67,8 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     MenuDetailPage,
     LoginPage,
     RegisterPage,
-    CartaoFidelidadePage
+    CartaoFidelidadePage,
+    PedidosPage
   ],
   providers: [
     StatusBar,

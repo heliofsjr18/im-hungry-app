@@ -16,6 +16,7 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
 import { CartaoFidelidadePage } from '../pages/cartao-fidelidade/cartao-fidelidade';
 
 import { UsuarioProvider } from '../providers/usuario/usuario';
+import { PedidosPage } from '../pages/pedidos/pedidos';
 
 @Component({
   templateUrl: 'app.html'
@@ -54,6 +55,11 @@ export class MyApp {
     this.closeMenu("main_Menu")
     this.userProvider.userLogout();
     this.content.setRoot(LoginPage);
+  }
+
+  mainMeusPedidos(){
+    this.closeMenu("main_Menu");
+    this.content.push(PedidosPage);
   }
 
   /**
