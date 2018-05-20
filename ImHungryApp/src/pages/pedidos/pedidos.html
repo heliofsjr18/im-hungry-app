@@ -8,17 +8,28 @@
 
 
 <ion-content padding>
-  <div *ngFor="let item of checkOutList">
+  <div class="div_Item" *ngFor="let item of checkOutList">
     <accordion [first-title]="item.filial_nome" [second-title]="item.checkout_code" [image-path]="item.filial_logo">
-      <div *ngFor="let subItem of item.itens">
+      <div class="item_Head">
         <div>
-          <img src="{{subItem.item_foto}}" width="30" height="30">
+          <span>{{item.checkout_flag_desc}}</span>
+        </div>
+        <div class="item_End">
+          <span>Feito em: {{item.checkout_date}}</span>
+        </div>
+      </div>
+      <div *ngFor="let subItem of item.itens">
+        <div class="item_Info">
+          <img src="{{subItem.item_foto}}">
           <div>
             <span>{{subItem.item_nome}}</span>
-            <span>{{subItem.item_valor}}</span>
-            <span>X{{subItem.item_qtd}}</span>
+            <span>R${{subItem.item_valor}}</span>
+            <span>x{{subItem.item_qtd}}</span>
           </div>
         </div>
+      </div>
+      <div class="item_End item_Total">
+        R${{item.checkout_valor_bruto}}
       </div>
     </accordion>
   </div>

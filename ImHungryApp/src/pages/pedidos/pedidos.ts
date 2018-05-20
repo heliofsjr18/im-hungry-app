@@ -47,7 +47,7 @@ export class PedidosPage {
           checkout_itens.push({
             item_nome: list[i].itens[j].item_nome,
             item_qtd: list[i].itens[j].checkout_item_qtd,
-            item_valor: list[i].itens[j].checkout_item_valor,
+            item_valor: parseFloat(list[i].itens[j].checkout_item_valor).toFixed(2),
             item_foto: 'https://api.rafafreitas.com/uploads/itens/' + list[i].itens[j].fotos[0].fot_file 
           });
         }
@@ -56,9 +56,9 @@ export class PedidosPage {
           filial_nome: list[i].filial_nome,
           checkout_ref: list[i].checkout_ref,
           checkout_code: '#' + list[i].checkout_ref.substring(8, 13),
-          checkout_date: list[i].checkout_date,
+          checkout_date: list[i].checkout_date_format,
           checkout_flag_desc: list[i].checkout_flag_desc,
-          checkout_valor_bruto: list[i].checkout_valor_bruto,
+          checkout_valor_bruto: parseFloat(list[i].checkout_valor_bruto).toFixed(2),
           itens: checkout_itens
         });
       }

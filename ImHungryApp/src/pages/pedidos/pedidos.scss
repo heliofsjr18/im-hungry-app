@@ -1,3 +1,63 @@
 page-pedidos {
+    .div_Item + .div_Item{
+        margin-top: 20px;
+    }
 
+    .item_End{
+        text-align: end;
+    }
+
+    .item_Total{
+        color: color($colors, secondary);
+        font-weight: bold;
+        font-size: 15px;
+        margin-top: 15px;
+    }
+
+    .item_Head{
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .item_Info{
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+
+    }
+
+    .item_Head > div:nth-child(1){
+        color: color($colors, success);
+    }
+
+    .item_Info Img{
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .item_Info > div{
+        align-items: center;
+        display: flex;
+        width: calc(100% - 50px);
+        justify-content: space-between;
+        text-align: initial;
+    }
+
+    .item_Info > div > span{
+        margin-left: 10px;
+    }
+
+    .item_Info > div > span:nth-child(1){
+        color: color($colors, secondary);
+        font-weight: bold;
+        font-size: 18px;
+        text-align: initial;
+    }
+
+    .item_Info > div > span:nth-child(2){
+        color: color($colors, secondary-dark);
+        font-size: 15px;
+    }
 }
