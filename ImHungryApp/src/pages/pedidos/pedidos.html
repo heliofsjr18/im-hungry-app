@@ -8,16 +8,18 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <button ion-item *ngFor="let item of data">
-      <ion-avatar item-start>
-        <img src="{{item.image}}">
-      </ion-avatar>
-      <h2>{{item.filial}}</h2>
-      <ion-row>
-        <p>{{item.status}}</p>
-      </ion-row>
-      <ion-note item-end>{{item.time}}</ion-note>
-    </button>
-  </ion-list>
+  <div *ngFor="let item of checkOutList">
+    <accordion [first-title]="item.filial_nome" [second-title]="item.checkout_code" [image-path]="item.filial_logo">
+      <div *ngFor="let subItem of item.itens">
+        <div>
+          <img src="{{subItem.item_foto}}" width="30" height="30">
+          <div>
+            <span>{{subItem.item_nome}}</span>
+            <span>{{subItem.item_valor}}</span>
+            <span>X{{subItem.item_qtd}}</span>
+          </div>
+        </div>
+      </div>
+    </accordion>
+  </div>
 </ion-content>

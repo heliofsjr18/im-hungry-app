@@ -27,6 +27,9 @@ import { PedidosPage } from '../pages/pedidos/pedidos';
 
 //Components
 import { IonRatingComponent } from '../components/ion-rating/ion-rating';
+import { AccordionComponent } from '../components/accordion/accordion';
+
+//Providers
 import { EstabelecimentoServiceProvider } from '../providers/estabelecimento-service/estabelecimento-service';
 import { RestClientProvider } from '../providers/rest-client/rest-client';
 import { CarrinhoProvider } from '../providers/carrinho/carrinho';
@@ -44,6 +47,7 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     CarrinhoPage,
     PagamentoPage,
     IonRatingComponent,
+    AccordionComponent,
     MenuDetailPage,
     LoginPage,
     RegisterPage,

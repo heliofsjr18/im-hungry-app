@@ -1,0 +1,36 @@
+accordion {
+    .card-header{
+        //background-color: map-get($colors, primary);
+        color: map-get($colors, secondary);//#fff;
+        font-weight: bold;
+        display: flex;
+        align-items: center
+    }
+
+    .card-header > div{
+        text-transform: uppercase;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin-left: 15px;
+        font-size: 19px;
+    }
+
+    .card-header > div:nth-child(3){
+        width: auto; 
+    }
+
+    .card-header > div:nth-child(2){
+        width: calc(100% - 170px);
+    }
+
+    .card-content{
+        box-shadow: 0 1px 5px rgba(0,0,0,0.16);
+        padding: 0px 16px;
+        max-height: 0px;
+    }
+
+    .card-img{
+        height: 60px;
+        width: 60px;
+    }
+}

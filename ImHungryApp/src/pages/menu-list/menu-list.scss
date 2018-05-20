@@ -112,7 +112,9 @@ page-menu-list {
         color: rgba(0,0,0,0.67);
         font-size: 12px;
         -webkit-line-clamp: 3;
+        line-clamp: 3;
         -webkit-box-orient: vertical;
+        box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
         min-height: 46px;

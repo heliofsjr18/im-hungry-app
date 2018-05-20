@@ -1,0 +1,16 @@
+<ion-card>
+  <ion-card-header (click)="toggleAccordion()">
+    <ion-thumbnail class="card-img">
+      <img src="{{image_path}}" height="60" width="60">
+    </ion-thumbnail>
+    <div>
+      <span>{{first_title}}</span>
+    </div>
+    <div>
+      <span>{{second_title}}</span>
+    </div>
+  </ion-card-header>
+  <ion-card-content #cc>
+    <ng-content></ng-content>
+  </ion-card-content>
+</ion-card>
