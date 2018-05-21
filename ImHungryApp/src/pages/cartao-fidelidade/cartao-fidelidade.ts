@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController,ToastController, AlertController  } from 'ionic-angular';
 
 /**
  * Generated class for the CartaoFidelidadePage page.
@@ -27,7 +27,7 @@ export class CartaoFidelidadePage {
 
   //fidelidadeQuantidade = this.fidelidadeDados;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private toast:ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuCtrl: MenuController, private toast:ToastController, private alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -78,13 +78,14 @@ export class CartaoFidelidadePage {
   }
 
   helpClick(){
-
-    let toast = this.toast.create({
-    message: this.message.toString(),
-    duration: 5000,
-    position: 'center'
-    });
-    toast.present();
+    
+      let alert = this.alertCtrl.create({
+        title: 'Fica a Dica!',
+        subTitle: this.message,
+        buttons: ['OK']
+      });
+      alert.present();
+    
   }
 
 }
