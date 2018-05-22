@@ -11,15 +11,18 @@ import { CarrinhoPage } from '../carrinho/carrinho';
   templateUrl: 'menu-detail.html',
 })
 export class MenuDetailPage {
-  private item = {};
+  private item: any = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
   private carrinho: CarrinhoProvider, private detector: ChangeDetectorRef, private toastCtrl: ToastController,
   private alertCtrl: AlertController) {
     this.item = navParams.get('objSelecionado');
     this.filial_status = this.navParams.get("filial_status");
+    //console.log(this.item.all_images);
+    for(let i in this.item.all_images){
+        this.item.all_images[i].fot_file = 'https://api.rafafreitas.com/uploads/itens/' + this.item.all_images[i].fot_file;
+    }
   }
-
   filial_status = 0;
 
   ionViewDidLoad() {

@@ -19,7 +19,12 @@
 
   <ion-card>
 
-    <img src="{{item.image}}">
+    <ion-slides loop="true">
+      <ion-slide *ngFor="let foto of item.all_images">
+        <img src="{{foto.fot_file}}">
+      </ion-slide>
+    </ion-slides>
+    <!--<img src="{{item.image}}">-->
 
     <ion-card-content>
       <ion-card-title color="primary-dark">

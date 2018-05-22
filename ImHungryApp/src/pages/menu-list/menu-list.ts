@@ -97,9 +97,11 @@ export class MenuListPage {
       console.log(items);
 
       for(let i in items){
+
         this.data.push({name: items[i].item_nome,
           description: '',
           image: 'https://api.rafafreitas.com/uploads/itens/' + items[i].fotos[0].fot_file,
+          all_images: items[i].fotos,
           rate: 4.5,
           price: parseFloat(items[i].item_valor),
           id: items[i].item_id,
