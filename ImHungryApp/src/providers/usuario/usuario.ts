@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FCM } from '@ionic-native/fcm';
-import { NativeStorage } from '@ionic-native/native-storage';
+import { Storage } from '@ionic/storage';
 
 @Injectable()
 export class UsuarioProvider {
@@ -38,7 +38,7 @@ export class UsuarioProvider {
 
   fcmTopicPrefix: string = 'com.br.ImHungryApp-';
 
-  constructor(public http: HttpClient, private fcm: FCM, private storage: NativeStorage) {
+  constructor(public http: HttpClient, private fcm: FCM, private storage: Storage) {
   }
 
   public setUserObject(userObj){
@@ -48,7 +48,7 @@ export class UsuarioProvider {
 
   public userLogout(){
     this.userUnsubscribeToTopic();
-    this.storage.remove("IHU");
+    this.storage.remove('IHU');
     this.resetUser();
   }
 
@@ -60,8 +60,8 @@ export class UsuarioProvider {
     this.fcm.unsubscribeFromTopic(this.fcmTopicPrefix + this.user.user_id);
   }
 
-  private storageUser(){
-    this.storage.setItem("IHU", {email: this.user.user_email, password: this.user.user_senha});
+  public storageUser(credential: {email, password}){
+    this.storage.set('IHU', {email: credential.email, password: credential.password});
   }
 
   public getUserObject(){

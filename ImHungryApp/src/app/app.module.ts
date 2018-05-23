@@ -9,7 +9,7 @@ import { Facebook } from '@ionic-native/facebook';
 import { Geolocation } from '@ionic-native/geolocation';
 import { FCM } from '@ionic-native/fcm';
 import { GooglePlus } from '@ionic-native/google-plus';
-import { NativeStorage } from '@ionic-native/native-storage';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 
@@ -58,7 +58,8 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     BrowserModule,
     BrowserAnimationsModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -88,8 +89,7 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     Facebook,
     GooglePlus,
     Geolocation,
-    FCM,
-    NativeStorage
+    FCM
   ]
 })
 export class AppModule {}

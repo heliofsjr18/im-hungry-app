@@ -1,6 +1,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, Loading, LoadingController, AlertController, ToastController } from 'ionic-angular';
-import { NativeStorage } from '@ionic-native/native-storage';
+import { Storage } from '@ionic/storage';
+
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
 import { EstabelecimentoListPage } from '../estabelecimento-list/estabelecimento-list';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
@@ -47,16 +48,16 @@ export class LoginPage {
     private loadingCtrl: LoadingController,
     private usuario: UsuarioProvider,
     private rest: RestClientProvider,
-    private storage: NativeStorage) {
+    private storage: Storage) {
 
-      this.storage.getItem("IHU")
+      this.storage.get('IHU')
         .then(
           data => {
             let body = {
               'email': data.email,
               'senha': data.password
             }
-            this.showErrorToast(data);
+            //this.showErrorToast(data);
             this.login(body);
           },
           error => {
@@ -158,12 +159,16 @@ export class LoginPage {
   login(body) {
     this.showLoading();
 
+    //let credential = JSON.parse(body);
+    //console.log(body);
     this.restLoginClient.getLoginRest(this.url, body)
       .then((res) => {
         // this.saveUserinfo(res);
         this.data = JSON.parse(res.toString());
         this.rest.Token = this.data.token;
         this.usuario.setUserObject(this.data.usuario);
+        
+        this.usuario.storageUser({email: body.email, password: body.senha});
         this.navCtrl.setRoot(EstabelecimentoListPage);
       })
       .catch((rej) => {
@@ -174,6 +179,7 @@ export class LoginPage {
               this.data = JSON.parse(res.toString());
               this.rest.Token = this.data.token;
               this.usuario.setUserObject(this.data.usuario);
+              this.usuario.storageUser({email: body.email, password: body.senha});
               this.navCtrl.setRoot(EstabelecimentoListPage);
             })
             .catch((rej) => {
@@ -185,6 +191,7 @@ export class LoginPage {
         }
         this.showErrorToast(this.data.error.result);
       });
+      //console.log(credential);
   }
 
   showErrorToast(error) {

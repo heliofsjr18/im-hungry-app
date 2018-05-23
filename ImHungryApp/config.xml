@@ -104,5 +104,5 @@
         <variable name="REVERSED_CLIENT_ID" value="125421574011-37f5eqh76k2evvogl7id37oclv6eb1om.apps.googleusercontent.com" />
     </plugin>
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
-    <plugin name="cordova-plugin-nativestorage" spec="^2.3.1" />
+    <plugin name="cordova-sqlite-storage" spec="^2.3.1" />
 </widget>
