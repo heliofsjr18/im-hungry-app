@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, MenuController, Nav } from 'ionic-angular';
+import { Platform, MenuController, Nav, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { FCM } from '@ionic-native/fcm';
@@ -31,7 +31,8 @@ export class MyApp {
   };
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-    private menuCtrl: MenuController, private fcm: FCM, private menuFilter: MenuFilterProvider, private userProvider: UsuarioProvider) {
+    private menuCtrl: MenuController, private fcm: FCM, private menuFilter: MenuFilterProvider, private userProvider: UsuarioProvider,
+    private alertCtrl: AlertController) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -90,13 +91,30 @@ export class MyApp {
     });*/
 
     this.fcm.onNotification().subscribe(data => {
-      alert('message received')
       if(data.wasTapped) {
-       console.info("Received in background");
+       //console.info("Received in background");
       } else {
-       console.info("Received in foreground");
+        console.log(data);
+        this.showAlert(data);
+       //console.info("Received in foreground");
       };
     });
+  }
+
+  showAlert(data){
+    let alert = this.alertCtrl.create({
+      title: data.title,
+      message: data.body,
+      buttons: [
+        {
+          text: 'Ok',
+          handler: () => {
+            
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   showToken(token){
