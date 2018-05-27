@@ -39,6 +39,7 @@
 
 
 <ion-content class="List_Body" padding (ionScroll)="onScroll()">
+
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
@@ -47,7 +48,12 @@
       refreshingText="Atualizando...">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-list padding-top>
+
+  <div *ngIf="!gpsActivated" class="emptyMessage">
+      <h3> Parece que o GPS não está ativado. Tente ativar através das configurações do telefone. </h3>
+  </div>
+
+  <ion-list *ngIf="gpsActivated" padding-top>
 
       <div *ngFor="let item of data" class="Card_Item">
         <img src="{{item.image}}" (click)="navigateToMenuPage(item)">

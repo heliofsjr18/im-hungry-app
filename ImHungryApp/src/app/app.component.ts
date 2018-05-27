@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { Platform, MenuController, Nav, AlertController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -30,14 +30,20 @@ export class MyApp {
     apenasFidelidade: false
   };
 
+  usuario: any  = {user_nome: ''};
+
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     private menuCtrl: MenuController, private fcm: FCM, private menuFilter: MenuFilterProvider, private userProvider: UsuarioProvider,
-    private alertCtrl: AlertController) {
+    private alertCtrl: AlertController, private detector: ChangeDetectorRef) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      this.menuCtrl.get('main_Menu').ionOpen.subscribe(() => {
+        this.usuario = this.userProvider.getUserObject();
+        this.detector.detectChanges();
+      });
       // Init Plugins
       this.initFontAwesome();
       this.initFCM();
@@ -77,18 +83,6 @@ export class MyApp {
   }
 
   initFCM(){
-    //this.fcm.subscribeToTopic('all');
-    //this.fcm.subscribeToTopic('com.br.ImHungryApp-2');
-    /*this.fcm.getToken().then(token => {
-      // backend.registerToken(token);
-      this.showToken(token);
-      console.log(token);
-    });
-    
-    this.fcm.onTokenRefresh().subscribe(token => {
-      this.showToken(token);
-      console.log(token);
-    });*/
 
     this.fcm.onNotification().subscribe(data => {
       if(data.wasTapped) {

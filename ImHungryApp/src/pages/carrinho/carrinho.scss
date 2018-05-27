@@ -14,4 +14,12 @@ page-carrinho {
     .Card_Item:last-child{
         margin-bottom: 100px;
     }
+
+    .emptyMessage{
+        display: flex;
+        align-items: center;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+    }
 }

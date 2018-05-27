@@ -34,11 +34,19 @@
                <ion-avatar item-start>
                    <img src="assets/imgs/test-logo.png">
                </ion-avatar>
-               <h2>Usuário Cliente 1</h2>
+               <h2>{{usuario.user_nome}}</h2>
            </ion-item>
            <button ion-item (click)="mainMeusPedidos()">
                 <i class="fas fa-calendar-check"></i>
                 <span class="spanIcon">Meus Pedidos</span>
+           </button>
+           <button ion-item>
+                <i class="fas fa-user"></i>
+                <span class="spanIcon">Minha Conta</span>
+           </button>
+           <button ion-item>
+                <i class="far fa-credit-card"></i>
+                <span class="spanIcon">Formas de Pagamento</span>
            </button>
            <button ion-item (click)="mainLogOut()">
                 <i class="fas fa-sign-out-alt"></i>

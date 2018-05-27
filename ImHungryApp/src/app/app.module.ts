@@ -10,6 +10,7 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { FCM } from '@ionic-native/fcm';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { IonicStorageModule } from '@ionic/storage';
+import { Diagnostic } from '@ionic-native/diagnostic';
 
 import { MyApp } from './app.component';
 
@@ -86,6 +87,7 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     LoginServiceProvider,
     UsuarioProvider,
     MenuFilterProvider,
+    Diagnostic,
     Facebook,
     GooglePlus,
     Geolocation,

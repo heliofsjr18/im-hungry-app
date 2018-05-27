@@ -9,7 +9,8 @@
 
 <ion-content>
 
-  <div class="cards">
+  <div *ngIf="data.length == 0" class="emptyMessage"> <h3>Parece que você não adicionou nada ao carrinho.</h3> </div>
+  <div *ngIf="data.length > 0" class="cards">
     <ion-list>
       <div *ngFor="let item of data" class="Card_Item">
         <ion-card>
