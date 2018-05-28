@@ -116,11 +116,11 @@ export class EstabelecimentoListPage {
       this.gpsActivated = true;
     }
 
-    if(this.gpsActivated){
+    let loading = this.loadingCtrl.create({
+      spinner: 'crescent'
+    });
 
-      let loading = this.loadingCtrl.create({
-        spinner: 'crescent'
-      });
+    if(this.gpsActivated){
 
       if (!isRefresh) {
         loading.present();
@@ -195,8 +195,12 @@ export class EstabelecimentoListPage {
         });
     }
     else{
-      if(isRefresh)
+      if(isRefresh){
         refresher.complete();
+      }else{
+        loading.dismiss();
+      }
+        
     }
   }
 

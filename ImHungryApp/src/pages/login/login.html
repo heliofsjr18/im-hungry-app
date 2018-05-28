@@ -1,12 +1,41 @@
 <ion-header>
-  <ion-navbar #myContent class="myNavBar" color="secondary">
-    <ion-title *ngIf="!showSearch">I'm Hungry</ion-title>
-  </ion-navbar>
+  
 </ion-header>
 
 
-<ion-content class="login-content" padding color="secondary">
-  <ion-row class="logo-row">
+<ion-content class="login-content" color="secondary">
+  
+  <div class="container">
+
+    <h1>LOG IN</h1>
+
+    <form (ngSubmit)="loginMain()" #registerForm="ngForm">
+      <div class="tbox">
+          <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
+      </div>
+      <div class="tbox">
+          <ion-input type="password" placeholder="Senha" name="password" [(ngModel)]="registerCredentials.password" required></ion-input>
+      </div>
+
+      <button ion-button type="submit" [disabled]="!registerForm.form.valid">Login</button>
+
+    </form>
+
+    <a class="b1"> CRIAR CONTA </a>
+
+    <button ion-button icon-left (click)='loginFacebook();'>
+      <i class="fab fa-facebook fa-lg"></i>
+      <span class="fbButtonText">Login com Facebook</span>
+    </button>
+
+    <button  ion-button icon-left (click)='loginGoogle();'>
+      <i class="fab fa-google fa-lg"></i>
+      <span class="fbButtonText">Login com Google</span>
+    </button>
+  </div>
+
+  
+  <!--<ion-row class="logo-row">
     <ion-col></ion-col>
 
     <ion-col></ion-col>
@@ -49,6 +78,6 @@
       <i class="fab fa-google fa-lg"></i>
       <span class="fbButtonText">Login com Google</span>
     </button>
-  </ion-row>
+  </ion-row>-->
 
 </ion-content>
