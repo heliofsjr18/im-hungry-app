@@ -115,12 +115,8 @@ page-pagamento {
         align-items: center;
     }
 
-    .divPayProgress > ion-spinner > svg{
-        height: 35px;
-        width: 35px;
-    }
-
     .divPayProgress > span{
+        //display: block;
         margin-left: 15px;
         font-size: 25px;
     }

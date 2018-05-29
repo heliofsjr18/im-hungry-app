@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FCM } from '@ionic-native/fcm';
 import { Storage } from '@ionic/storage';
+import { CarrinhoProvider } from '../carrinho/carrinho';
 
 @Injectable()
 export class UsuarioProvider {
@@ -38,7 +39,7 @@ export class UsuarioProvider {
 
   fcmTopicPrefix: string = 'com.br.ImHungryApp-';
 
-  constructor(public http: HttpClient, private fcm: FCM, private storage: Storage) {
+  constructor(public http: HttpClient, private fcm: FCM, private storage: Storage, private cart: CarrinhoProvider) {
   }
 
   public setUserObject(userObj){
@@ -50,6 +51,7 @@ export class UsuarioProvider {
     this.userUnsubscribeToTopic();
     this.storage.remove('IHU');
     this.resetUser();
+    this.cart.clearCart();
   }
 
   private userSubscribeToTopic(){

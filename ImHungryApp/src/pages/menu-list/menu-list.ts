@@ -79,7 +79,18 @@ export class MenuListPage {
   loadList(){
     
     let loading = this.loadingCtrl.create({
-      spinner: 'crescent'
+      content: `<div class="loading">
+                  <div class="loading-center">
+                    <div class="loading-center-absolute">
+                      <div class="loading-object loading-object-four" id="object_four"></div>
+                      <div class="loading-object loading-object-three" id="object_three"></div>
+                      <div class="loading-object loading-object-two" id="object_two"></div>
+                      <div class="loading-object loading-object-one" id="object_one"></div>
+                    </div>
+                  </div>
+                </div>`,
+      spinner: 'hide',
+      cssClass: 'my-loading-class'
     });
 
     loading.present();

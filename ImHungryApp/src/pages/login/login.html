@@ -7,7 +7,7 @@
   
   <div class="container">
 
-    <h1>LOG IN</h1>
+    <img src="assets/imgs/wave.png">
 
     <form (ngSubmit)="loginMain()" #registerForm="ngForm">
       <div class="tbox">
@@ -21,7 +21,7 @@
 
     </form>
 
-    <a class="b1"> CRIAR CONTA </a>
+    <a class="b1" (click)="createAccount()"> CRIAR CONTA </a>
 
     <button ion-button icon-left (click)='loginFacebook();'>
       <i class="fab fa-facebook fa-lg"></i>
