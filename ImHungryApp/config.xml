@@ -106,4 +106,8 @@
     <plugin name="cordova-plugin-fcm" spec="^2.1.2" />
     <plugin name="cordova-sqlite-storage" spec="^2.3.1" />
     <plugin name="cordova.plugins.diagnostic" spec="^4.0.8" />
+    <plugin name="cordova-plugin-telerik-imagepicker" spec="^2.2.0">
+        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Fotos do cadastro do usuário" />
+    </plugin>
+    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
 </widget>

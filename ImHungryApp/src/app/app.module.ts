@@ -11,6 +11,8 @@ import { FCM } from '@ionic-native/fcm';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { IonicStorageModule } from '@ionic/storage';
 import { Diagnostic } from '@ionic-native/diagnostic';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { Camera } from '@ionic-native/camera';
 
 import { MyApp } from './app.component';
 
@@ -87,6 +89,8 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     LoginServiceProvider,
     UsuarioProvider,
     MenuFilterProvider,
+    ImagePicker,
+    Camera,
     Diagnostic,
     Facebook,
     GooglePlus,

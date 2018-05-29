@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Cadastro</ion-title>
+  <ion-navbar class="myNavBar" color="secondary">
+    <ion-title>{{pageTitle}}</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -13,10 +13,10 @@
       <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="registerCredentials.nome" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="CPF" name="cpf" [(ngModel)]="registerCredentials.cpf" required></ion-input>
+      <ion-input type="text" placeholder="CPF" name="cpf" [(ngModel)]="registerCredentials.cpf" (ionBlur)="registerCredentials.nome = format(registerCredentials.nome)" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Nascimento" name="nascimento" [(ngModel)]="registerCredentials.nascimento" required></ion-input>
+      <ion-input type="text" placeholder="Data Nascimento" name="nascimento" [(ngModel)]="registerCredentials.nascimento" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
@@ -29,7 +29,7 @@
     </ion-item>
   </ion-list>
   <div padding>
-    <button ion-button (click)="cadastrar()"> Salvar</button>
+    <button ion-button (click)="salvar()"> Salvar</button>
 
     <button ion-button (click)="cancelar()"> Cancelar</button>
   </div>

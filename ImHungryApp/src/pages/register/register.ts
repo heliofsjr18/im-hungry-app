@@ -6,13 +6,6 @@ import { RestClientProvider } from '../../providers/rest-client/rest-client';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { EstabelecimentoListPage } from '../estabelecimento-list/estabelecimento-list';
 
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-register',
@@ -31,6 +24,8 @@ export class RegisterPage {
     telefone: '',
     fot64: 'register',
   };
+  pageTitle: string = '';
+  user: any = {};
   public url = "cliente/insert";
 
   constructor(public navCtrl: NavController,
@@ -40,10 +35,29 @@ export class RegisterPage {
     private rest: RestClientProvider,
     private usuario: UsuarioProvider,
     private toast: ToastController) {
+
+      this.user = this.usuario.getUserObject();
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RegisterPage');
+    if(this.user.user_id){
+      this.pageTitle = 'Minha Conta';
+    }else{
+      this.pageTitle = 'Cadastro';
+    }
+  }
+
+  salvar(){
+    if(this.user.user_id){
+      //UPDATE
+    }
+    else{
+      this.cadastrar();
+    }
+  }
+
+  update(){
+
   }
 
   public cadastrar() {
@@ -77,8 +91,18 @@ export class RegisterPage {
 
   showLoading() {
     this.loading = this.loadingCtrl.create({
-      content: 'Aguarde...',
-      spinner: 'crescent',
+      content: `<div class="loading">
+                  <div class="loading-center">
+                    <div class="loading-center-absolute">
+                      <div class="loading-object loading-object-four" id="object_four"></div>
+                      <div class="loading-object loading-object-three" id="object_three"></div>
+                      <div class="loading-object loading-object-two" id="object_two"></div>
+                      <div class="loading-object loading-object-one" id="object_one"></div>
+                    </div>
+                  </div>
+                </div>`,
+      spinner: 'hide',
+      cssClass: 'my-loading-class',
       dismissOnPageChange: true
     });
     this.loading.present();
@@ -86,6 +110,12 @@ export class RegisterPage {
 
   dismissLoadding(){
     this.loading.dismiss();
+  }
+
+  format(value){
+    let re =  this.usuario.format_cpf_cnpj(value);
+    console.log(re);
+    return re;
   }
 
   showErrorToast(error) {
@@ -98,7 +128,7 @@ export class RegisterPage {
   }
 
   cancelar() {
-    this.navCtrl.setRoot(LoginPage);
+    this.navCtrl.popToRoot();
   }
 
 }
