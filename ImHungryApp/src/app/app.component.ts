@@ -17,6 +17,7 @@ import { CartaoFidelidadePage } from '../pages/cartao-fidelidade/cartao-fidelida
 
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { PedidosPage } from '../pages/pedidos/pedidos';
+import { RegisterPage } from '../pages/register/register';
 
 @Component({
   templateUrl: 'app.html'
@@ -67,6 +68,11 @@ export class MyApp {
   mainMeusPedidos(){
     this.closeMenu("main_Menu");
     this.content.push(PedidosPage);
+  }
+
+  mainMinhaConta(){
+    this.closeMenu("main_Menu");
+    this.content.push(RegisterPage);
   }
 
   /**

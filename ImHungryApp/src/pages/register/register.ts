@@ -42,17 +42,63 @@ export class RegisterPage {
   ionViewDidLoad() {
     if(this.user.user_id){
       this.pageTitle = 'Minha Conta';
+      this.registerCredentials = {
+        nome: this.user.user_nome,
+        cpf: this.user.user_cpf,
+        nascimento: this.user.user_data,
+        email: this.user.user_email,
+        senha: this.user.user_senha,
+        telefone: this.user.user_telefone,
+        fot64: this.user.user_foto_perfil
+      }
     }else{
       this.pageTitle = 'Cadastro';
     }
   }
 
   salvar(){
-    if(this.user.user_id){
-      //UPDATE
+    if(this.validation()){
+      if(this.user.user_id){
+        this.update();
+      }
+      else{
+        this.cadastrar();
+      }
     }
-    else{
-      this.cadastrar();
+  }
+
+  validation(): boolean{
+    if(this.registerCredentials.nome.length < 1){
+      this.showErrorToast('Nome do usuário é obrigatório');
+      return false;
+    }
+    else if(this.registerCredentials.cpf.length < 1){
+      this.showErrorToast('CPF é obrigatório');
+      return false;
+    }
+    else if(this.registerCredentials.cpf.length < 11 || this.registerCredentials.cpf.length > 11){
+      this.showErrorToast('CPF inválido');
+      return false;
+    }
+    else if(this.registerCredentials.nascimento.length < 1){
+      this.showErrorToast('Data de nascimento é obrigatória');
+      return false;
+    }
+    else if(new Date(this.registerCredentials.nascimento) > new Date()){
+      this.showErrorToast('Data de nascimento inválida');
+      return false;
+    }
+    else if(this.registerCredentials.email.length < 1){
+      this.showErrorToast('Email é obrigatório');
+      return false;
+    }
+    else if(this.registerCredentials.email.indexOf('@') == -1){
+      this.showErrorToast('Email inválido');
+      return false;
+    }
+    else if(this.registerCredentials.telefone.length < 1){
+      this.showErrorToast('Telefone é obrigatório');
+      return false;
     }
   }
 

@@ -13,23 +13,23 @@
       <ion-input type="text" placeholder="Nome" name="nome" [(ngModel)]="registerCredentials.nome" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="CPF" name="cpf" [(ngModel)]="registerCredentials.cpf" (ionBlur)="registerCredentials.nome = format(registerCredentials.nome)" required></ion-input>
+      <ion-input type="text" placeholder="CPF" name="cpf" [(ngModel)]="registerCredentials.cpf" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Data Nascimento" name="nascimento" [(ngModel)]="registerCredentials.nascimento" required></ion-input>
+      <ion-datetime required cancelText="Cancelar" doneText="Ok" displayFormat="D MMM YYYY" min="1960-02"  max="2018-12" [(ngModel)]="registerCredentials.nascimento"></ion-datetime>
     </ion-item>
     <ion-item>
       <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="registerCredentials.email" required></ion-input>
     </ion-item>
     <ion-item>
-      <ion-input type="text" placeholder="Senha" name="senha" [(ngModel)]="registerCredentials.senha" required></ion-input>
+      <ion-input type="password" placeholder="Senha" name="senha" [(ngModel)]="registerCredentials.senha" required></ion-input>
     </ion-item>
     <ion-item>
       <ion-input type="text" placeholder="Telefone" name="telefone" [(ngModel)]="registerCredentials.telefone" required></ion-input>
     </ion-item>
   </ion-list>
-  <div padding>
-    <button ion-button (click)="salvar()"> Salvar</button>
 
+  <div padding>
+    <button type="submit" ion-button (click)="salvar()"> Salvar</button>
     <button ion-button (click)="cancelar()"> Cancelar</button>
   </div>
