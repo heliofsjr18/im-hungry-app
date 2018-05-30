@@ -11,13 +11,6 @@ import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { RegisterPage } from '../register/register';
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage()
 @Component({
   selector: 'page-login',
@@ -196,7 +189,7 @@ export class LoginPage {
 
   showErrorToast(error) {
     let toast = this.toast.create({
-      message: error.toString(),
+      message: error,
       duration: 1500,
       position: 'top'
     });
