@@ -118,8 +118,8 @@ export class RegisterPage {
   choosePhoto(){
     let options = {
       maximumImagesCount: 1,
-      width: 500,
-      height: 500,
+      width: 150,
+      height: 150,
       quality: 100,
       outputType: 1
     }
