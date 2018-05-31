@@ -27,7 +27,7 @@
     <!--<img src="{{item.image}}">-->
 
     <ion-card-content>
-      <ion-card-title color="primary-dark">
+      <ion-card-title color="secondary">
         <span>{{item.name}}</span>
       </ion-card-title>
       <p class="cardTextDescription">
@@ -49,14 +49,14 @@
       <ion-col>
         <button ion-button clear small color="secondary" icon-start>
           <i class="fas fa-star"></i>
-          Favorito
+          <span>Favorito</span>
         </button>
       </ion-col>
 
       <ion-col text-right>
         <button *ngIf="filial_status === 1" (click)="addToCart_Validate(item)" ion-button clear small color="secondary" icon-start>
           <i class="fas fa-shopping-cart"></i>
-          Adcionar ao Carrinho
+          <span>Adcionar ao Carrinho</span>
         </button>
       </ion-col>
     </ion-row>

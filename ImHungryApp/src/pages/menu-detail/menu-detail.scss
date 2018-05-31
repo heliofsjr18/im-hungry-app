@@ -1,5 +1,9 @@
 page-menu-detail {
     
+    button span{
+        margin-left: 5px;
+    }
+
     .menuViewDiv{
         display: flex;
         align-items: center;
@@ -7,7 +11,7 @@ page-menu-detail {
     }
 
     .cardTextDescription{
-        color: color($colors, primary-light);
+        color: color($colors, primary-dark);
     }
 
     .menuViewStar{

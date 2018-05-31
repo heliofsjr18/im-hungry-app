@@ -30,7 +30,7 @@
 
 .textListPrice{
     font-size: 15px;
-    color: color($colors, secondary-dark);
+    color: color($colors, primary-dark);
 }
 
 .List_Body{
@@ -87,9 +87,9 @@ ion-loading.my-loading-class {
     -webkit-border-radius: 50% 50% 50% 50%;
     border-radius: 50% 50% 50% 50%;
     position: absolute;
-    border-top: 5px solid #f4511e;
+    border-top: 5px solid color($colors, primary);
     border-bottom: 5px solid transparent;
-    border-left:  5px solid #f4511e;
+    border-left:  5px solid color($colors, primary);
     border-right: 5px solid transparent;
     -webkit-animation: animate 2s infinite;
     animation: animate 2s infinite;

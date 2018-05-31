@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController, Loading, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController, Loading, ToastController, ActionSheetController } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { LoginServiceProvider } from '../../providers/login-service/login-service';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
 import { UsuarioProvider } from '../../providers/usuario/usuario';
 import { EstabelecimentoListPage } from '../estabelecimento-list/estabelecimento-list';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 @IonicPage()
 @Component({
@@ -13,6 +15,7 @@ import { EstabelecimentoListPage } from '../estabelecimento-list/estabelecimento
 })
 export class RegisterPage {
 
+  
   loading: Loading;
   data: any;
   registerCredentials = {
@@ -26,6 +29,7 @@ export class RegisterPage {
   };
   pageTitle: string = '';
   user: any = {};
+  userImage = 'assets/imgs/user-default.jpg';
   public url = "cliente/insert";
 
   constructor(public navCtrl: NavController,
@@ -34,7 +38,10 @@ export class RegisterPage {
     public restLoginClient: LoginServiceProvider,
     private rest: RestClientProvider,
     private usuario: UsuarioProvider,
-    private toast: ToastController) {
+    private toast: ToastController,
+    private actionSheetCtrl: ActionSheetController,
+    private camera: Camera,
+    private imagePicker: ImagePicker) {
 
       this.user = this.usuario.getUserObject();
   }
@@ -51,9 +58,81 @@ export class RegisterPage {
         telefone: this.user.user_telefone,
         fot64: this.user.user_foto_perfil
       }
+      if(this.user.fot64){
+        this.userImage = 'data:image/jpeg;base64,' + this.user.fot64;
+      }
     }else{
       this.pageTitle = 'Cadastro';
     }
+  }
+
+  openAvatarOptions(){
+    let actionsheet = this.actionSheetCtrl.create({
+      title: 'Alterar Foto',
+      buttons: [
+        {
+          text: 'Tirar Foto',
+          icon: 'camera',
+          handler: () => {
+            this.takePhoto();
+          }
+        },
+        {
+          text: 'Escolher da Galeria',
+          icon: 'image',
+          handler: () => {
+            this.choosePhoto();
+          }
+        },
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          icon: 'close-circle',
+          handler: () => {
+            
+          }
+        }
+      ]
+    });
+    actionsheet.present();
+  }
+
+  takePhoto(){
+    let cameraOptions: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(cameraOptions).then((imageData) => {
+      if(imageData){
+        this.userImage = 'data:image/jpeg;base64,' + imageData;
+        this.registerCredentials.fot64 = this.userImage;
+        console.log(this.userImage);
+      }
+    }, (err) => {
+      this.showToast(err);
+    });
+  }
+
+  choosePhoto(){
+    let options = {
+      maximumImagesCount: 1,
+      width: 500,
+      height: 500,
+      quality: 100,
+      outputType: 1
+    }
+
+    this.imagePicker.getPictures(options).then((images) => {
+      if(images[0]){
+        this.userImage = 'data:image/jpeg;base64,' + images[0];
+        this.registerCredentials.fot64 = this.userImage;
+        console.log(this.userImage);
+      }
+    }, (err) => {
+      this.showToast(err);
+    });
   }
 
   salvar(){
@@ -66,44 +145,28 @@ export class RegisterPage {
       }
     }
   }
-
-  validation(): boolean{
-    if(this.registerCredentials.nome.length < 1){
-      this.showErrorToast('Nome do usuário é obrigatório');
-      return false;
-    }
-    else if(this.registerCredentials.cpf.length < 1){
-      this.showErrorToast('CPF é obrigatório');
-      return false;
-    }
-    else if(this.registerCredentials.cpf.length < 11 || this.registerCredentials.cpf.length > 11){
-      this.showErrorToast('CPF inválido');
-      return false;
-    }
-    else if(this.registerCredentials.nascimento.length < 1){
-      this.showErrorToast('Data de nascimento é obrigatória');
-      return false;
-    }
-    else if(new Date(this.registerCredentials.nascimento) > new Date()){
-      this.showErrorToast('Data de nascimento inválida');
-      return false;
-    }
-    else if(this.registerCredentials.email.length < 1){
-      this.showErrorToast('Email é obrigatório');
-      return false;
-    }
-    else if(this.registerCredentials.email.indexOf('@') == -1){
-      this.showErrorToast('Email inválido');
-      return false;
-    }
-    else if(this.registerCredentials.telefone.length < 1){
-      this.showErrorToast('Telefone é obrigatório');
-      return false;
-    }
-  }
-
   update(){
-
+    let body = {
+      'nome': this.registerCredentials.nome,
+      'cpf': this.registerCredentials.cpf,
+      'dataNasc': this.registerCredentials.nascimento,
+      'email': this.registerCredentials.email,
+      'senha': this.registerCredentials.senha,
+      'telefone': this.registerCredentials.telefone,
+      'foto': this.registerCredentials.fot64
+    }
+    if(body.senha === this.user.user_senha){
+      body.senha = '';
+    }
+    this.showLoading();
+    this.rest.getPostJson('cliente/update', body).then((data) => {
+      this.dismissLoadding();
+      this.showToast('Cadastro Atualizado Com Sucesso.')
+      this.back();
+    }).catch((error) => {
+      this.dismissLoadding();
+      this.showToast(error);
+    });
   }
 
   public cadastrar() {
@@ -127,12 +190,13 @@ export class RegisterPage {
         this.rest.Token = this.data.token;
         this.usuario.setUserObject(this.data.usuario);
         this.navCtrl.setRoot(EstabelecimentoListPage);
+        this.dismissLoadding();
       })
       .catch((rej) => {
         this.data = JSON.parse(rej.toString());
-        this.showErrorToast(this.data.error.result);
+        this.dismissLoadding();
+        this.showToast(this.data.error.result);
       });
-      this.dismissLoadding();
   }
 
   showLoading() {
@@ -164,17 +228,52 @@ export class RegisterPage {
     return re;
   }
 
-  showErrorToast(error) {
+  showToast(message) {
     let toast = this.toast.create({
-      message: error.toString(),
+      message: message.toString(),
       duration: 1500,
       position: 'top'
     });
     toast.present();
   }
 
-  cancelar() {
+  back() {
     this.navCtrl.popToRoot();
+  }
+
+  validation(): boolean{
+    if(this.registerCredentials.nome.length < 1){
+      this.showToast('Nome do usuário é obrigatório');
+      return false;
+    }
+    else if(this.registerCredentials.cpf.length < 1){
+      this.showToast('CPF é obrigatório');
+      return false;
+    }
+    else if(this.registerCredentials.cpf.length < 11 || this.registerCredentials.cpf.length > 11){
+      this.showToast('CPF inválido');
+      return false;
+    }
+    else if(this.registerCredentials.nascimento.length < 1){
+      this.showToast('Data de nascimento é obrigatória');
+      return false;
+    }
+    else if(new Date(this.registerCredentials.nascimento) > new Date()){
+      this.showToast('Data de nascimento inválida');
+      return false;
+    }
+    else if(this.registerCredentials.email.length < 1){
+      this.showToast('Email é obrigatório');
+      return false;
+    }
+    else if(this.registerCredentials.email.indexOf('@') == -1){
+      this.showToast('Email inválido');
+      return false;
+    }
+    else if(this.registerCredentials.telefone.length < 1){
+      this.showToast('Telefone é obrigatório');
+      return false;
+    }
   }
 
 }

@@ -34,6 +34,7 @@ page-menu-list {
         height: 19px;
         display: inline-flex;
         justify-content: center;
+        background-color: color($colors, primary);
     } 
 
     .Card_Item{
@@ -88,7 +89,7 @@ page-menu-list {
     .Card_Info > div > span:nth-child(2) { 
         font-size: 13px;
         text-decoration: none;
-        color: #000;
+        color: color($colors, secondary-dark);
         text-align: right;
         //display: inline-block;
         display: inline-flex;

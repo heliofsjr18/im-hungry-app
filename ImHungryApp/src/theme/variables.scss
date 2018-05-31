@@ -33,7 +33,8 @@ $app-direction: ltr;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$colors: (
+//ORIGINAL
+/*$colors: (
   primary:    #424242, //#546e7a,
   secondary:  #f4511e,//#ff9800,
   danger:     #f53d3d,
@@ -46,9 +47,40 @@ $colors: (
 
   primary-dark: #1b1b1b,//#29434e,
   primary-light: #6d6d6d,//#819ca9,
+);*/
 
+// 1ª ALTERANATIVA
+/*$colors: (
+  primary: #b71c1c,
+  secondary: #fb8c00,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  success:    #00B200,
 
+  primary-dark: #7f0000,
+  primary-light: #f05545,
+
+  secondary-dark: #c25e00,
+  secondary-light: #ffbd45,
+);*/
+
+// 2º ALTERNATIVA
+$colors: (
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  success:    #00B200,
+
+  secondary: #b71c1c,
+  secondary-light: #f05545,
+  secondary-dark: #7f0000,
+
+  primary: #ffb300,
+  primary-light: #ffe54c,
+  primary-dark: #c68400
 );
+
 
 $loading-md-border-radius: 8px;
 $loading-md-background: transparent;
