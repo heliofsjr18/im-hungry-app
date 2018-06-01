@@ -59,7 +59,7 @@ export class RegisterPage {
         fot64: this.user.user_foto_perfil
       }
       if(this.user.fot64){
-        this.userImage = 'data:image/jpeg;base64,' + this.user.fot64;
+        this.userImage = this.user.fot64;
       }
     }else{
       this.pageTitle = 'Cadastro';
@@ -135,7 +135,7 @@ export class RegisterPage {
     });
   }
 
-  salvar(){
+  saveUser(){
     if(this.validation()){
       if(this.user.user_id){
         this.update();
@@ -235,6 +235,7 @@ export class RegisterPage {
       position: 'top'
     });
     toast.present();
+    console.log(message);
   }
 
   back() {
@@ -274,6 +275,7 @@ export class RegisterPage {
       this.showToast('Telefone é obrigatório');
       return false;
     }
+    return true;
   }
 
 }

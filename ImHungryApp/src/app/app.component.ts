@@ -32,6 +32,7 @@ export class MyApp {
   };
 
   usuario: any  = {user_nome: ''};
+  userDefaultImage = 'assets/imgs/user-default.jpg';
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
     private menuCtrl: MenuController, private fcm: FCM, private menuFilter: MenuFilterProvider, private userProvider: UsuarioProvider,
@@ -43,6 +44,9 @@ export class MyApp {
       splashScreen.hide();
       this.menuCtrl.get('main_Menu').ionOpen.subscribe(() => {
         this.usuario = this.userProvider.getUserObject();
+        if(this.usuario.user_foto_perfil){
+          this.userDefaultImage = this.usuario.user_foto_perfil;
+        }
         this.detector.detectChanges();
       });
       // Init Plugins
