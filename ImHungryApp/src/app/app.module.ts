@@ -40,6 +40,7 @@ import { PagSeguroProvider } from '../providers/pag-seguro/pag-seguro';
 import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
+import { FormasPagamentoPage } from '../pages/formas-pagamento/formas-pagamento';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     LoginPage,
     RegisterPage,
     CartaoFidelidadePage,
-    PedidosPage
+    PedidosPage,
+    FormasPagamentoPage
   ],
   imports: [
     BrowserModule,
@@ -82,7 +84,8 @@ import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
     LoginPage,
     RegisterPage,
     CartaoFidelidadePage,
-    PedidosPage
+    PedidosPage,
+    FormasPagamentoPage
   ],
   providers: [
     StatusBar,

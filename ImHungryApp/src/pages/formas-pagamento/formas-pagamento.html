@@ -1,0 +1,35 @@
+<ion-header>
+
+  <ion-navbar class="myNavBar" color="secondary">
+    <ion-title>Formas de Pagamento</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+  <div class="container">
+    <ion-list *ngFor="let card of creditCardList">
+      <ion-item-sliding #slidingItem>
+        <ion-item>
+          <div class="card-list-item">
+            <div><i [class]="getCardClass(card)"></i></div>
+            <div class="spanIcon">
+              <span>••••</span>
+              <span>••••</span>
+              <span>••••</span>
+              <span>{{card.cartao_digitos}}</span>
+            </div>
+          </div>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="primary" (click)="openCardDetail(card, slidingItem)">
+            Editar
+          </button>
+          <button ion-button color="secondary" (click)="removeCard(card, slidingItem)">
+            Remover
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
+</ion-content>

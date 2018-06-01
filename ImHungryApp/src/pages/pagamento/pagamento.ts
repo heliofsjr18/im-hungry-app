@@ -62,7 +62,7 @@ export class PagamentoPage {
     }else if(brand == 'visa'){
       return 'fab fa-cc-visa fa-3x';
     }else{
-      return '';
+      return 'fas fa-question-circle fa-3x';
     }
   }
 

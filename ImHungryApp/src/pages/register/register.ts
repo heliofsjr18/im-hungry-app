@@ -111,7 +111,7 @@ export class RegisterPage {
         console.log(this.userImage);
       }
     }, (err) => {
-      this.showToast(err);
+      console.log(err);
     });
   }
 
@@ -131,7 +131,7 @@ export class RegisterPage {
         console.log(this.userImage);
       }
     }, (err) => {
-      this.showToast(err);
+      console.log(err);
     });
   }
 
@@ -165,7 +165,8 @@ export class RegisterPage {
       this.back();
     }).catch((error) => {
       this.dismissLoadding();
-      this.showToast(error);
+      this.showToast('Ocorreu um erro ao atualizar o cadastro.');
+      console.log(error);
     });
   }
 

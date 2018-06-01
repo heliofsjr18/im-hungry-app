@@ -100,7 +100,10 @@ export class LoginPage {
           this.isLoggedIn = false;
         }
       })
-      .catch(e => console.log('Error logging into Facebook', e));
+      .catch((e) => {
+        console.log('Error logging into Facebook', e);
+        this.showErrorToast('Ocorreu um erro no login com Facebook.')
+      });
   }
 
   loginMain() {
@@ -117,7 +120,7 @@ export class LoginPage {
         console.log(res);
         this.isLoggedIn = false;
       })
-      .catch(err => console.error(err));
+      .catch(err => console.log('Erro logout from Google', err));
   }
 
   logoutFacebook() {
@@ -146,7 +149,6 @@ export class LoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
   }
 
   login(body) {

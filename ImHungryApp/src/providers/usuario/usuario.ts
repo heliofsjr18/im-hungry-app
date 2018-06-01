@@ -37,6 +37,18 @@ export class UsuarioProvider {
     }
   };
 
+  credCards: [
+    {
+      cartao_id: '',
+      cartao_digitos: '',
+      cartao_ano: '',
+      cartao_mes: '',
+      cartao_brand: '',
+      cartao_status: '',
+      cartao_cvc: ''
+    }
+  ]
+
   fcmTopicPrefix: string = 'com.br.ImHungryApp-';
   DECIMAL_SEPARATOR=".";
   GROUP_SEPARATOR=",";
@@ -76,6 +88,11 @@ export class UsuarioProvider {
 
   public getCreditCards(){
     return {cards: this.user.credCards.list, user_name: this.user.user_nome};
+  }
+
+  public updateCreditCards(updatedCards: [{cartao_id: '', cartao_digitos: '', cartao_ano: '', cartao_mes: '', cartao_brand: '', cartao_status: '', cartao_cvc: ''}]){
+    this.user.credCards.list = updatedCards;
+    console.log(updatedCards);
   }
 
   public getCreditCardById(cartao_id){

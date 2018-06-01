@@ -1,0 +1,25 @@
+page-formas-pagamento {
+    .container{
+        margin-top: 10px;
+    }
+
+    .card-list-item{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .card-list-item > div:nth-child(1){
+        width: 20%;
+        text-align: left;
+        color: color($colors, primary-dark);
+    }
+
+    .spanIcon{
+        font-size: 30px;
+        width: 80%;
+        text-align: center;
+        display: flex;
+        justify-content: space-between;
+        color: color($colors, primary-dark);
+    }
+}

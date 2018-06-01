@@ -18,6 +18,7 @@ import { CartaoFidelidadePage } from '../pages/cartao-fidelidade/cartao-fidelida
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { PedidosPage } from '../pages/pedidos/pedidos';
 import { RegisterPage } from '../pages/register/register';
+import { FormasPagamentoPage } from '../pages/formas-pagamento/formas-pagamento';
 
 @Component({
   templateUrl: 'app.html'
@@ -77,6 +78,11 @@ export class MyApp {
   mainMinhaConta(){
     this.closeMenu("main_Menu");
     this.content.push(RegisterPage);
+  }
+
+  mainFomasPagamento(){
+    this.closeMenu("main_Menu");
+    this.content.push(FormasPagamentoPage);
   }
 
   /**
