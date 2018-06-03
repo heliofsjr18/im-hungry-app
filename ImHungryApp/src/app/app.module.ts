@@ -41,6 +41,7 @@ import { LoginServiceProvider } from '../providers/login-service/login-service';
 import { UsuarioProvider } from '../providers/usuario/usuario';
 import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
 import { FormasPagamentoPage } from '../pages/formas-pagamento/formas-pagamento';
+import { FormaPagamentoDetailPage } from '../pages/forma-pagamento-detail/forma-pagamento-detail';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { FormasPagamentoPage } from '../pages/formas-pagamento/formas-pagamento'
     RegisterPage,
     CartaoFidelidadePage,
     PedidosPage,
-    FormasPagamentoPage
+    FormasPagamentoPage,
+    FormaPagamentoDetailPage
   ],
   imports: [
     BrowserModule,
@@ -85,7 +87,8 @@ import { FormasPagamentoPage } from '../pages/formas-pagamento/formas-pagamento'
     RegisterPage,
     CartaoFidelidadePage,
     PedidosPage,
-    FormasPagamentoPage
+    FormasPagamentoPage,
+    FormaPagamentoDetailPage
   ],
   providers: [
     StatusBar,

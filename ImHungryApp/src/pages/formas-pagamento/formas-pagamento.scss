@@ -3,6 +3,10 @@ page-formas-pagamento {
         margin-top: 10px;
     }
 
+    .iconHeader{
+        margin-right: 7px;
+    }
+
     .card-list-item{
         display: flex;
         justify-content: space-between;
@@ -11,7 +15,7 @@ page-formas-pagamento {
     .card-list-item > div:nth-child(1){
         width: 20%;
         text-align: left;
-        color: color($colors, primary-dark);
+        color: color($colors, secondary);
     }
 
     .spanIcon{
@@ -20,6 +24,6 @@ page-formas-pagamento {
         text-align: center;
         display: flex;
         justify-content: space-between;
-        color: color($colors, primary-dark);
+        color: color($colors, secondary);
     }
 }

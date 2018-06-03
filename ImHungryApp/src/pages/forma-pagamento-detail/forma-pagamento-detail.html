@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar class="myNavBar" color="secondary">
+    <ion-title>{{pageTitle}}</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only class="iconHeader" (click)="closeModal()">
+        <i class="fas fa-times fa-lg"></i>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+ 
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list padding>
+    <ion-item>
+      <ion-label floating>Bandeira</ion-label>
+      <ion-select [(ngModel)]="card.cartao_brand">
+        <ion-option value="visa">Visa</ion-option>
+        <ion-option value="master">MasterCard</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Tipo de Cartão</ion-label>
+      <ion-select [(ngModel)]="cardType">
+        <ion-option value="credit">Crédito</ion-option>
+        <ion-option value="debit">Débito</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Número do Cartão</ion-label>
+      <ion-input [(ngModel)]="card.cartao_digitos" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Data de Vencimento</ion-label>
+      <ion-datetime [(ngModel)]="cardDate" displayFormat="MM/YYYY" pickerFormat="MM YYYY" min="2018" max="2030" cancelText="Cancelar" doneText="Ok">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Código de Segurança</ion-label>
+      <ion-input type="password" [(ngModel)]="card.cartao_cvc"></ion-input>
+    </ion-item>
+  </ion-list>
+  <div class="security-warning"><span>Para sua segurança criptografamos o seu código de segurança e sempre o solicitamos no pagamento.</span></div>
+  <button ion-button block color="secondary" (click)="saveCard()">
+    Salvar
+  </button>
+</ion-content>

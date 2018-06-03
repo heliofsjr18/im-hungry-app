@@ -90,13 +90,20 @@ export class UsuarioProvider {
     return {cards: this.user.credCards.list, user_name: this.user.user_nome};
   }
 
-  public updateCreditCards(updatedCards: [{cartao_id: '', cartao_digitos: '', cartao_ano: '', cartao_mes: '', cartao_brand: '', cartao_status: '', cartao_cvc: ''}]){
+  public updateCreditCards(updatedCards: any){
     this.user.credCards.list = updatedCards;
     console.log(updatedCards);
   }
 
   public getCreditCardById(cartao_id){
     return this.user.credCards.list.find(x => x.cartao_id == cartao_id);
+  }
+
+  public removeCreditCardById(cartao_id){
+    let index = this.user.credCards.list.findIndex(x => x.cartao_id = cartao_id);
+    if(index > -1){
+      this.user.credCards.list.splice(index, 1);
+    }
   }
 
   public format_cpf_cnpj(valString){

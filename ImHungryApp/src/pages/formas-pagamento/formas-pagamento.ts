@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Loading, LoadingController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Loading, LoadingController, ToastController, ModalController } from 'ionic-angular';
 import { RestClientProvider } from '../../providers/rest-client/rest-client';
+import { FormaPagamentoDetailPage } from '../forma-pagamento-detail/forma-pagamento-detail';
+import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 
 @IonicPage()
@@ -40,7 +42,9 @@ export class FormasPagamentoPage {
               public navParams: NavParams,
               private loadingCtrl: LoadingController,
               private rest: RestClientProvider,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController,
+              private modalCtrl: ModalController,
+              private userProvider: UsuarioProvider) {
   }
 
   ionViewDidLoad() {
@@ -76,7 +80,7 @@ export class FormasPagamentoPage {
           cartao_cvc: ''
         });
       }
-      console.log(this.creditCardList);
+      this.userProvider.updateCreditCards(this.originalCards);
       this.dimissLoading();
     })
     .catch((error) => {
@@ -114,15 +118,40 @@ export class FormasPagamentoPage {
   }
 
   openCardDetail(card){
-    console.log('editar');
-    console.log(card);
+    let modal = this.modalCtrl.create(FormaPagamentoDetailPage, {card: card});
+
+    modal.onDidDismiss(() => {
+      this.loadList();
+    });
+
+    modal.present();
+  }
+
+  addCardDetail(){
+    let modal = this.modalCtrl.create(FormaPagamentoDetailPage);
+
+    modal.onDidDismiss(() => {
+      this.loadList();
+    });
+
+    modal.present();
   }
 
   removeCard(card, slidingItem){
-    console.log('remover');
-    console.log(card);
-    console.log(slidingItem);
-    slidingItem.close();
+    this.showLoading();
+
+    let body = {
+      'cartao_id': card.cartao_id
+    }
+    this.rest.getPostJson('cartao/enabled', body).then((data) => {
+      this.dimissLoading();
+      this.loadList();
+      this.showToast('Forma de pagamento removida com sucesso');
+    })
+    .catch((error) => {
+      this.dimissLoading();
+      this.showToast('Erro ao remover forma de pagamento');
+    });
   }
 
   dimissLoading(){
