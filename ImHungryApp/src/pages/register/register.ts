@@ -25,7 +25,7 @@ export class RegisterPage {
     email: '',
     senha: '',
     telefone: '',
-    fot64: 'register',
+    fot64: null,
   };
   pageTitle: string = '';
   user: any = {};
@@ -46,7 +46,7 @@ export class RegisterPage {
       this.user = this.usuario.getUserObject();
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter(){
     if(this.user.user_id){
       this.pageTitle = 'Minha Conta';
       this.registerCredentials = {
@@ -64,6 +64,11 @@ export class RegisterPage {
     }else{
       this.pageTitle = 'Cadastro';
     }
+    console.log(this.user.fot64);
+  }
+
+  ionViewDidLoad() {
+    
   }
 
   openAvatarOptions(){
@@ -160,8 +165,11 @@ export class RegisterPage {
     }
     this.showLoading();
     this.rest.getPostJson('cliente/update', body).then((data) => {
+      let res = JSON.parse(data.toString());
       this.dismissLoadding();
-      this.showToast('Cadastro Atualizado Com Sucesso.')
+      this.showToast('Cadastro Atualizado Com Sucesso.');
+      this.usuario.setUserObject(res.usuario);
+      console.log(res);
       this.back();
     }).catch((error) => {
       this.dismissLoadding();

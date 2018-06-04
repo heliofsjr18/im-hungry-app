@@ -64,9 +64,11 @@ export class FormasPagamentoPage {
   loadList(){
     this.showLoading();
 
+    this.creditCardList = [];
+    this.originalCards = [];
+
     this.rest.getJson('cartao/list').then((data) => {
-      this.creditCardList = [];
-      this.originalCards = [];
+      
       let object = JSON.parse(data.toString());
       this.originalCards = object.cartões;
       for(let i in object.cartões){
@@ -77,9 +79,10 @@ export class FormasPagamentoPage {
           cartao_mes: object.cartões[i].cartao_mes,
           cartao_brand: object.cartões[i].cartao_brand,
           cartao_status: object.cartões[i].cartao_status,
-          cartao_cvc: ''
+          cartao_cvc: object.cartões[i].cartao_cvc
         });
       }
+      console.log(this.creditCardList);
       this.userProvider.updateCreditCards(this.originalCards);
       this.dimissLoading();
     })
@@ -87,6 +90,7 @@ export class FormasPagamentoPage {
       console.log(error);
       this.showToast('Erro ao obter as formas de pagamento.');
       this.dimissLoading();
+      console.log(this.creditCardList);
     });
   }
 
