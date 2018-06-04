@@ -109,6 +109,7 @@ export class MyApp {
     this.fcm.onNotification().subscribe(data => {
       if(data.wasTapped) {
        //console.info("Received in background");
+       this.content.push(PedidosPage);
       } else {
         console.log(data);
         this.showAlert(data);

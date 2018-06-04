@@ -86,6 +86,22 @@ export class UsuarioProvider {
     return this.user;
   }
 
+  public userCanPay(): boolean{
+    if(this.user.user_nome.length < 1){
+      return false;
+    }
+    else if(this.user.user_cpf.length < 1){
+      return false;
+    }
+    else if(this.user.user_telefone.length < 1){
+      return false;
+    }
+    else if(this.user.user_data.length < 1){
+      return false;
+    }
+    return true;
+  }
+
   public getCreditCards(){
     return {cards: this.user.credCards.list, user_name: this.user.user_nome};
   }

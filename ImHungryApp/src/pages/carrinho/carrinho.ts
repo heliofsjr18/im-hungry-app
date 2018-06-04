@@ -4,6 +4,7 @@ import { CarrinhoProvider } from '../../providers/carrinho/carrinho'
 import { MenuDetailPage } from '../menu-detail/menu-detail';
 import $ from "jquery";
 import { PagamentoPage } from '../pagamento/pagamento';
+import { UsuarioProvider } from '../../providers/usuario/usuario';
 
 @IonicPage()
 @Component({
@@ -22,7 +23,7 @@ export class CarrinhoPage {
   }
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private platform: Platform,
-   private carrinho: CarrinhoProvider) {
+   private carrinho: CarrinhoProvider, private userProvider: UsuarioProvider) {
   }
 
   data = [];
@@ -35,6 +36,10 @@ export class CarrinhoPage {
       },100);
     }
     this.loadCart();
+  }
+
+  canPay(): boolean{
+    return this.userProvider.userCanPay();
   }
 
   loadCart(){
