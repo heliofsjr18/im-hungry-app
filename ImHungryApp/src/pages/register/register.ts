@@ -25,7 +25,7 @@ export class RegisterPage {
     email: '',
     senha: '',
     telefone: '',
-    fot64: null,
+    fot64: '',
   };
   pageTitle: string = '';
   user: any = {};
@@ -58,13 +58,13 @@ export class RegisterPage {
         telefone: this.user.user_telefone,
         fot64: this.user.user_foto_perfil
       }
-      if(this.user.fot64){
-        this.userImage = this.user.fot64;
+      if(this.user.user_foto_perfil){
+        this.userImage = this.user.user_foto_perfil;
       }
     }else{
       this.pageTitle = 'Cadastro';
     }
-    console.log(this.user.fot64);
+    console.log(this.user.user_foto_perfil);
   }
 
   ionViewDidLoad() {

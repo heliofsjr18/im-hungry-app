@@ -30,7 +30,7 @@ page-login {
   .tbox{
     width: 75%;
     height: 40px;
-    background-color: #f1f1f1b3;
+    background-color: #f1f1f1;
     border-radius: 12px;
     margin: 10px auto;
     align-items: center;
@@ -56,7 +56,7 @@ page-login {
   .container button{
     width: 75%;
     height: 40px;
-    background-color: color($colors, secondary);
+    //background-color: color($colors, secondary);
     border-radius: 12px;
     margin: 15px auto;
     align-items: center;
@@ -65,19 +65,19 @@ page-login {
     font-family: "Montserrat", sans-serif;
     font-size: 16px;
     border: none;
-    color: white;
+    //color: white;
   }
 
   .b1{
-    display: block;
+    /*display: block;
     width: 75%;
     padding: 10px 0;
-    text-decoration: none;
-    color: color($colors, primary);
-    text-align: center;
+    text-decoration: none;*/
+    color: color($colors, secondary);
+    /*text-align: center;
     margin: auto;
     font-weight: bold;
-    transition: 0.4s all;
+    transition: 0.4s all;*/
   }
 
   .container button svg{

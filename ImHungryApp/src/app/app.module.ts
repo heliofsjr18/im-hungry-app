@@ -13,6 +13,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Diagnostic } from '@ionic-native/diagnostic';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { Camera } from '@ionic-native/camera';
+import { LaunchNavigator } from '@ionic-native/launch-navigator';
 
 import { MyApp } from './app.component';
 
@@ -43,6 +44,7 @@ import { UsuarioProvider } from '../providers/usuario/usuario';
 import { MenuFilterProvider } from '../providers/menu-filter/menu-filter';
 import { FormasPagamentoPage } from '../pages/formas-pagamento/formas-pagamento';
 import { FormaPagamentoDetailPage } from '../pages/forma-pagamento-detail/forma-pagamento-detail';
+
 
 @NgModule({
   declarations: [
@@ -104,6 +106,7 @@ import { FormaPagamentoDetailPage } from '../pages/forma-pagamento-detail/forma-
     LoginServiceProvider,
     UsuarioProvider,
     MenuFilterProvider,
+    LaunchNavigator,
     ImagePicker,
     Camera,
     Diagnostic,
