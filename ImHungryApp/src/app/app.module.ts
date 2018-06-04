@@ -27,6 +27,7 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { CartaoFidelidadePage } from '../pages/cartao-fidelidade/cartao-fidelidade';
 import { PedidosPage } from '../pages/pedidos/pedidos';
+import { CartaoFidelidadeClientePage } from '../pages/cartao-fidelidade-cliente/cartao-fidelidade-cliente';
 
 //Components
 import { IonRatingComponent } from '../components/ion-rating/ion-rating';
@@ -58,7 +59,7 @@ import { FormaPagamentoDetailPage } from '../pages/forma-pagamento-detail/forma-
     RegisterPage,
     CartaoFidelidadePage,
     PedidosPage,
-    FormasPagamentoPage,
+    CartaoFidelidadeClientePage,
     FormaPagamentoDetailPage
   ],
   imports: [
@@ -87,7 +88,7 @@ import { FormaPagamentoDetailPage } from '../pages/forma-pagamento-detail/forma-
     RegisterPage,
     CartaoFidelidadePage,
     PedidosPage,
-    FormasPagamentoPage,
+    CartaoFidelidadeClientePage,
     FormaPagamentoDetailPage
   ],
   providers: [
