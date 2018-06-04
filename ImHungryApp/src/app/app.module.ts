@@ -60,7 +60,8 @@ import { FormaPagamentoDetailPage } from '../pages/forma-pagamento-detail/forma-
     CartaoFidelidadePage,
     PedidosPage,
     CartaoFidelidadeClientePage,
-    FormaPagamentoDetailPage
+    FormaPagamentoDetailPage,
+    FormasPagamentoPage
   ],
   imports: [
     BrowserModule,
@@ -89,7 +90,8 @@ import { FormaPagamentoDetailPage } from '../pages/forma-pagamento-detail/forma-
     CartaoFidelidadePage,
     PedidosPage,
     CartaoFidelidadeClientePage,
-    FormaPagamentoDetailPage
+    FormaPagamentoDetailPage,
+    FormasPagamentoPage
   ],
   providers: [
     StatusBar,
