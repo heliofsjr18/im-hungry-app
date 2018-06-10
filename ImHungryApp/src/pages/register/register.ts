@@ -204,7 +204,8 @@ export class RegisterPage {
       'email': this.registerCredentials.email,
       'senha': this.registerCredentials.senha,
       'telefone': this.registerCredentials.telefone,
-      'fot64': this.registerCredentials.fot64
+      'fot64': this.registerCredentials.fot64,
+      'main_insert': true
     }
     this.save(body)
   }
