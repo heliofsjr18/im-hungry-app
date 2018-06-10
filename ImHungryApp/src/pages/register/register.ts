@@ -86,7 +86,7 @@ export class RegisterPage {
           text: 'Escolher da Galeria',
           icon: 'image',
           handler: () => {
-            this.choosePhoto();
+            this.photoGallery();
           }
         },
         {
@@ -108,6 +108,24 @@ export class RegisterPage {
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(cameraOptions).then((imageData) => {
+      if(imageData){
+        this.userImage = 'data:image/jpeg;base64,' + imageData;
+        this.registerCredentials.fot64 = this.userImage;
+        console.log(this.userImage);
+      }
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
+  photoGallery(){
+    let cameraOptions: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false
     }
     this.camera.getPicture(cameraOptions).then((imageData) => {
       if(imageData){
@@ -282,6 +300,10 @@ export class RegisterPage {
     }
     else if(this.registerCredentials.telefone.length < 1){
       this.showToast('Telefone é obrigatório');
+      return false;
+    }
+    else if(!this.user.user_id && this.registerCredentials.senha.length < 1){
+      this.showToast('Senha é obrigatória');
       return false;
     }
     return true;
