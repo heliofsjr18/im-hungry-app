@@ -169,7 +169,7 @@ export class LoginPage {
       .catch((rej) => {
         this.data = JSON.parse(rej.toString());
         if (body.tipoUsuario == "redeSocial") {
-          this.restLoginClient.getLoginRest("cliente/insert", body)
+          this.restLoginClient.getLoginRest("cliente/insert/social", body)
             .then((res) => {
               this.data = JSON.parse(res.toString());
               this.rest.Token = this.data.token;
