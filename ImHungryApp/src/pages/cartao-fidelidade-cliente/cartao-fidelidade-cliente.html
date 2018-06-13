@@ -6,29 +6,23 @@
 -->
 <ion-header>
 
-  <ion-navbar class="myNavBar" color="secondary">
-    <ion-title>Meus Cartões Fidelidade</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-<ion-content>
-<div class="container">  
-      <ion-list>  
-    <ion-item>
-      <ion-item>
-        <div class="card-list-item">
-          <div><i ></i></div>
-          <div class="spanIcon">            
-            
+    <ion-navbar class="myNavBar" color="secondary">
+      <ion-title>Meus Cartões Fidelidade</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  <ion-content>
+      <ion-list padding-top>
+          <div *ngFor="let item of data" class="Card_fidelidade_Item">
+              <img (click)="openCardDetail(item)" src="{{item.image}}">
+              <div class="Card_Info">
+                  <div>
+                      <span>{{item.quantidade_cliente}}</span>
+                      <span>{{item.quantidade_fidelidade}}</span>
+                  </div>
+              </div>
           </div>
-        </div>
-      </ion-item>    
-      <ion-item-options side="right">
-        
-      </ion-item-options>
-    </ion-item>
-  </ion-list>
-</div>
-
-</ion-content>
+      </ion-list>  
+  </ion-content>
+  

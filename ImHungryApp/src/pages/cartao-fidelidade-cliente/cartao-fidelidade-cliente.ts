@@ -17,6 +17,7 @@ import { RestClientProvider } from '../../providers/rest-client/rest-client';
 })
 export class CartaoFidelidadeClientePage {
 
+  data = [];
   cartaoFidelidadeList = [
     {
       cartao_id: '',
