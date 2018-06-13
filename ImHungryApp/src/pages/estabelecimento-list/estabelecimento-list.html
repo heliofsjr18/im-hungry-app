@@ -71,11 +71,11 @@
               <i  class="fas fa-handshake fa-lg" [ngStyle]="{ 'color': '#6d6d6d', 'margin-right': '8px' }"></i>
             </div>
           </div>
-          <div (click)="navigateToMenuPage(item)">
-            <div>
+          <div>
+            <div (click)="navigateToMenuPage(item)">
               <ion-rating class="smallRating" [showOnly]="true" [numStars]="5" [rateValue]="item.rate" (ionClick)="logStars($event)"></ion-rating>
             </div>
-            <div class="textNote">
+            <div class="textNote" (click)="launchNavigation(item)">
               <i class="fas fa-map-marker-alt"></i>
               {{item.distance}}
             </div>
