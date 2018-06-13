@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { style, animate, transition, trigger } from '@angular/animations';
 import { Geolocation } from '@ionic-native/geolocation';
 import { Diagnostic } from '@ionic-native/diagnostic';
-import { IonicPage, NavController, NavParams, MenuController, LoadingController, Platform, AlertController } from 'ionic-angular';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
+import { IonicPage, NavController, NavParams, MenuController, LoadingController, Platform, AlertController, ActionSheetController, ActionSheetButton } from 'ionic-angular';
 import { MenuListPage } from '../menu-list/menu-list';
 import { CarrinhoPage } from '../carrinho/carrinho';
 import { CarrinhoProvider } from '../../providers/carrinho/carrinho';
@@ -38,7 +39,7 @@ export class EstabelecimentoListPage {
     private elRef: ElementRef, private menuCtrl: MenuController, private carrinho: CarrinhoProvider, private estabelecimentoServiceProvider: EstabelecimentoServiceProvider,
     private loadingCtrl: LoadingController, private http: HttpClient, private restClient: RestClientProvider,
     private geolocation: Geolocation, private menuFilter: MenuFilterProvider, private platform: Platform, private alertCtrl: AlertController,
-    private diagnostic: Diagnostic) {
+    private diagnostic: Diagnostic, private actionSheetCtrl: ActionSheetController, private launchNavigator: LaunchNavigator) {
 
     platform.registerBackButtonAction(() => {
       this.showLogoutAlert();
@@ -53,6 +54,7 @@ export class EstabelecimentoListPage {
   totalCarrinho: string = '';
   data = [];
   objDadosFidelidade = [];
+  currLocation = {latitude: '0', longitude: '0'}
 
   showLogoutAlert() {
     let alert = this.alertCtrl.create({
@@ -168,9 +170,12 @@ export class EstabelecimentoListPage {
                 status: parseInt(listItem[i].filial_status),
                 id: parseInt(listItem[i].filial_id),
                 fidelidade: listItem[i].filial_fidelidade,
-                fidelidadeDados: listItem[i].fidelidade_desc
+                fidelidadeDados: listItem[i].fidelidade_desc,
+                address: listItem[i].logradouro + ', ' + listItem[i].filial_numero_endereco + ', ' + listItem[i].bairro + ', ' + listItem[i].cidade + ', ' + listItem[i].uf
               });
             }
+
+            this.currLocation = {latitude: body.latitude, longitude: body.longitude};
 
             console.log(this.data);
 
@@ -213,6 +218,16 @@ export class EstabelecimentoListPage {
       }
         
     }
+  }
+
+  launchNavigation(item){
+    this.launchNavigator.navigate(item.address, {
+      start: this.currLocation.latitude + ", " + this.currLocation.longitude,
+      startName: 'Você',
+      destinationName: item.name
+    }).then(success => console.log('Navegação Iniciada'),
+            error => console.log('Erro na navegação', error)
+    );
   }
 
   ionViewDidLoad() {
