@@ -12,17 +12,24 @@
   
   </ion-header>
   
-  <ion-content>
-      <ion-list padding-top>
-          <div *ngFor="let item of data" class="Card_fidelidade_Item">
-              <img (click)="openCardDetail(item)" src="{{item.image}}">
-              <div class="Card_Info">
+  <ion-content padding>
+    <ion-list padding-top>
+    <div *ngFor="let item of cartaoFidelidadeList" class="Card_Item">
+          <img src="{{item.foto_filial_fidelidade}}">          
+          <div class="Card_Info">
+              <div>
+                <span>
+                  {{item.nome_filial_fidelidade}}
+                </span>                
+              </div> 
+                <div class="Card_Info">
                   <div>
-                      <span>{{item.quantidade_cliente}}</span>
-                      <span>{{item.quantidade_fidelidade}}</span>
+                    <span>{{item.pontos_conquistados_fidelidade}}</span>
+                    <span>/</span>
+                    <span>{{item.pontos_necessarios_fidelidade}}</span>
                   </div>
-              </div>
+                </div>                           
           </div>
-      </ion-list>  
+    </div>
+    </ion-list>
   </ion-content>
-  

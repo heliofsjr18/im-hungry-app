@@ -18,19 +18,7 @@ import { RestClientProvider } from '../../providers/rest-client/rest-client';
 export class CartaoFidelidadeClientePage {
 
   data = [];
-  cartaoFidelidadeList = [
-    {
-      cartao_id: '',
-      // cartao_filial: '',        
-      cartao_brand: '',
-      // cartao_quantidade: '',
-      cartao_digitos: '',
-      cartao_ano: '',
-      cartao_mes: '',      
-      cartao_status: '',
-      cartao_cvc: ''
-    }
-  ];
+  cartaoFidelidadeList = [];
 
   loading: Loading;
   
@@ -42,17 +30,58 @@ export class CartaoFidelidadeClientePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CartaoFidelidadeClientePage');
-    this.loadList();
+    this.getFidelidade();
   }
 
   
 
-  openCardDetail(){
-    this.navCtrl.push(CartaoFidelidadePage);
+  openCardDetail(item){
+    
+    this.navCtrl.push(CartaoFidelidadePage, {
+      image: item.foto_filial_fidelidade,
+      name: item.nome_filial_fidelidade
+      
+    });
   }
   
-  showLoading(){
-    this.loading = this.loadingCtrl.create({
+
+  getFidelidade(){
+    let load = this.showLoading();
+
+    this.rest.getJson('fidelidade/list').then((data) => {
+      let obj = JSON.parse(data.toString());
+
+      let list = obj.fidelidade;
+
+      for(let i in list){
+        
+        this.cartaoFidelidadeList.push({
+          foto_filial_fidelidade: "https://api.rafafreitas.com/uploads/empresa/" + list[i].foto_filial,
+          nome_filial_fidelidade: list[i].nome_filial,
+          pontos_conquistados_fidelidade: list[i].pontos_conquistados,
+          pontos_necessarios_fidelidade: list[i].pontos_necessarios,
+          requisito_valor_fidelidade: list[i].requisito_valor
+        });
+      }
+      console.log(this.cartaoFidelidadeList);
+      console.log(obj);
+      this.closeLoading(load);
+    }, (error) => {
+      console.log(error);
+      this.closeLoading(load);
+    }).catch((error) => {
+      console.log(error);
+      this.closeLoading(load);
+    });
+  }
+
+
+  closeLoading(loading: Loading){
+    loading.dismiss();
+  }
+
+  showLoading(): Loading{
+    let loading = this.loadingCtrl.create({
       content: `<div class="loading">
                   <div class="loading-center">
                     <div class="loading-center-absolute">
@@ -64,10 +93,11 @@ export class CartaoFidelidadeClientePage {
                   </div>
                 </div>`,
       spinner: 'hide',
-      dismissOnPageChange: true,
       cssClass: 'my-loading-class'
     });
-    this.loading.present();
+
+    loading.present();
+    return loading;
   }
 
 
@@ -76,7 +106,7 @@ export class CartaoFidelidadeClientePage {
 
     this.rest.getJson('fidelidade/list').then((data) => {
       this.cartaoFidelidadeList = [];      
-      let object = JSON.parse(data.toString());            
+      let object = JSON.parse(data.toString());
       // for(let i in object.cartões){
       //   this.cartaoFidelidadeList.push({
       //     cartao_id: object.cartões[i].cartao_id,
@@ -110,5 +140,8 @@ export class CartaoFidelidadeClientePage {
       this.loading.dismiss();
     }
   }
+
+  
+
 
 }
